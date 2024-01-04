@@ -46,6 +46,8 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 // console.log(ScrollTrigger);
 
+import { BrowserView, MobileView } from "react-device-detect";
+
 const ControlsForScroll = () => {
   const moonRef = useRef();
   const textRef = useRef();
@@ -1123,6 +1125,12 @@ const MainSection = () => {
               args={["linear-gradient(#e66465, #9198e5)"]}
             /> */}
             {/* <pointLight position={[0, 100, 0]} intensity={10} /> */}
+            <BrowserView>
+              <WaterMesh />
+            </BrowserView>
+            <MobileView>
+              <h1>This is rendered only on a mobile device</h1>
+            </MobileView>
             <ambientLight ref={lightRef1} intensity={3} />
 
             {/* <PageComponent /> */}
@@ -1139,7 +1147,7 @@ const MainSection = () => {
               speed={1}
             />
             {/* <Ocean /> */}
-            <WaterMesh />
+
             {/*  */}
             <mesh
               ref={planeMesh}
