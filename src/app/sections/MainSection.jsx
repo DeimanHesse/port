@@ -1183,7 +1183,7 @@ const MainSection = () => {
                   thickness={0.5}
                 />
               </mesh>
-              <mesh position={[0, 15, 45]}>
+              {/* <mesh position={[0, 15, 45]}>
                 <boxGeometry args={[15, 20, 1]} />
                 <meshPhysicalMaterial
                   // color={"#000000"}
@@ -1216,7 +1216,7 @@ const MainSection = () => {
                   reflectivity={1.8}
                   thickness={0.5}
                 />
-              </mesh>
+              </mesh> */}
               <mesh>
                 <boxGeometry args={[70, 70, 70]} />
                 <meshStandardMaterial
