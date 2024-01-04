@@ -525,9 +525,9 @@ const MainSection = () => {
   const pigMesh = useRef(null);
   const skyBoxRef = useRef();
 
-  const [colorMap2] = useLoader(TextureLoader, [
-    "images/AboutSection/aboutPhoto.jpg",
-  ]);
+  // const [colorMap2] = useLoader(TextureLoader, [
+  //   "images/AboutSection/aboutPhoto.jpg",
+  // ]);
 
   useEffect(() => {
     console.log(canvasRef.current);
@@ -1166,57 +1166,6 @@ const MainSection = () => {
               rotation={[0, Math.PI / 2, 0]}
               position={[-110, 10, 20]}
             >
-              <mesh ref={pigMesh} position={[-20, 15, 45]}>
-                <boxGeometry args={[15, 20, 1]} />
-                <meshPhysicalMaterial
-                  // color={"#000000"}
-                  // side={THREE.DoubleSide}
-                  map={colorMap2}
-                  emissiveIntensity={10}
-                  // emissiveMap={colorMap2}
-                  // emissiveIntensity={2}
-                  // alphaMap={colorMap2}
-                  roughness={10}
-                  metalness={0.1}
-                  transmission={0.8}
-                  reflectivity={1.8}
-                  thickness={0.5}
-                />
-              </mesh>
-              {/* <mesh position={[0, 15, 45]}>
-                <boxGeometry args={[15, 20, 1]} />
-                <meshPhysicalMaterial
-                  // color={"#000000"}
-                  // side={THREE.DoubleSide}
-                  map={colorMap2}
-                  emissiveIntensity={10}
-                  // emissiveMap={colorMap2}
-                  // emissiveIntensity={2}
-                  // alphaMap={colorMap2}
-                  roughness={10}
-                  metalness={0.1}
-                  transmission={0.8}
-                  reflectivity={1.8}
-                  thickness={0.5}
-                />
-              </mesh>
-              <mesh position={[20, 15, 45]}>
-                <boxGeometry args={[15, 20, 1]} />
-                <meshPhysicalMaterial
-                  // color={"#000000"}
-                  // side={THREE.DoubleSide}
-                  map={colorMap2}
-                  emissiveIntensity={10}
-                  // emissiveMap={colorMap2}
-                  // emissiveIntensity={2}
-                  // alphaMap={colorMap2}
-                  roughness={10}
-                  metalness={0.1}
-                  transmission={0.8}
-                  reflectivity={1.8}
-                  thickness={0.5}
-                />
-              </mesh> */}
               <mesh>
                 <boxGeometry args={[70, 70, 70]} />
                 <meshStandardMaterial
