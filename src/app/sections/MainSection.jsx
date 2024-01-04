@@ -524,10 +524,6 @@ const MainSection = () => {
 
   const skyBoxRef = useRef();
 
-  // const [colorMap2] = useLoader(TextureLoader, [
-  //   "images/AboutSection/aboutPhoto.jpg",
-  // ]);
-
   useEffect(() => {
     console.log(canvasRef.current);
   }, []);
