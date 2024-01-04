@@ -501,7 +501,17 @@ const GlowingObj = ({ glowObjRef, lightRef1 }) => {
   );
 };
 
-const MainSection = () => {
+function Greeting({ userAgent }) {
+  if (userAgent && userAgent.toLowerCase().includes("mobile")) {
+    console.log("NOagent");
+    return;
+  } else {
+    console.log("agent");
+    return <WaterMesh />;
+  }
+}
+
+const MainSection = ({ userAgent }) => {
   const textRef = useRef();
   // const data = useScroll();
   const domnodeRef = useRef();
@@ -1125,12 +1135,8 @@ const MainSection = () => {
               args={["linear-gradient(#e66465, #9198e5)"]}
             /> */}
             {/* <pointLight position={[0, 100, 0]} intensity={10} /> */}
-            <BrowserView>
-              <WaterMesh />
-            </BrowserView>
-            <MobileView>
-              <h1>This is rendered only on a mobile device</h1>
-            </MobileView>
+            {}
+
             <ambientLight ref={lightRef1} intensity={3} />
 
             {/* <PageComponent /> */}
@@ -1147,7 +1153,7 @@ const MainSection = () => {
               speed={1}
             />
             {/* <Ocean /> */}
-
+            <Greeting />
             {/*  */}
             <mesh
               ref={planeMesh}
