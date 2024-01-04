@@ -522,7 +522,6 @@ const MainSection = () => {
   const lightRef1 = useRef(0);
   const glowObjRef = useRef(0);
 
-  const pigMesh = useRef(null);
   const skyBoxRef = useRef();
 
   // const [colorMap2] = useLoader(TextureLoader, [
