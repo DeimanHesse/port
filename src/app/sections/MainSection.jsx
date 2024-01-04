@@ -502,11 +502,13 @@ const GlowingObj = ({ glowObjRef, lightRef1 }) => {
 };
 
 function Greeting({ userAgent }) {
+  console.log(userAgent);
   if (userAgent && userAgent.toLowerCase().includes("mobile")) {
     console.log("NOagent");
     return;
   } else {
     console.log("agent");
+    console.log(userAgent);
     return <WaterMesh />;
   }
 }
@@ -1153,7 +1155,7 @@ const MainSection = ({ userAgent }) => {
               speed={1}
             />
             {/* <Ocean /> */}
-            <Greeting />
+            <Greeting userAgent={userAgent} />
             {/*  */}
             <mesh
               ref={planeMesh}
