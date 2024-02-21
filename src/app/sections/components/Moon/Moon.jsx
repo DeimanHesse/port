@@ -25,13 +25,14 @@ export default function Moon({ position, referens }) {
 
   const lightRef = useRef();
   const [colorMap] = useLoader(TextureLoader, ["images/moon/moon.png"]);
+  // const [colorMap] = useLoader(TextureLoader, ["images/moon/mars.jpg"]);
   useFrame(({ camera }) => {});
   // return <mesh ref={ref} {...props} />;
   return (
     <group ref={referens} position={position}>
       <mesh position={[0, 40, 0]} ref={ref}>
         {/* <boxGeometry args={[20, 20, 20]} /> */}
-        <sphereGeometry args={[20, 64, 32]} />
+        <sphereGeometry args={[1200, 64, 32]} />
         {/* <meshPhysicalMaterial
             color={"black"}
             side={THREE.DoubleSide}
@@ -65,27 +66,28 @@ export default function Moon({ position, referens }) {
           // transmission={0.5}
           // reflectivity={1.8}
           emissiveIntensity={0.01}
-          emissive={"white"}
+          // emissive={"white"}
+          // emissiveMap={colorMap}
           map={colorMap}
         />
       </mesh>
-      <EffectComposer>
-        {/* <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} /> */}
-        {/* <DepthOfField
+      {/* <EffectComposer> */}
+      {/* <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} /> */}
+      {/* <DepthOfField
           focusDistance={0.3}
           focalLength={0.02}
           bokehScale={1}
           height={1080}
         /> */}
-        {/* <Vignette eskil={false} offset={0.005} darkness={0.7} /> */}
-        {/* <BrightnessContrast brightness={0.2} contrast={0.5} /> */}
-        {/* <Noise opacity={0.03} /> */}
-        <SelectiveBloom
+      {/* <Vignette eskil={false} offset={0.001} darkness={0.9} /> */}
+      {/* <BrightnessContrast brightness={0.01} contrast={0.03} /> */}
+      {/* <Noise opacity={0.03} /> */}
+      {/* <SelectiveBloom
           // ref={lightRef}
           // lights={[lightRef1, lightRef2]} // ⚠️ REQUIRED! all relevant lights
           selection={[ref]} // selection of objects that will have bloom effect
           selectionLayer={1} // selection layer
-          intensity={5.01} // The bloom intensity.
+          intensity={1.01} // The bloom intensity.
           //   blurPass={undefined} // A blur pass.
           //   width={Resizer.AUTO_SIZE} // render width
           //   height={Resizer.AUTO_SIZE} // render height
@@ -93,8 +95,8 @@ export default function Moon({ position, referens }) {
           luminanceThreshold={0.01} // luminance threshold. Raise this value to mask out darker elements in the scene.
           luminanceSmoothing={0.025} // smoothness of the luminance threshold. Range is [0, 1]
           mipmapBlur
-        />
-      </EffectComposer>
+        /> */}
+      {/* </EffectComposer> */}
     </group>
   );
 }

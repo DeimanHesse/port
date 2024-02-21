@@ -21,7 +21,7 @@ const WaterMesh = () => {
       reflectivity: 0.4,
       alpha: 1,
       // fog: true,
-      // color: "red",
+      // color: "blue",
       // color: "#1800a328",
 
       // flowMap: flowMap,

@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { Suspense, useRef, useMemo, useState, useEffect } from "react";
 import * as THREE from "three";
 import { TextureLoader } from "three";
@@ -13,20 +13,30 @@ import {
 import {
   Html,
   OrbitControls,
-  Sky,
+  Sky as SkyImpl,
+  StatsGl,
   Stars,
   Environment,
-  Cloud,
-  Clouds,
-  Effects,
+  // Cloud,
+  // Clouds,
+  // Effects,
   ScrollControls,
   Scroll,
   useScroll,
   Text,
   Billboard,
   useTexture,
+  Grid,
+  Lightformer,
+  Text3D,
+  Gltf,
+  Center,
+  MapControls,
+  FlyControls,
 } from "@react-three/drei";
 import "./MainSection.scss";
+
+import { useControls } from "leva";
 
 import { EffectComposer, SelectiveBloom } from "@react-three/postprocessing";
 
@@ -34,19 +44,30 @@ import { BlurPass, Resizer, KernelSize, Resolution } from "postprocessing";
 
 import WaterMesh from "./components/Water/WaterMesh.jsx";
 import Moon from "./components/Moon/Moon.jsx";
+import { Effects2 } from "./components/Effects";
+import SkyBox from "./components/SkyBox";
+import TestShadersScene from "./components/TestShadersScene";
+// import Points from "./components/Fog/App";
+// import App from "./components/Fog/App";
+import MovingPlane from "./components/MovingPlane/MovingPlane";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-// import { Tween } from "react-gsap";
-
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-// import { Water } from "three-stdlib";
-
-// extend({ Water });
-
-// console.log(ScrollTrigger);
 
 import { BrowserView, MobileView } from "react-device-detect";
+
+import Stack from "./components/Stack/Stack";
+import Landscape from "./components/Landscape/Landscape";
+import Pyramids from "./components/Pyramids";
+import CloudsComp from "./components/Clouds/Clouds";
+
+import WorkExpierence from "./WorkExpirience";
+import About from "./About";
+import Works from "./Works";
+import Contacts from "./Contacts";
+
+import workExamples from "../data/WorkExamplesData";
+import Popup from "./components/Popup";
 
 const ControlsForScroll = () => {
   const moonRef = useRef();
@@ -104,7 +125,7 @@ const ControlsForScroll = () => {
 
   let position = [0, 70, 100];
 
-  const [photoMap] = useLoader(TextureLoader, ["images/about/aboutPhoto.jpg"]);
+  // const [photoMap] = useLoader(TextureLoader, ["images/about/aboutPhoto.jpg"]);
 
   return (
     <>
@@ -140,198 +161,6 @@ const ControlsForScroll = () => {
   );
 };
 
-const HtmlSections = () => {
-  const line = useRef();
-  const container = useRef();
-  const card = useRef();
-  const data = useScroll();
-
-  useGSAP(() => {
-    // gsap.registerPlugin(ScrollTrigger);
-    // gsap.to(card.current, {
-    //   backgroundColor: "yellow",
-    //   duration: 5,
-    //   scrollTrigger: {
-    //     trigger: container.current,
-    //     markers: true,
-    //     start: "center center",
-    //     scrub: true,
-    //   },
-    // });
-  });
-
-  // console.log(data.range);
-  useFrame(() => {
-    //   // console.log(tl.current);
-    //   // const firstSection = data.range(0, 1 / 5);
-    // const secondSection = data.range(2 / 5, 3 / 5);
-    //   const fullRange = data.range(0, 1);
-    //   console.log(fullRange);
-    //   // moonRef.current.position.z = 100 - firstSection * 3000;
-    //   // // textRef.current.position.z = firstSection * -1350;
-    // //   // // pigMesh.current.position.x = b * 150.5;
-    // //   // pigMesh.current.position.x = -220 + secondSection * 750;
-    // gsap.to(line.current, {
-    //   height: `${secondSection * 100}%`,
-    //   // duration: 2,
-    // });
-    //   if (secondSection * 100 > 70) {
-    //     gsap.to(card.current, {
-    //       backgroundColor: "yellow",
-    //       duration: 2,
-    //     });
-    //   }
-  });
-
-  useGSAP(
-    () => {
-      // tl.current = gsap.timeline().to(".work-expirience__line-inner", {
-      //   rotate: 360,
-      //   scrollTrigger: {
-      //     trigger: container.current,
-      //     markers: false,
-      //     start: "center bottom",
-      //     scrub: false,
-      //     onUpdate: () => {
-      //       console.log("ggggg");
-      //     },
-      //   },
-      // });
-      // gsap.to(tl.current, {
-      //   height: "100%",
-      //   duration: 4,
-      //   scrollTrigger: {
-      //     trigger: container.current,
-      //     markers: true,
-      //     start: "center bottom",
-      //     // scrub: false,
-      //     // onUpdate: () => {
-      //     //   console.log("ggggg");
-      //     // },
-      //   },
-      // });
-      // const fullRange = data.range(0, 1);
-      // gsap.to(tl.current, {
-      //   height: `${fullRange + 100}%`,
-      //   // duration: 2,
-      // });
-    },
-    { scope: container }
-  );
-  return (
-    <>
-      <section style={{ height: "100vh", color: "white" }}>
-        <h1>Banner</h1>
-      </section>
-      <section style={{ height: "100vh", color: "white" }}>
-        <h1>About</h1>
-        <p className="about-text">
-          You can also call me a product designer, experience designer,
-          interaction, UI, UX or by any other market defined function-title. I'm
-          also a multi-disciplinary maker with over 10 years of experiences in
-          wide range of design disciplines, manager, advisor, entrepreneur,
-          front-end developer, music enthusiast, traveler, photographer and
-          more.
-        </p>
-      </section>
-      <section ref={container} style={{ height: "100vh", color: "white" }}>
-        <h1>Work Expirience</h1>
-        <div className="work-expirience">
-          <div className="work-expirience__cards">
-            <div ref={card} className="work-expirience__card">
-              <h2 className="work-expirience__card-title">
-                Frontend-разработчик
-              </h2>
-              <h4 className="work-expirience__card-subtitle">GoodFellaz</h4>
-              <p className="work-expirience__card-text">
-                You can also call me a product designer, experience designer,
-                interaction, UI, UX or by any other market defined
-                function-title. I'm also a multi-disciplinary maker with over 10
-                years of experiences in wide range of design disciplines,
-                manager, advisor, entrepreneur, front-end developer, music
-                enthusiast, traveler, photographer and more.
-              </p>
-            </div>
-            <div className="work-expirience__card">
-              <h2 className="work-expirience__card-title">
-                Frontend-разработчик
-              </h2>
-              <h4 className="work-expirience__card-subtitle">GoodFellaz</h4>
-              <p className="work-expirience__card-text">
-                You can also call me a product designer, experience designer,
-                interaction, UI, UX or by any other market defined
-                function-title. I'm also a multi-disciplinary maker with over 10
-                years of experiences in wide range of design disciplines,
-                manager, advisor, entrepreneur, front-end developer, music
-                enthusiast, traveler, photographer and more.
-              </p>
-            </div>
-            <div className="work-expirience__card">
-              <h2 className="work-expirience__card-title">
-                Frontend-разработчик
-              </h2>
-              <h4 className="work-expirience__card-subtitle">GoodFellaz</h4>
-              <p className="work-expirience__card-text">
-                You can also call me a product designer, experience designer,
-                interaction, UI, UX or by any other market defined
-                function-title. I'm also a multi-disciplinary maker with over 10
-                years of experiences in wide range of design disciplines,
-                manager, advisor, entrepreneur, front-end developer, music
-                enthusiast, traveler, photographer and more.
-              </p>
-            </div>
-          </div>
-          <div className="work-expirience__line">
-            <div ref={line} className="work-expirience__line-inner"></div>
-          </div>
-        </div>
-      </section>
-      <section style={{ height: "100vh", color: "white" }}>
-        <h1>Works</h1>
-        <div className="works__cards">
-          <div className="works__card">
-            <h1>Zao</h1>
-          </div>
-          <div className="works__card">
-            <h1>Hermes</h1>
-          </div>
-          <div className="works__card">
-            <h1>Ebis</h1>
-          </div>
-          <div className="works__card">
-            <h1>T-Club</h1>
-          </div>
-          <div className="works__card">
-            <h1>Техноград</h1>
-          </div>
-        </div>
-      </section>
-      <section style={{ height: "100vh", color: "white" }}>
-        <h1>Contacts</h1>
-      </section>
-    </>
-  );
-};
-
-const PageComponent = () => {
-  return (
-    <ScrollControls pages={5}>
-      <Scroll html>
-        <HtmlSections />
-      </Scroll>
-
-      <ControlsForScroll />
-      {/* <Moon position={position} /> */}
-      {/* </ControlsForScroll> */}
-      {/* <Moon position={[-50, 150, -100]} /> */}
-
-      {/* <GlowingObj /> */}
-      {/* <Glow /> */}
-      <WaterMesh />
-    </ScrollControls>
-  );
-};
-
 const CameraControls = ({ position, target, move, z }) => {
   //Initialize camera controls
   const {
@@ -357,81 +186,6 @@ const CameraControls = ({ position, target, move, z }) => {
     />
   );
 };
-
-const SkyBox = ({ skyBoxRef }) => {
-  const skyTexture = useTexture("/images/sky/sky.jpg");
-  const skyTexture2 = useTexture("/images/sky/sky2.jpg");
-  const skyTexture3 = useTexture("/images/sky/sky3.jpg");
-  const skyTexture4 = useTexture("/images/sky/sky4.jpg");
-
-  return (
-    <mesh ref={skyBoxRef} position={[0, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
-      <sphereGeometry args={[900, 64, 32]} />
-      {/* <boxGeometry args={[1200, 1200, 1200]} /> */}
-      {/* <meshStandardMaterial
-        // map={skyTexture}
-        // emissiveMap={skyTexture}
-        // side={THREE.DoubleSide}
-        emissiveIntensity={0.7}
-        em
-        emissive={1.7}
-        // opacity={0.1}
-        // transparent
-        // color={"green"}
-        // flatShading
-      /> */}
-      <meshPhysicalMaterial
-        color={"#0b1a25"}
-        // color={"#060e14"}
-        // color={"#052d4c"}
-        // color={"#898989"}
-        side={THREE.BackSide}
-        // side={THREE.FrontSide}
-        // map={skyTexture4}
-        emissiveIntensity={0}
-        // flatShading
-        emissiveMap={skyTexture3}
-        // alphaMap={skyTexture}
-        emissive={"white"}
-        roughness={0.2}
-        metalness={0.2}
-        // transmission={0.8}
-        // reflectivity={0.1}
-        // thickness={0.9}
-      />
-    </mesh>
-  );
-};
-
-function Ocean() {
-  const ref = useRef();
-  const gl = useThree((state) => state.gl);
-  const waterNormals = useLoader(
-    THREE.TextureLoader,
-    "/images/waternormals.jpeg"
-  );
-  waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
-  const geom = useMemo(() => new THREE.PlaneGeometry(10000, 10000), []);
-  const config = useMemo(
-    () => ({
-      textureWidth: 512,
-      textureHeight: 512,
-      waterNormals,
-      sunDirection: new THREE.Vector3([0, -1000, 0]),
-      sunColor: 0x000000,
-      // waterColor: 0x001e0f,
-      waterColor: 0x0d051e,
-      distortionScale: 5.7,
-      fog: false,
-      format: gl.encoding,
-    }),
-    [waterNormals]
-  );
-  useFrame(
-    (state, delta) => (ref.current.material.uniforms.time.value += delta / 2)
-  );
-  return <water ref={ref} args={[geom, config]} rotation-x={-Math.PI / 2} />;
-}
 
 const GlowingObj = ({ glowObjRef, lightRef1 }) => {
   const circleMesh = useRef(null);
@@ -509,18 +263,515 @@ function Greeting({ userAgent }) {
   } else {
     console.log("agent");
     console.log(userAgent);
-    return <WaterMesh />;
+    return (
+      <>
+        <WaterMesh />;
+        <mesh position={[0, -13, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <planeGeometry args={[2000, 2000]} />
+          <meshPhongMaterial opacity={1.2} transparent color={"black"} />
+          {/* <meshPhongMaterial opacity={0.5} transparent color={"blue"} /> */}
+        </mesh>
+      </>
+    );
   }
 }
 
+// const Pyramids = () => {
+//   const pyramidRef = useRef();
+//   const gRef = useRef();
+//   const pyramidRefOuter = useRef();
+//   const roadRef1 = useRef();
+//   const roadRef2 = useRef();
+//   const texture = useTexture("/grid.png");
+//   const texture2 = useTexture("/displacementmap.png");
+//   useFrame(({ clock, camera }) => {
+//     // pyramidRef.current.rotation.y = clock.getElapsedTime();
+//     // gRef.current.rotation.y = clock.getElapsedTime();
+//     // gRef.current.rotation.y += 0.005;
+//     // camera.lookAt(100, 100, 4);
+//   });
+//   return (
+//     <>
+//       <mesh
+//         ref={pyramidRef}
+//         rotation={[0, -Math.PI / 4, 0]}
+//         position={[340, 55, -300]}
+//       >
+//         <coneGeometry args={[100, 100, 4]} />
+//         {/* <boxGeometry args={[3, 10, 700]} /> */}
+//         {/* <meshStandardMaterial
+//       // transparent
+//       opacity={1}
+//       color={"#008e8e"}
+//       // emissiveIntensity={5}
+//       emissiveMap={pyramidMap}
+
+//     /> */}
+//         <meshPhysicalMaterial
+//           // color={"red"}
+//           side={THREE.DoubleSide}
+//           // map={colorMap2}
+//           emissiveIntensity={0.1}
+//           // emissiveMap={colorMap2}
+//           // emissiveIntensity={2}
+//           // alphaMap={colorMap2}
+//           // emissive={"blue"}
+//           roughness={0}
+//           metalness={0}
+//           transmission={1}
+//           reflectivity={0}
+//           ior={2.33}
+//           thickness={0.3}
+//         />
+//         {/* <meshStandardMaterial color={"blue"} /> */}
+//       </mesh>
+//       {/* <Text3D
+//         ref={gRef}
+//         position={[-40, 10.8, 10]}
+//         letterSpacing={0.2}
+//         size={50.3}
+//         font="/Inter_Bold.json"
+//         smooth={4}
+//       >
+//         JS
+//         <meshStandardMaterial color="white" />
+//       </Text3D> */}
+//       <Gltf
+//         ref={gRef}
+//         scale={110}
+//         position={[0, 40, 0]}
+//         src="/react.glb"
+//         receiveShadow
+//         castShadow
+//       />
+//       <mesh rotation={[0, -Math.PI / 4, 0]} position={[-200, 30, 350]}>
+//         <coneGeometry args={[50, 50, 4]} />
+//         {/* <boxGeometry args={[3, 10, 700]} /> */}
+//         <meshPhysicalMaterial
+//           // color={"red"}
+//           // side={THREE.DoubleSide}
+//           // map={colorMap2}
+//           emissiveIntensity={0.5}
+//           // emissiveMap={colorMap2}
+//           // emissiveIntensity={2}
+//           // alphaMap={colorMap2}
+//           emissive={"black"}
+//           roughness={0}
+//           metalness={0}
+//           transmission={1}
+//           reflectivity={5.1}
+//           ior={2.33}
+//           thickness={1.3}
+//         />
+//       </mesh>
+//       <mesh rotation={[0, -Math.PI / 4, 0]} position={[0, 75, 0]}>
+//         <coneGeometry args={[150, 150, 4]} />
+//         {/* <boxGeometry args={[3, 10, 700]} /> */}
+//         <meshPhysicalMaterial
+//           // color={"red"}
+//           side={THREE.DoubleSide}
+//           // map={colorMap2}
+//           emissiveIntensity={0.5}
+//           // emissiveMap={colorMap2}
+//           // emissiveIntensity={2}
+//           // alphaMap={colorMap2}
+//           // envMap={hdrEq}
+//           emissive={"black"}
+//           roughness={0}
+//           metalness={0}
+//           transmission={1}
+//           reflectivity={1}
+//           ior={2.33}
+//           thickness={0.3}
+//         />
+//         {/* <meshPhongMaterial shininess={30} color={"red"} /> */}
+//         {/* <meshLambertMaterial /> */}
+//       </mesh>
+
+//       <mesh position={[0, -13, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+//         <planeGeometry args={[2000, 2000]} />
+//         <meshPhysicalMaterial
+//           // color={"black"}
+//           side={THREE.DoubleSide}
+//           // map={colorMap2}
+//           emissiveIntensity={0.5}
+//           // emissiveMap={colorMap2}
+//           // emissiveIntensity={2}
+//           // alphaMap={colorMap2}
+//           // envMap={hdrEq}
+//           emissive={"black"}
+//           roughness={0.8}
+//           metalness={0.8}
+//           transmission={0.1}
+//           reflectivity={0.3}
+//           ior={2.33}
+//           thickness={0}
+//           displacementMap={texture2}
+//           map={texture}
+//           displacementScale={7}
+//         />
+//       </mesh>
+//       <group
+//         // scale={0.4}
+//         // ref={testMesh2}
+//         rotation={[0, Math.PI / 2, 0]}
+//         position={[60, 6, -305]}
+//         // rotation={[0, -Math.PI / 2, 0]}
+//       >
+//         <mesh rotation={[-Math.PI / 2, 0, 0]}>
+//           <planeGeometry args={[20, 500]} />
+//           <meshPhysicalMaterial
+//             // color={"red"}
+//             // side={THREE.DoubleSide}
+//             // map={colorMap2}
+//             emissiveIntensity={0.5}
+//             // emissiveMap={colorMap2}
+//             // emissiveIntensity={2}
+//             // alphaMap={colorMap2}
+//             emissive={"black"}
+//             roughness={0}
+//             metalness={0}
+//             transmission={1}
+//             reflectivity={6.1}
+//             ior={2.33}
+//             thickness={1.3}
+//           />
+//         </mesh>
+//         <mesh ref={roadRef2} position={[-10, 2, 0]}>
+//           <boxGeometry args={[2, 5, 470]} />
+//           <meshPhysicalMaterial
+//             // color={"red"}
+//             side={THREE.DoubleSide}
+//             // map={colorMap2}
+//             emissiveIntensity={0.5}
+//             // emissiveMap={colorMap2}
+//             // emissiveIntensity={2}
+//             // alphaMap={colorMap2}
+//             emissive={"black"}
+//             roughness={0}
+//             metalness={0}
+//             transmission={1}
+//             reflectivity={6.1}
+//             ior={2.33}
+//             thickness={1.3}
+//           />
+//         </mesh>
+//         <mesh ref={roadRef1} position={[10, 2, 25]}>
+//           <boxGeometry args={[2, 5, 600]} />
+//           <meshPhysicalMaterial
+//             // color={"red"}
+//             side={THREE.DoubleSide}
+//             // map={colorMap2}
+//             emissiveIntensity={0.5}
+//             // emissiveMap={colorMap2}
+//             // emissiveIntensity={2}
+//             // alphaMap={colorMap2}
+//             emissive={"black"}
+//             roughness={0}
+//             metalness={0}
+//             transmission={1}
+//             reflectivity={6.1}
+//             ior={2.33}
+//             thickness={1.3}
+//           />
+//         </mesh>
+//       </group>
+//       <group
+//         // scale={0.4}
+//         // ref={testMesh2}
+//         // rotation={[0, Math.PI / 2, 0]}
+//         position={[-200, 6, 10]}
+//         // rotation={[0, -Math.PI / 2, 0]}
+//       >
+//         <mesh rotation={[-Math.PI / 2, 0, 0]}>
+//           <planeGeometry args={[20, 650]} />
+//           <meshPhysicalMaterial
+//             // color={"red"}
+//             side={THREE.DoubleSide}
+//             // map={colorMap2}
+//             emissiveIntensity={0.5}
+//             // emissiveMap={colorMap2}
+//             // emissiveIntensity={2}
+//             // alphaMap={colorMap2}
+//             emissive={"black"}
+//             roughness={0}
+//             metalness={0}
+//             transmission={1}
+//             reflectivity={6.1}
+//             ior={2.33}
+//             thickness={1.3}
+//           />
+//         </mesh>
+//         <mesh ref={roadRef2} position={[-10, 2, 5]}>
+//           <boxGeometry args={[2, 5, 650]} />
+//           <meshPhysicalMaterial
+//             // color={"red"}
+//             side={THREE.DoubleSide}
+//             // map={colorMap2}
+//             emissiveIntensity={0.5}
+//             // emissiveMap={colorMap2}
+//             // emissiveIntensity={2}
+//             // alphaMap={colorMap2}
+//             emissive={"black"}
+//             roughness={0}
+//             metalness={0}
+//             transmission={1}
+//             reflectivity={6.1}
+//             ior={2.33}
+//             thickness={1.3}
+//           />
+//         </mesh>
+//         <mesh ref={roadRef1} position={[10, 2, 25]}>
+//           <boxGeometry args={[2, 5, 650]} />
+//           <meshPhysicalMaterial
+//             // color={"red"}
+//             side={THREE.DoubleSide}
+//             // map={colorMap2}
+//             emissiveIntensity={0.5}
+//             // emissiveMap={colorMap2}
+//             // emissiveIntensity={2}
+//             // alphaMap={colorMap2}
+//             emissive={"black"}
+//             roughness={0}
+//             metalness={0}
+//             transmission={1}
+//             reflectivity={6.1}
+//             ior={2.33}
+//             thickness={1.3}
+//           />
+//         </mesh>
+//       </group>
+//       <Environment background resolution={512}>
+//         {/* Ceiling */}
+//         <Lightformer
+//           intensity={2}
+//           rotation-x={Math.PI / 2}
+//           position={[0, 4, -9]}
+//           scale={[10, 1, 1]}
+//         />
+//         <Lightformer
+//           intensity={10}
+//           rotation-x={Math.PI / 2}
+//           position={[0, 4, -6]}
+//           scale={[10, 1, 1]}
+//           color={"red"}
+//         />
+//         <Lightformer
+//           intensity={2}
+//           rotation-x={Math.PI / 2}
+//           position={[0, 4, -3]}
+//           scale={[10, 1, 1]}
+//         />
+//         <Lightformer
+//           intensity={2}
+//           rotation-x={Math.PI / 2}
+//           position={[0, 4, 0]}
+//           scale={[10, 1, 1]}
+//         />
+//         <Lightformer
+//           intensity={2}
+//           rotation-x={Math.PI / 2}
+//           position={[0, 4, 3]}
+//           scale={[10, 1, 1]}
+//         />
+//         <Lightformer
+//           intensity={2}
+//           rotation-x={Math.PI / 2}
+//           position={[0, 4, 6]}
+//           scale={[10, 1, 1]}
+//           color={"blue"}
+//         />
+//         <Lightformer
+//           intensity={2}
+//           rotation-x={Math.PI / 2}
+//           position={[0, 4, 9]}
+//           scale={[10, 1, 1]}
+//         />
+//         {/* Sides */}
+//         <Lightformer
+//           intensity={2}
+//           rotation-y={Math.PI / 2}
+//           position={[-50, 2, 0]}
+//           scale={[100, 2, 1]}
+//         />
+//         <Lightformer
+//           intensity={2}
+//           rotation-y={-Math.PI / 2}
+//           position={[50, 2, 0]}
+//           scale={[100, 2, 1]}
+//         />
+//         {/* Key */}
+//         <Lightformer
+//           form="ring"
+//           color="red"
+//           intensity={10}
+//           scale={2}
+//           position={[10, 5, 10]}
+//           onUpdate={(self) => self.lookAt(0, 0, 0)}
+//         />
+//       </Environment>
+//     </>
+//   );
+// };
+
+function CloudsSky() {
+  const ref = useRef();
+  const cloud0 = useRef();
+  const { color, x, y, z, range, ...config } = useControls({
+    seed: { value: 1, min: 1, max: 100, step: 1 },
+    segments: { value: 20, min: 1, max: 80, step: 1 },
+    volume: { value: 6, min: 0, max: 100, step: 0.1 },
+    opacity: { value: 0.8, min: 0, max: 1, step: 0.01 },
+    fade: { value: 10, min: 0, max: 400, step: 1 },
+    growth: { value: 4, min: 0, max: 20, step: 1 },
+    speed: { value: 0.1, min: 0, max: 1, step: 0.01 },
+    x: { value: 6, min: 0, max: 100, step: 1 },
+    y: { value: 1, min: 0, max: 100, step: 1 },
+    z: { value: 1, min: 0, max: 100, step: 1 },
+    color: "white",
+  });
+  useFrame((state, delta) => {
+    ref.current.rotation.y = Math.cos(state.clock.elapsedTime / 2) / 2;
+    ref.current.rotation.x = Math.sin(state.clock.elapsedTime / 2) / 2;
+    cloud0.current.rotation.y -= delta;
+  });
+  return (
+    <>
+      <SkyImpl />
+      <group ref={ref}>
+        <Clouds material={THREE.MeshLambertMaterial} limit={400} range={range}>
+          <Cloud ref={cloud0} {...config} bounds={[x, y, z]} color={color} />
+          <Cloud
+            {...config}
+            bounds={[x, y, z]}
+            color="#eed0d0"
+            seed={2}
+            position={[15, 0, 0]}
+          />
+          <Cloud
+            {...config}
+            bounds={[x, y, z]}
+            color="#d0e0d0"
+            seed={3}
+            position={[-15, 0, 0]}
+          />
+          <Cloud
+            {...config}
+            bounds={[x, y, z]}
+            color="#a0b0d0"
+            seed={4}
+            position={[0, 0, -12]}
+          />
+          <Cloud
+            {...config}
+            bounds={[x, y, z]}
+            color="#c0c0dd"
+            seed={5}
+            position={[0, 0, 12]}
+          />
+          <Cloud
+            concentrate="outside"
+            growth={100}
+            color="#ffccdd"
+            opacity={1.25}
+            seed={0.3}
+            bounds={200}
+            volume={200}
+          />
+        </Clouds>
+      </group>
+    </>
+  );
+}
+
+const ScrollText = () => {
+  const scrollTextCounterRef = useRef(0);
+  const scrollTextRef = useRef(null);
+  useFrame((state) => {
+    // scrollTextCounterRef.current += 0.1;
+    // if (scrollTextCounterRef.current < 1) {
+    //   scrollTextRef.current.rotation.y += 0.01;
+    // } else if (scrollTextCounterRef.current > 1) {
+    //   scrollTextRef.current.rotation.y -= 0.01;
+    // }
+  });
+
+  useEffect(() => {
+    // console.log(scrollTextRef.current);
+    // gsap.to(
+    //   scrollTextRef.current.rotation,
+    //   {
+    //     y: 10,
+    //     duration: 4,
+    //   },
+    //   "<"
+    // );
+  }, []);
+
+  return (
+    <Text3D
+      ref={scrollTextRef}
+      rotation={[-0.5, -0.25, 0]}
+      position={[-7, 6, 435]}
+      letterSpacing={0.2}
+      lineHeight={0.6}
+      size={3.3}
+      font="/Inter_Bold.json"
+      // smooth={4}
+      curveSegments={32}
+      bevelEnabled
+      bevelSize={0.04}
+      bevelThickness={1.1}
+    >
+      {/* {`hello\nworld`} */}
+      {`scroll\ndown`}
+      {/* <meshStandardMaterial /> */}
+      <meshPhysicalMaterial
+        // color={"#0077ff"}
+        side={THREE.DoubleSide}
+        // map={colorMap2}
+        emissiveIntensity={0.1}
+        // emissiveMap={colorMap2}
+        // emissiveIntensity={2}
+        // alphaMap={colorMap2}
+        emissive={"blue"}
+        roughness={0.2}
+        metalness={1}
+        transmission={1}
+        reflectivity={1.1}
+        ior={2.33}
+        thickness={0.3}
+      />
+    </Text3D>
+  );
+};
+
+const CameraSearch = ({ cameraRef }) => {
+  // const {
+  //   gl, // WebGL renderer
+  //   scene, // Default scene
+  //   camera, // Default camera
+
+  //   setDefaultCamera, // Sets the default camera
+  // } = useThree();
+  // console.log(camera);
+  // const orbChange = (e) => {
+  //   console.log(camera.position);
+  // };
+  return (
+    <OrbitControls
+      target={[0, 0, -330]}
+      ref={cameraRef}
+      // onChange={(e) => orbChange(e)}
+      enableZoom={false}
+      enableRotate={false}
+    />
+  );
+};
+
 const MainSection = ({ userAgent }) => {
   const textRef = useRef();
-  // const data = useScroll();
   const domnodeRef = useRef();
-  const htmlRef = useRef();
-  const testMesh = useRef();
-  const testMesh2 = useRef();
-  const planeMesh = useRef();
   const moonRef = useRef();
   const canvasRef = useRef();
   const cameraRef = useRef();
@@ -537,88 +788,41 @@ const MainSection = ({ userAgent }) => {
   const glowObjRef = useRef(0);
 
   const skyBoxRef = useRef();
+  const skyBoxMatRef = useRef();
 
-  useEffect(() => {
-    console.log(canvasRef.current);
-  }, []);
+  const ambientLightRef = useRef();
+  const workExampleRef = useRef();
+
+  const [popup, setPopup] = useState(false);
+
+  const [popupData, setPopupData] = useState({
+    title: "",
+    text: "",
+    picture: "/",
+  });
+
+  const popupCall = (index) => {
+    if (!popup) {
+      workExampleRef.current?.focus();
+      console.log("hhhh");
+      setPopupData(workExamples[index]);
+    }
+    workExampleRef.current?.blur();
+    setPopup(!popup);
+    // console.log(popupData);
+  };
 
   let tl = gsap.timeline();
-
-  const [position, setPosition] = useState({ x: 10, y: 10, z: 10 });
-  const [target, setTarget] = useState({ x: 0, y: 0, z: 0 });
-  const [move, setMove] = useState(false);
-  const z = 150;
   const cPosRef = useRef(true);
+  const dTextref = useRef();
 
-  const cameraPos = () => {
-    let tl = gsap.timeline();
-    if (cPosRef.current) {
-      cPosRef.current = !cPosRef.current;
-      tl.to(cameraRef.current.position0, {
-        y: 5,
-        duration: 2,
-        onUpdate: () => {
-          cameraRef.current.reset();
-        },
-      });
-      tl.to(cameraRef.current.position0, {
-        z: 60,
-        duration: 2,
-        onUpdate: () => {
-          cameraRef.current.reset();
-        },
-      });
-      tl.to(
-        cameraRef.current.target0,
-        {
-          x: -30,
-          y: 5,
-          z: 50,
-          duration: 2,
-        },
-        "<"
-      );
-      console.log(cPosRef.current);
-    } else {
-      cPosRef.current = !cPosRef.current;
-      // tl.reverse();
-      tl.to(cameraRef.current.position0, {
-        y: 50,
-        duration: 2,
-        onUpdate: () => {
-          cameraRef.current.reset();
-        },
-      });
-      tl.to(cameraRef.current.position0, {
-        z: 360,
-        duration: 2,
-        onUpdate: () => {
-          cameraRef.current.reset();
-        },
-      });
-      tl.to(
-        cameraRef.current.target0,
-        {
-          x: 0,
-          y: 0,
-          z: 0,
-          duration: 2,
-        },
-        "<"
-      );
-      console.log(cPosRef.current);
-    }
-    // setMove(true);
-
-    console.log(cameraRef.current);
-  };
+  // const [pyramidMap] = useLoader(TextureLoader, ["images/pyramid.jpg"]);
 
   const animArr = [
     function one(direction) {
-      console.log("dfgfdfgdgfd");
       if (!direction) {
-        tl.to(moonRef.current.position, { z: -1800, duration: 1 });
-        tl.to(moonRef.current.position, { y: -30, duration: 1 }, "<");
+        // tl.to(moonRef.current.position, { z: -1800, duration: 1 });
+        // tl.to(moonRef.current.position, { y: -30, duration: 1 }, "<");
 
         // tl.to(canvasRef.current, {
         //   // background: "linear-gradient(#031730 15%, #000002 45%)",
@@ -630,9 +834,9 @@ const MainSection = ({ userAgent }) => {
       } else {
         tl.to(cameraRef.current.position0, {
           x: 0,
-          z: 370,
-          y: 70,
-          duration: 1,
+          y: 65,
+          z: 520,
+          duration: 2,
           onUpdate: () => {
             cameraRef.current.reset();
           },
@@ -642,108 +846,133 @@ const MainSection = ({ userAgent }) => {
           {
             x: 0,
             y: 0,
-            z: 0,
+            z: -330,
             duration: 1,
           },
           "<"
         );
-        // tl.to(skyBoxRef.current.material, {
-        //   emissiveIntensity: 0,
-        //   duration: 2,
-        // });
-        // tl.to(cameraRef.current.position0, {
-        //   y: 50,
-        //   duration: 2,
-        //   onUpdate: () => {
-        //     cameraRef.current.reset();
-        //   },
-        // });
+        tl.to(
+          "canvas",
+          {
+            filter: "blur(0px) grayscale(0) contrast(1)",
+            duration: 1,
+          },
+          "<"
+        );
         // tl.to(
-        //   cameraRef.current.position0,
+        //   skyBoxMatRef.current.color,
         //   {
-        //     z: 360,
-        //     duration: 2,
-        //     onUpdate: () => {
-        //       cameraRef.current.reset();
-        //     },
+        //     // color: "#0e1925",
+        //     r: 0.014,
+        //     g: 0.025,
+        //     b: 0.037,
+        //     duration: 4,
         //   },
         //   "<"
         // );
-        // tl.to(
-        //   cameraRef.current.target0,
-        //   {
-        //     x: 0,
-        //     y: 0,
-        //     z: 0,
-        //     duration: 2,
-        //   },
-        //   "<"
-        // );
-        // tl.to(textRef.current.position, { y: 40, duration: 2 });
-        // let tl = gsap.timeline();
-        // tl.to(canvasRef.current, {
-        //   background: "#030313",
-        //   // background: "linear-gradient(#031730 15%, #000002 45%)",
-        //   duration: 2,
-        // });
-        tl.to(moonRef.current.position, { y: 50, duration: 1 }, "<");
-        tl.to(moonRef.current.position, { z: 0, duration: 1 }, "<");
+
         tl.eventCallback("onComplete", null);
       }
     },
     function two(direction) {
-      console.log("two");
+      console.log("two", skyBoxMatRef.current);
       if (direction) {
-        console.log(skyBoxRef.current.material);
         tl.to(cameraRef.current.position0, {
-          y: 5,
-
-          duration: 1,
-          onUpdate: () => {
-            cameraRef.current.reset();
-          },
-        });
-        tl.to(cameraRef.current.position0, {
-          x: -20,
-          //  y: 70,
-          z: 20,
-          duration: 1,
+          y: 23,
+          duration: 0.5,
           onUpdate: () => {
             cameraRef.current.reset();
           },
         });
         tl.to(
+          cameraRef.current.position0,
+          {
+            z: 296,
+            duration: 0.5,
+            ease: "power1.out",
+            onUpdate: () => {
+              cameraRef.current.reset();
+            },
+          },
+          "<"
+        );
+        tl.to(
+          cameraRef.current.position0,
+          {
+            x: -210,
+            y: 30,
+            z: 200,
+            duration: 1,
+            ease: "power1.out",
+            onUpdate: () => {
+              cameraRef.current.reset();
+            },
+          },
+          "<"
+        );
+        tl.to(
           cameraRef.current.target0,
           {
-            x: -110,
-            y: 10,
-            z: 20,
+            x: -200,
+            z: -1000,
+            duration: 1,
+            ease: "power1.out",
+            onUpdate: () => {
+              cameraRef.current.reset();
+            },
+          },
+          "<"
+        );
+        tl.to(
+          cameraRef.current.target0,
+          {
+            x: 200,
+            z: -300,
+            duration: 1,
+            onUpdate: () => {
+              cameraRef.current.reset();
+            },
+          },
+          "<"
+        );
+        tl.to("canvas", {
+          filter: "blur(3px) grayscale(1) contrast(1.1)",
+          // filter: "grayscale(1) contrast(1.1)",
+          duration: 0.3,
+        });
+        tl.to(secondSectionRef.current, {
+          opacity: 1,
+          duration: 2,
+          pointerEvents: "all",
+        });
+        tl.to(
+          ".about__text",
+          {
+            // backgroundColor: "#ffffff69",
+            backgroundColor: "#0d2c4f91",
+            // filter: "blur(0px)",
             duration: 1,
           },
           "<"
         );
+        tl.to(".about__text", {
+          // backgroundColor: "#ffffff69",
+          // filter: "blur(0px)",
+          opacity: 1,
+          duration: 0.3,
+        });
 
-        // tl.to(testMesh2.current.position, { y: 10, duration: 2 });
-        // tl.to(testMesh2.current.material, { opacity: 1, duration: 2 }, "<");
-        tl.to(secondSectionRef.current, { opacity: 1, duration: 2 });
         tl.eventCallback("onComplete", null);
       } else {
-        // tl.to(skyBoxRef.current.material, {
-        //   emissiveIntensity: 0,
-        //   duration: 2,
+        // tl.to("canvas", {
+        //   filter: "blur(0px) grayscale(0) contrast(1)",
+        //   // filter: "grayscale(1) contrast(1.1)",
+        //   duration: 0.1,
         // });
-        tl.to(testMesh2.current.position, { y: -90, duration: 2 });
-        // tl.to(
-        //   testMesh2.current.material,
-        //   {
-        //     opacity: 0,
-        //     duration: 2,
-        //   },
-        //   "<"
-        // );
         tl.to(secondSectionRef.current, {
           opacity: 0,
-          duration: 2,
+          duration: 0.3,
+          pointerEvents: "none",
           onUpdate: () => {
             // secondSectionRef.current.reset();
           },
@@ -753,97 +982,201 @@ const MainSection = ({ userAgent }) => {
     },
     function three(direction) {
       if (direction) {
-        // tl.to(skyBoxRef.current.material, {
-        //   emissiveIntensity: 4,
-        //   duration: 2,
-        // });
-        tl.to(cameraRef.current.position0, {
-          x: -350,
-          y: 5,
-          z: -180,
-          duration: 2,
+        tl.to(cameraRef.current.target0, {
+          x: 20,
+          z: -300,
+          duration: 1,
           onUpdate: () => {
             cameraRef.current.reset();
           },
         });
         tl.to(
-          // [-400, 20, -180]
-          cameraRef.current.target0,
+          cameraRef.current.position0,
           {
-            x: -400,
-            y: 10,
-            z: -180,
-            duration: 2,
+            x: -210,
+            y: 30,
+            z: -200,
+            duration: 1,
+            ease: "power1.out",
             onUpdate: () => {
               cameraRef.current.reset();
             },
           },
           "<"
         );
-        tl.to(glowObjRef.current.rotation, {
-          y: 60,
-          duration: 3,
-          ease: "back.inOut(1.7)",
+
+        tl.to(
+          "canvas",
+          {
+            filter: "blur(3px) grayscale(1) contrast(1.1)",
+            // filter: "grayscale(1) contrast(1.1)",
+            duration: 0.2,
+          },
+          "<"
+        );
+        // ПОЯВЛЕНИЕ HTML
+        tl.to(thirdSectionRef.current, {
+          opacity: 1,
+          duration: 0.3,
+          pointerEvents: "all",
         });
-        tl.to(thirdSectionRef.current, { opacity: 1, duration: 2 });
-        tl.eventCallback("onComplete", null);
+        tl.to(".work-expirience__line-inner", {
+          height: "100%",
+          duration: 0.6,
+          ease: "back.out(2)",
+        });
+        tl.fromTo(
+          ".work-expirience__card-date",
+          {
+            scale: 0,
+          },
+          {
+            scale: 1,
+            duration: 0.5,
+            ease: "back.out(2)",
+            // repeat: -1,
+            // delay: 1,
+            // // reversed: true,
+            // yoyo: true,
+          },
+          "+=1"
+        );
+        tl.fromTo(
+          ".work-expirience__card",
+          {
+            scale: 0,
+          },
+          {
+            scale: 1,
+            duration: 0.8,
+            ease: "back.out(2)",
+            // repeat: -1,
+            // delay: 1,
+            // // reversed: true,
+            // yoyo: true,
+          }
+        );
+
+        // tl.eventCallback("onComplete", null);
       } else {
-        tl.to(thirdSectionRef.current, { opacity: 0, duration: 2 });
+        tl.to(".work-expirience__card", {
+          scale: 0,
+
+          duration: 1.3,
+          ease: "back.out(2)",
+          // repeat: -1,
+          // delay: 1,
+          // // reversed: true,
+          // yoyo: true,
+        });
+        tl.to(thirdSectionRef.current, {
+          opacity: 0,
+          pointerEvents: "none",
+          duration: 0.3,
+        });
+        tl.to(".work-expirience__line-inner", {
+          height: "0%",
+          duration: 0.3,
+          ease: "back.out(2)",
+        });
         tl.eventCallback("onComplete", null);
       }
     },
     function four(direction) {
       if (direction) {
+        tl.to(cameraRef.current.position0, {
+          x: 310,
+          y: 30,
+          z: 60,
+          duration: 1,
+          ease: "power1.out",
+          onUpdate: () => {
+            cameraRef.current.reset();
+          },
+        });
+        // tl.to(
+        //   cameraRef.current.position0,
+        //   {
+        //     // x: -210,
+        //     // y: 30,
+        //     z: -200,
+        //     duration: 1,
+        //     ease: "power1.out",
+        //     onUpdate: () => {
+        //       cameraRef.current.reset();
+        //     },
+        //   },
+        //   "<"
+        // );
+
+        tl.to("canvas", {
+          filter: "blur(6px) grayscale(1) contrast(1.1)",
+          // filter: "grayscale(1) contrast(1.1)",
+          duration: 1,
+        });
+        // ПОЯВЛЕНИЕ HTML
+        tl.to(fourSectionRef.current, {
+          opacity: 1,
+          pointerEvents: "all",
+          duration: 2,
+        });
+        tl.eventCallback("onComplete", null);
+      } else {
+        tl.to(fourSectionRef.current, {
+          opacity: 0,
+          pointerEvents: "none",
+          duration: 0.3,
+        });
+        tl.eventCallback("onComplete", null);
+      }
+    },
+    function five(direction) {
+      if (direction) {
+        tl.to("canvas", {
+          filter: "blur(0px) grayscale(0) contrast(1)",
+          // filter: "grayscale(1) contrast(1.1)",
+          duration: 0.3,
+        });
+        tl.to(cameraRef.current.target0, {
+          x: cameraRef.current.position0.x,
+          z: cameraRef.current.position0.z,
+          y: 500,
+          duration: 1,
+          onUpdate: () => {
+            cameraRef.current.reset();
+          },
+        });
         tl.to(
-          // [-400, 20, -180]
           cameraRef.current.position0,
           {
-            y: 5,
-
-            duration: 1,
-            onUpdate: () => {
-              cameraRef.current.reset();
-            },
-          }
-        );
-        tl.to(
-          // [-400, 20, -180]
-          cameraRef.current.target0,
-          {
-            x: 310,
-            // y: 5,
-            z: -300,
+            x: cameraRef.current.position0.x,
+            y: 100,
+            z: cameraRef.current.position0.z,
             duration: 2,
+            ease: "power1.out",
             onUpdate: () => {
               cameraRef.current.reset();
             },
           },
           "<"
         );
-        // 310, 10, -200
-        tl.to(cameraRef.current.position0, {
-          x: 220,
-          y: 1,
-          z: -300,
-          duration: 2,
-          onUpdate: () => {
-            cameraRef.current.reset();
-          },
+        tl.to("canvas", {
+          filter: "blur(0px) grayscale(0) contrast(1)",
+          // filter: "grayscale(1) contrast(1.1)",
+          duration: 1,
         });
-
-        tl.to(fourSectionRef.current, { opacity: 1, duration: 2 });
+        tl.to(fiveSectionRef.current, {
+          opacity: 1,
+          pointerEvents: "all",
+          duration: 2,
+        });
         tl.eventCallback("onComplete", null);
       } else {
-        tl.to(fourSectionRef.current, { opacity: 0, duration: 2 });
-        tl.eventCallback("onComplete", null);
-      }
-    },
-    function five(direction) {
-      if (direction) {
-        tl.to(fiveSectionRef.current, { opacity: 1, duration: 2 });
-        tl.eventCallback("onComplete", null);
-      } else {
-        tl.to(fiveSectionRef.current, { opacity: 0, duration: 2 });
+        tl.to(fiveSectionRef.current, {
+          opacity: 0,
+          pointerEvents: "none",
+          duration: 0.3,
+        });
         tl.eventCallback("onComplete", null);
       }
     },
@@ -885,9 +1218,13 @@ const MainSection = ({ userAgent }) => {
     currentStageRef.current = targetStage;
   };
 
+  const orbChange = (e) => {
+    console.log(e.target);
+  };
+
   return (
     <div ref={domnodeRef} className="mainSection">
-      <header style={{ position: "absolute" }} className="header">
+      <header className="header">
         <nav className="navigation">
           <ul>
             <li>
@@ -918,308 +1255,157 @@ const MainSection = ({ userAgent }) => {
           </ul>
         </nav>
       </header>
-      {/* <button
-        style={{
-          margin: "0 auto",
-          display: "block",
-          zIndex: 100,
-          position: "relative",
-          fontSize: 20,
-          backgroundColor: "transparent",
-          color: "white",
-          cursor: "pointer",
-        }}
-        onClick={() => console.log(cameraRef.current)}
-      >
-        Stage
-      </button>
-      <button
-        style={{
-          margin: "0 auto",
-          display: "block",
-          zIndex: 100,
-          position: "relative",
-          fontSize: 20,
-          backgroundColor: "transparent",
-          color: "white",
-          cursor: "pointer",
-        }}
-        onClick={() => cameraPos()}
-      >
-        CameraPos
-      </button> */}
-      <Suspense fallback={null}>
+      <div className={popup ? "wrapper blured" : "wrapper"}>
+        <div className="app-inner">
+          <About secondSectionRef={secondSectionRef} />
+          <WorkExpierence thirdSectionRef={thirdSectionRef} />
+          <Works
+            popup={popup}
+            popupCall={popupCall}
+            setPopup={setPopup}
+            fourSectionRef={fourSectionRef}
+            workExamples={workExamples}
+          />
+          <Contacts fiveSectionRef={fiveSectionRef} />
+        </div>
+      </div>
+      <Popup popup={popup} popupData={popupData} popupCall={popupCall} />
+
+      <Suspense fallback={<h1>loading</h1>}>
         <div
           ref={canvasRef}
-          onWheel={(e) => weelHandler(e)}
+          // onWheel={(e) => weelHandler(e)}
           id="canvas-container"
+          className={popup ? "canvas-container blured" : "canvas-container"}
         >
-          <div
-            ref={secondSectionRef}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              zIndex: 10,
-              opacity: 0,
-              width: "100%",
-            }}
-            className=""
-          >
-            <section style={{ height: "100vh", color: "white" }}>
-              <div className="wrapper">
-                <h1>About</h1>
-                <p className="about-text">
-                  You can also call me a product designer, experience designer,
-                  interaction, UI, UX or by any other market defined
-                  function-title. I'm also a multi-disciplinary maker with over
-                  10 years of experiences in wide range of design disciplines,
-                  manager, advisor, entrepreneur, front-end developer, music
-                  enthusiast, traveler, photographer and more.
-                </p>
-              </div>
-            </section>
-          </div>
-          <div
-            ref={thirdSectionRef}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              zIndex: 10,
-              opacity: 0,
-              width: "100%",
-            }}
-            className=""
-          >
-            <section
-              className="works"
-              style={{ height: "100vh", color: "white" }}
-            >
-              <div className="wrapper">
-                <h1>Work Expirience</h1>
-                <div className="work-expirience">
-                  <div className="work-expirience__cards">
-                    <div className="work-expirience__card">
-                      <h2 className="work-expirience__card-title">
-                        Frontend-разработчик
-                      </h2>
-                      <h4 className="work-expirience__card-subtitle">
-                        GoodFellaz
-                      </h4>
-                      <p className="work-expirience__card-text">
-                        You can also call me a product designer, experience
-                        designer, interaction, UI, UX or by any other market
-                        defined function-title. I'm also a multi-disciplinary
-                        maker with over 10 years of experiences in wide range of
-                        design disciplines, manager, advisor, entrepreneur,
-                        front-end developer, music enthusiast, traveler,
-                        photographer and more.
-                      </p>
-                    </div>
-                    <div className="work-expirience__card">
-                      <h2 className="work-expirience__card-title">
-                        Frontend-разработчик
-                      </h2>
-                      <h4 className="work-expirience__card-subtitle">
-                        GoodFellaz
-                      </h4>
-                      <p className="work-expirience__card-text">
-                        You can also call me a product designer, experience
-                        designer, interaction, UI, UX or by any other market
-                        defined function-title. I'm also a multi-disciplinary
-                        maker with over 10 years of experiences in wide range of
-                        design disciplines, manager, advisor, entrepreneur,
-                        front-end developer, music enthusiast, traveler,
-                        photographer and more.
-                      </p>
-                    </div>
-                    <div className="work-expirience__card">
-                      <h2 className="work-expirience__card-title">
-                        Frontend-разработчик
-                      </h2>
-                      <h4 className="work-expirience__card-subtitle">
-                        GoodFellaz
-                      </h4>
-                      <p className="work-expirience__card-text">
-                        You can also call me a product designer, experience
-                        designer, interaction, UI, UX or by any other market
-                        defined function-title. I'm also a multi-disciplinary
-                        maker with over 10 years of experiences in wide range of
-                        design disciplines, manager, advisor, entrepreneur,
-                        front-end developer, music enthusiast, traveler,
-                        photographer and more.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="work-expirience__line">
-                    <div className="work-expirience__line-inner"></div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-          <div
-            ref={fourSectionRef}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              zIndex: 10,
-              opacity: 0,
-              width: "100%",
-            }}
-            className=""
-          >
-            <section
-              className="works"
-              style={{ height: "100vh", color: "white" }}
-            >
-              <div className="wrapper">
-                <h1>Works</h1>
-                <div className="works__cards">
-                  <div className="works__card">
-                    <h1>Zao</h1>
-                  </div>
-                  <div className="works__card">
-                    <h1>Hermes</h1>
-                  </div>
-                  <div className="works__card">
-                    <h1>Ebis</h1>
-                  </div>
-                  <div className="works__card">
-                    <h1>T-Club</h1>
-                  </div>
-                  <div className="works__card">
-                    <h1>Техноград</h1>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-          <div
-            ref={fiveSectionRef}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              zIndex: 10,
-              opacity: 0,
-              width: "100%",
-            }}
-            className=""
-          >
-            <section
-              className="works"
-              style={{ height: "100vh", color: "white" }}
-            >
-              <div className="wrapper">
-                <h1>Contacts</h1>
-                <div className="contacts__inner">
-                  <div className="contacts__form"></div>
-                </div>
-              </div>
-            </section>
-          </div>
           <Canvas
             opacity={0}
             ref={canvasRef}
-            camera={{ position: [0, 70, 370], fov: 75, near: 0.01, far: 4000 }}
+            camera={{
+              position: [0, 65, 520],
+              fov: 75,
+              near: 0.01,
+              far: 4000,
+            }}
+            // camera={{
+            //   position: [100, 110, 350],
+            //   fov: 75,
+            //   near: 0.01,
+            //   far: 4000,
+            // }}
           >
-            {/* <color  attach={"background"} args={["#161656"]} /> */}
+            {/* <fog attach="fog" args={["white", 1500, 6000]} /> */}
+            {/* <MapControls
+              enableDamping={true}
+              dampingFactor={0.05}
+              screenSpacePanning={false}
+              minDistance={100}
+              maxDistance={500}
+              maxPolarAngle={Math.PI / 2}
+            /> */}
+            <color attach={"background"} args={["black"]} />
             {/* <color
               ref={canvasRef}
               attach={"background"}
               args={["linear-gradient(#031730 15%, #000002 45%)"]}
             /> */}
-            {/* <color
-              attach={"background"}
-              args={["linear-gradient(#e66465, #9198e5)"]}
-            /> */}
-            {/* <pointLight position={[0, 100, 0]} intensity={10} /> */}
-            {}
+            {/* <pointLight position={[0, 300, 0]} intensity={5} /> */}
+            {/* <spotLight position={[0, 200, 0]} intensity={10} /> */}
+            <ambientLight ref={ambientLightRef} intensity={5} />
+            {/* <directionalLight position={[0, -200, -400]} intensity={10} /> */}
+            {/* <directionalLight position={[0, -200, 400]} intensity={10} /> */}
 
-            <ambientLight ref={lightRef1} intensity={3} />
+            {/* <Environment
+              background
+              preset="night"
+              resolution={512}
+            ></Environment> */}
+            {/* <MovingPlane /> */}
+            {/* <Center top left> */}
+            <Text3D
+              position={[-110, 110.8, 420]}
+              // position={[-120, 110.8, 460]}
+              letterSpacing={0.2}
+              lineHeight={0.6}
+              size={7.3}
+              font="/Inter_Bold.json"
+              // smooth={4}
+              curveSegments={32}
+              bevelEnabled
+              bevelSize={0.04}
+              bevelThickness={1.1}
+              ref={dTextref}
+            >
+              {/* {`hello\nworld`} */}
+              {`Hello, I'm \n frontend-developer`}
+              {/* <meshStandardMaterial /> */}
+              <meshPhysicalMaterial
+                // color={"#0077ff"}
+                side={THREE.DoubleSide}
+                // map={colorMap2}
+                emissiveIntensity={0.1}
+                // emissiveMap={colorMap2}
+                // emissiveIntensity={2}
+                // alphaMap={colorMap2}
+                emissive={"red"}
+                // emissive={"#003153"}
+                roughness={0.2}
+                metalness={0.7}
+                transmission={1}
+                reflectivity={0.1}
+                ior={2.33}
+                thickness={0.3}
+              />
+            </Text3D>
+            {/* <EffectComposer>
+              <SelectiveBloom
+                // ref={lightRef}
+                // lights={[lightRef1, lightRef2]} // ⚠️ REQUIRED! all relevant lights
+                selection={[dTextref]} // selection of objects that will have bloom effect
+                selectionLayer={1} // selection layer
+                intensity={0.9} // The bloom intensity.
+                //   blurPass={undefined} // A blur pass.
+                //   width={Resizer.AUTO_SIZE} // render width
+                //   height={Resizer.AUTO_SIZE} // render height
+                kernelSize={KernelSize.LARGE} // blur kernel size
+                luminanceThreshold={0.01} // luminance threshold. Raise this value to mask out darker elements in the scene.
+                luminanceSmoothing={0.025} // smoothness of the luminance threshold. Range is [0, 1]
+                mipmapBlur
+              />
+            </EffectComposer> */}
+            <ScrollText />
 
-            {/* <PageComponent /> */}
-            {/* <gridHelper args={[100, 100]} position={[0, -5, 0]} /> */}
-            <GlowingObj glowObjRef={glowObjRef} lightRef1={lightRef1} />
+            <Pyramids />
+            {/* <Stack /> */}
+            {/* <Landscape /> */}
+            {/* <TestShadersScene /> */}
+            <SkyBox
+              color={"#0e1925"}
+              skyBoxMatRef={skyBoxMatRef}
+              skyBoxRef={skyBoxRef}
+            />
+            {/* <CloudsComp /> */}
 
             <Stars
-              radius={400}
+              radius={600}
               depth={60}
-              count={5000}
-              factor={4}
+              count={15000}
+              factor={10}
               saturation={3.2}
               fade
               speed={1}
             />
-            {/* <Ocean /> */}
-            <Greeting userAgent={userAgent} />
-            {/*  */}
-            <mesh
-              ref={planeMesh}
-              position={[0, -13, 0]}
-              rotation={[-Math.PI / 2, 0, 0]}
-            >
-              <planeGeometry args={[2000, 10000]} />
-              <meshPhongMaterial opacity={1.2} transparent color={"black"} />
-            </mesh>
-            {/* <mesh
-              position={[0, -50, -800]}
-              // rotation={[-Math.PI / 2, 0, 0]}
-            >
-              <planeGeometry args={[10000, 10000]} />
-              <meshPhongMaterial opacity={0.1} transparent color={"red"} />
-            </mesh> */}
-            <group
-              ref={testMesh2}
-              rotation={[0, Math.PI / 2, 0]}
-              position={[-110, 10, 20]}
-            >
-              <mesh>
-                <boxGeometry args={[70, 70, 70]} />
-                <meshStandardMaterial
-                  transparent
-                  opacity={1}
-                  color={"#008e8e"}
-                />
-              </mesh>
-            </group>
-            <mesh position={[310, 10, -300]}>
-              <boxGeometry args={[70, 70, 70]} />
-              <meshStandardMaterial transparent opacity={1} color={"#1b791e"} />
-            </mesh>
-            <SkyBox skyBoxRef={skyBoxRef} />
-            {/* <mesh position={[0, 0, 0]}>
-              <boxGeometry args={[1000, 1000, 1000]} />
-              <meshStandardMaterial transparent opacity={1} color={"#008e8e"} />
-            </mesh> */}
 
-            <Text
-              ref={textRef}
-              color={"red"}
-              fontSize={34}
-              position={[160, 170, 50]}
-              maxWidth={600}
-              rotateZ={90}
-            >
-              Hello, I m frontend-developer
-            </Text>
-            <Moon referens={moonRef} position={[0, 50, 0]} />
-
-            {/* <CameraControls
-              position={position}
-              target={target}
-              move={move}
-              z={z}
-            /> */}
-
-            <OrbitControls
+            <Moon referens={moonRef} position={[0, 210, -2500]} />
+            {/* <Greeting userAgent={userAgent} /> */}
+            {/* <OrbitControls
+              target={[0, 0, -330]}
               ref={cameraRef}
-              enableZoom={true}
-              enableRotate={true}
-            />
+              onChange={(e) => orbChange(e)}
+              // enableZoom={false}
+              // enableRotate={false}
+            /> */}
+            <CameraSearch cameraRef={cameraRef} />
           </Canvas>
         </div>
       </Suspense>
