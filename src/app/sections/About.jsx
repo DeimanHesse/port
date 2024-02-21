@@ -46,7 +46,8 @@ const About = ({ secondSectionRef }) => {
           <div className="about__image">
             <Image
               // className={styles.bgImg}
-              src="/images/aboutSection/aboutPhoto.jpg"
+              // src="/images/aboutSection/aboutPhoto.jpg"
+              src="/images/about/about2.jpg"
               priority
               sizes="(max-width: 900px) 100vw, (max-width: 1920px) 50vw"
               alt=""

@@ -46,7 +46,8 @@ const workExamples = [
     picture: "/images/work/hermes.png",
     short_description:
       "Гидроцилиндры, гидроклапанная аппаратура, фильтры ЕГА ЕГА",
-    company_description: "",
+    company_description:
+      "Промышленная группа «Гермес»- группа машиностроительных предприятий полного цикла со 100% локализованной продукцией, производимой на европейском оборудовании по немецкой технологии, и включает заводы «Гермес-Урал» в Свердловской области, «Гермес-Липецк» в Липецкой области и сбытовую и управляющую компанию ООО «Гермес» в Москве.",
     work_description: "",
     work_link: "https://hermes-industries.ru/",
     stack: "Laravel, Interia, Blade, GrapesJS, VueJs, VanillaJs, SCSS",
