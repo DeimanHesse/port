@@ -1,6 +1,13 @@
 "use client";
 import Image from "next/image";
-import { Suspense, useRef, useMemo, useState, useEffect } from "react";
+import {
+  Suspense,
+  useRef,
+  useMemo,
+  useState,
+  useEffect,
+  useLayoutEffect,
+} from "react";
 import * as THREE from "three";
 import { TextureLoader } from "three";
 import {
@@ -9,6 +16,7 @@ import {
   extend,
   useThree,
   useLoader,
+  useFrameLoop,
 } from "@react-three/fiber";
 import {
   Html,
@@ -35,6 +43,7 @@ import {
   FlyControls,
 } from "@react-three/drei";
 import "./MainSection.scss";
+import { Perf } from "r3f-perf";
 
 import { useControls } from "leva";
 
@@ -651,6 +660,21 @@ const CameraSearch = ({ cameraRef }) => {
   );
 };
 
+const FrameLimiter = ({ fps = 60 }) => {
+  const previousTimeRef = useRef(0);
+  const interval = 1000 / fps;
+
+  useFrame(({ clock }) => {
+    const elapsedTime = clock.getElapsedTime() * 1000;
+    if (elapsedTime - previousTimeRef.current > interval) {
+      previousTimeRef.current = elapsedTime;
+      // Ваш код для обновления сцены с заданной частотой FPS
+    }
+  });
+
+  return null;
+};
+
 const MainSection = ({ userAgent }) => {
   const textRef = useRef();
   const domnodeRef = useRef();
@@ -1161,6 +1185,7 @@ const MainSection = ({ userAgent }) => {
           className={popup ? "canvas-container blured" : "canvas-container"}
         >
           <Canvas
+            frameloop="demand"
             opacity={0}
             ref={canvasRef}
             camera={{
@@ -1185,6 +1210,7 @@ const MainSection = ({ userAgent }) => {
               maxDistance={500}
               maxPolarAngle={Math.PI / 2}
             /> */}
+            {/* <FrameLimiter fps={5} /> */}
             <color attach={"background"} args={["black"]} />
             {/* <color
               ref={canvasRef}
@@ -1270,7 +1296,7 @@ const MainSection = ({ userAgent }) => {
               skyBoxMatRef={skyBoxMatRef}
               skyBoxRef={skyBoxRef}
             />
-            <CloudsComp />
+            {/* <CloudsComp userAgent={userAgent} /> */}
 
             <Stars
               radius={600}
