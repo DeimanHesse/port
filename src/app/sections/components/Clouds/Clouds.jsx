@@ -10,13 +10,19 @@ import {
 } from "@react-three/drei";
 import { useControls } from "leva";
 
-const CloudsComp = () => {
-  return (
-    <>
-      {/* <StatsGl /> */}
-      <Sky />
-    </>
-  );
+const CloudsComp = ({ userAgent }) => {
+  if (userAgent && userAgent.toLowerCase().includes("mobile")) {
+    console.log("NOagent");
+    return;
+  } else {
+    console.log("agent");
+    console.log(userAgent);
+    return (
+      <>
+        <Sky />
+      </>
+    );
+  }
 };
 
 export default CloudsComp;

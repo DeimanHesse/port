@@ -178,6 +178,7 @@ const Pyramids = () => {
         <meshStandardMaterial map={texture01} />
       </mesh> */}
       {/* ОТРАЖАЮЩИЙ ЛАНШАФТ */}
+
       <mesh position={[0, -15, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[2000, 2000]} />
         <MeshReflectorMaterial
