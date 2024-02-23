@@ -178,7 +178,7 @@ const Pyramids = () => {
         <meshStandardMaterial map={texture01} />
       </mesh> */}
       {/* ОТРАЖАЮЩИЙ ЛАНШАФТ */}
-      {/* <mesh position={[0, -15, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+      <mesh position={[0, -15, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[2000, 2000]} />
         <MeshReflectorMaterial
           envMapIntensity={0}
@@ -202,7 +202,7 @@ const Pyramids = () => {
           debug={0}
           reflectorOffset={0.02} // Offsets the virtual camera that projects the reflection. Useful when the reflective surface is some distance from the object's origin (default = 0)
         />
-      </mesh> */}
+      </mesh>
       {/* ГОРОД */}
       <mesh
         position={[0, -10, -600]}

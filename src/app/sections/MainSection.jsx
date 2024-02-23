@@ -1139,8 +1139,8 @@ const MainSection = ({ userAgent }) => {
       </header>
       <div className={popup ? "wrapper blured" : "wrapper"}>
         <div className="app-inner">
-          {/* <About secondSectionRef={secondSectionRef} />
-          <WorkExpierence thirdSectionRef={thirdSectionRef} /> */}
+          <About secondSectionRef={secondSectionRef} />
+          <WorkExpierence thirdSectionRef={thirdSectionRef} />
           <Works
             popup={popup}
             popupCall={popupCall}
@@ -1148,7 +1148,7 @@ const MainSection = ({ userAgent }) => {
             fourSectionRef={fourSectionRef}
             workExamples={workExamples}
           />
-          {/* <Contacts fiveSectionRef={fiveSectionRef} /> */}
+          <Contacts fiveSectionRef={fiveSectionRef} />
         </div>
       </div>
       <Popup popup={popup} popupData={popupData} popupCall={popupCall} />
@@ -1270,7 +1270,7 @@ const MainSection = ({ userAgent }) => {
               skyBoxMatRef={skyBoxMatRef}
               skyBoxRef={skyBoxRef}
             />
-            {/* <CloudsComp /> */}
+            <CloudsComp />
 
             <Stars
               radius={600}
