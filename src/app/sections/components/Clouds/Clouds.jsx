@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   Clouds,
   Cloud,
@@ -43,11 +43,14 @@ function Sky() {
   //   z: { value: 1, min: 0, max: 100, step: 1 },
   //   color: "white",
   // });
+
+  const { invalidate, camera, gl } = useThree();
   useFrame((state, delta) => {
     ref.current.rotation.y = Math.cos(state.clock.elapsedTime / 2) / 25;
     // ref.current.rotation.y = state.clock.elapsedTime / 2 / 2;
     ref.current.rotation.x = Math.sin(state.clock.elapsedTime / 2) / 25;
     // cloud0.current.rotation.y -= delta;
+    ref.current.addEventListener("change", invalidate);
   });
   return (
     <>
