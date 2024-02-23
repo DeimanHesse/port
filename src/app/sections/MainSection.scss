@@ -55,6 +55,7 @@ section {
   left: 0;
   top: 0;
   color: #3223bc;
+  user-select: none;
   // color: #0077ff;
 }
 
@@ -426,40 +427,54 @@ svg.active .svg-elem-1 {
   }
   &__cards {
     // width: 900px;
+    width: 100%;
     margin: 0 auto;
     display: flex;
     gap: 52px;
     justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    // align-items: center;
+    // flex-wrap: wrap;
     // background-color: rgb(146, 146, 43);
     // height: calc(100% - 70px);
     height: max-content;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding-top: 50px;
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 550px) {
+      grid-template-columns: 1fr;
+    }
   }
-  // &__card {
-  //   width: 30%;
-  //   height: 300px;
-  //   // justify-self: center;
-
-  //   color: rgb(221, 221, 221);
-  //   // background-color: #ffffff2c;
-  //   // width: 500px;
-  //   padding: 15px;
-  //   border-radius: 10px;
-  //   line-height: 1.4;
-  //   // border: 3px solid white;
-
-  //   // box-shadow: 0px 0px 0px 2px green, inset 0px 0px 0px 2px green,
-  //   //   0px 0px 20px 4px green, inset 0px 0px 20px 4px green;
-  // }
 }
 
 .card {
-  width: 300px;
-  height: 250px;
+  // width: 300px;
+  // height: 250px;
+  // height: auto
+  aspect-ratio: 10 / 7;
   position: relative;
   cursor: pointer;
   // overflow: hidden;
+  &__button {
+    // // width: 200px;
+    // // height: 50px;
+    // display: block;
+    // margin: 0 auto;
+    padding: 8px 16px;
+    // text-transform: uppercase;
+    // background: transparent;
+    // cursor: pointer;
+    // border-radius: 4px;
+    // // box-shadow: 0 0 5px #0fd2ff, 0 0 10px white, 0 0 50px;
+    // box-shadow: 0px 0px 0px 1px #0fd2ff, inset 0px 0px 0px 1px #0fd2ff,
+    //   0px 0px 12px 1px #0fd2ff, inset 0px 0px 10px 1px #0fd2ff;
+    // // filter: brightness(10);
+    transition: 0.3s;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
   &:hover {
     z-index: 1000;
     .card__face-1 {
@@ -644,9 +659,9 @@ svg.active .svg-elem-1 {
   // width: 500px;
   padding: 32px 16px;
   border-radius: 10px;
-  border: 2px solid white;
+  border: 3px solid white;
   line-height: 1.4;
-  box-shadow: 0px 0px 0px 1px #0fd2ff, inset 0px 0px 0px 1px #0fd2ff,
+  box-shadow: 0px 0px 4px 1px #0fd2ff, inset 0px 0px 5px 1px #0fd2ff,
     0px 0px 12px 1px #0fd2ff, inset 0px 0px 10px 1px #0fd2ff;
   // box-shadow: 0px 0px 0px 2px green, inset 0px 0px 0px 2px green,
   //   0px 0px 20px 4px green, inset 0px 0px 20px 4px green;
@@ -671,9 +686,11 @@ svg.active .svg-elem-1 {
     margin: 0 auto;
     cursor: pointer;
     border-radius: 4px;
+    border: 2px solid white;
     // box-shadow: 0 0 5px #0fd2ff, 0 0 10px white, 0 0 50px;
-    box-shadow: 0px 0px 0px 1px #0fd2ff, inset 0px 0px 0px 1px #0fd2ff,
-      0px 0px 12px 1px #0fd2ff, inset 0px 0px 10px 1px #0fd2ff;
+    // box-shadow: 0px 0px 0px 1px #0fd2ff, inset 0px 0px 0px 1px #0fd2ff,
+    //   0px 0px 12px 1px #0fd2ff, inset 0px 0px 10px 1px #0fd2ff;
+
     // filter: brightness(10);
   }
 }
@@ -891,13 +908,15 @@ svg *[fill] {
   }
 
   height: 100%;
+  // overflow-y: scroll;
   &__content {
     display: grid;
     grid-template-columns: 40% 1fr;
     height: 100%;
     // padding: 50px;
     border: 1px solid black;
-    // overflow-y: scroll;
+    overflow-y: scroll;
+    position: relative;
     @media (max-width: 900px) {
       grid-template-columns: 1fr;
     }
@@ -913,14 +932,34 @@ svg *[fill] {
   }
   &__description {
     position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 100%;
-    padding-top: 200px;
-    padding: 200px 20px 200px 20px;
+    // padding-top: 200px;
+    padding: 40px;
     line-height: 1.4;
-    background-color: rgba(255, 255, 255, 0.244);
+    // background-color: #ffffff3e;
+    // background: linear-gradient(to right, #ffffff94 0%, #ffffff00 50%);
+    background: linear-gradient(
+      to right,
+      #6baede67 20%,
+      #ffc0cb3d 50%,
+      #ffc0cb00 70%
+    );
     color: black;
     @media (max-width: 900px) {
-      order: 2;
+      order: 1;
+      padding-top: 100px;
+      background: linear-gradient(
+        to bottom,
+        #6baede95 20%,
+        #ffc0cb3d 50%,
+        #ffc0cb00 70%
+      );
+      height: max-content;
     }
     p {
       margin-bottom: 1rem;
@@ -932,13 +971,21 @@ svg *[fill] {
     font-size: 50px;
     margin-bottom: 32px;
     text-align: center;
+    filter: drop-shadow(1px 5px 5px rgba(255, 66, 66, 0.374));
+    text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 5px #fff, 0 0 11px #0077ff,
+      0 0 20px #e0e0e0, 0 0 30px #dbdbdb, 0 0 55px #0077ff, 0 0 80px #0077ff;
+    user-select: none;
   }
 
   &__description-inner {
-    background-color: #0077ff41;
-    border-radius: 16px;
-    padding: 10px;
+    width: 100%;
+    background-color: #0077ff1f;
+    border-radius: 6px;
+    padding: 20px;
     margin-bottom: 32px;
+    border: 3px solid white;
+    box-shadow: 0px 0px 10px 2px #1aa7e8, inset 0px 0px 10px 2px #1aa7e8,
+      0px 0px 15px 2px #1aa7e8, inset 0px 0px 10px 1px #1aa7e8;
   }
   &__description-item {
     margin-bottom: 32px;
@@ -954,37 +1001,84 @@ svg *[fill] {
   }
   &__button-back {
     position: absolute;
-    top: -50px;
-    left: -50px;
+    top: -70px;
+    left: -70px;
     width: 200px;
     height: 200px;
     font-size: 22px;
+    padding-top: 35px;
+    padding-left: 30px;
     text-transform: uppercase;
-    background: #83a7c9;
+    // background: #0077ff42;
+    background: rgba(255, 0, 0, 0.244);
     border-radius: 50%;
     border: none;
     cursor: pointer;
     display: block;
+    border: 3px solid white;
     transition: 0.3s;
+    box-shadow: 0px 0px 0px 2px red, inset 0px 0px 0px 2px red,
+      0px 0px 20px 4px red, inset 0px 0px 20px 4px red;
+    text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 5px #fff, 0 0 11px #0077ff,
+      0 0 20px #e0e0e0, 0 0 30px #dbdbdb, 0 0 55px #0077ff, 0 0 80px #0077ff;
+    // box-shadow: 0px 0px 0px 2px #1aa7e8, inset 0px 0px 0px 2px #1aa7e8,
+    //   0px 0px 20px 4px #1aa7e8, inset 0px 0px 20px 4px #1aa7e8;
+    // text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 5px #fff, 0 0 11px #0077ff,
+    //   0 0 20px #e0e0e0, 0 0 30px #dbdbdb, 0 0 55px #0077ff, 0 0 80px #0077ff;
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 0px 20px 10px red, inset 0px 0px 10px 10px red,
+        0px 0px 20px 10px red, inset 0px 0px 20px 10px red;
+      // box-shadow: 0px 0px 20px 10px #1aa7e8, inset 0px 0px 10px 10px #1aa7e8,
+      //   0px 0px 20px 10px #1aa7e8, inset 0px 0px 20px 10px #1aa7e8;
+      top: -35px;
+      left: -35px;
+      padding: 0;
+
+      // filter: brightness(1.7);
+    }
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+  &__button-visit {
+    color: white;
+    // position: absolute;
+    // bottom: 30px;
+    // right: calc(50% - 150px);
+    // right: 50%;
+    width: 300px;
+    height: 60px;
+    font-size: 22px;
+    text-transform: uppercase;
+    background: #0077ff42;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    display: block;
+    border: 3px solid white;
+    transition: 0.3s;
+    box-shadow: 0px 0px 0px 2px #1aa7e8, inset 0px 0px 0px 2px #1aa7e8,
+      0px 0px 15px 4px #1aa7e8, inset 0px 0px 10px 4px #1aa7e8;
+    // text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 5px #fff, 0 0 11px #0077ff,
+    //   0 0 20px #e0e0e0, 0 0 30px #dbdbdb, 0 0 55px #0077ff, 0 0 80px #0077ff;
     &:hover {
       transform: scale(1.1);
-      top: -20px;
-      left: -20px;
+      box-shadow: 0px 0px 20px 3px #1aa7e8, inset 0px 0px 10px 3px #1aa7e8,
+        0px 0px 20px 3px #1aa7e8, inset 0px 0px 20px 3px #1aa7e8;
+      // bottom: -30px;
+      // right: -30px;
+
+      // filter: brightness(1.7);
+    }
+    &:active {
+      transform: scale(0.9);
     }
   }
 
-  &__back {
-    position: absolute;
-    top: 0;
-    // left: 20%;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 0, 0, 0.258);
-    transform: skew(20deg);
-  }
   &__image-wrapper {
     width: 100%;
-    // height: 100%;
+    height: 100%;
 
     display: flex;
     align-items: center;
@@ -992,13 +1086,13 @@ svg *[fill] {
 
     overflow: hidden;
     @media (max-width: 900px) {
-      order: 1;
-      height: 400px;
+      order: 2;
+      height: 600px;
     }
   }
   &__image-inner {
     width: 80%;
-    height: 70%;
+    height: 60%;
     padding: 20px;
     // background-color: red;
     // overflow: hidden;
@@ -1037,7 +1131,6 @@ svg *[fill] {
     // scrollbar-color: #6969dd #e0e0e0;
     // scrollbar-width: thin;
   }
-
   &__image {
     // background-color: rgb(194, 183, 97);
 

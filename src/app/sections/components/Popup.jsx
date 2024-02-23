@@ -29,7 +29,7 @@ const Popup = ({ data, workExampleRef, popup, popupCall, popupData }) => {
             </div>
             <div className="work-example__description-item">
               <div className="work-example__description-item-title">
-                Технологический стек:
+                Технический стек:
               </div>
               <div className="work-example__description-item-text">
                 {popupData.stack}
@@ -50,7 +50,9 @@ const Popup = ({ data, workExampleRef, popup, popupCall, popupData }) => {
             </div>
           </div>
           <a href={popupData.work_link} target="_blank">
-            <button>посетить сайт</button>
+            <button className="work-example__button-visit">
+              посетить сайт
+            </button>
           </a>
         </div>
         <div className="work-example__image-wrapper">

@@ -39,16 +39,16 @@ function Sky() {
   // });
   useFrame((state, delta) => {
     ref.current.rotation.y = Math.cos(state.clock.elapsedTime / 2) / 25;
-    ref.current.rotation.y = state.clock.elapsedTime / 2 / 25;
+    // ref.current.rotation.y = state.clock.elapsedTime / 2 / 2;
     ref.current.rotation.x = Math.sin(state.clock.elapsedTime / 2) / 25;
     // cloud0.current.rotation.y -= delta;
   });
   return (
     <>
       {/* <SkyImpl /> */}
-      <group ref={ref}>
+      <group position={[0, -150, -600]} ref={ref}>
         <Clouds
-          position={[0, 0, -400]}
+          // position={[0, 0, 100]}
           material={THREE.MeshLambertMaterial}
           limit={50}
           // range={range}
@@ -84,27 +84,18 @@ function Sky() {
             position={[0, 0, 12]}
           /> */}
           <Cloud
+            // position={[0, 0, 0]}
             // concentrate="outside"
-            growth={1000}
+            growth={400}
             color={"white"}
-            opacity={0.25}
+            opacity={0.45}
             seed={0.1}
-            bounds={[1200, 10, 500]}
+            bounds={[1120, 100, 100]}
             volume={800}
-            segments={30}
+            segments={20}
           />
-          <Cloud
-            position={[0, 0, 400]}
-            // concentrate="outside"
-            growth={1000}
-            color={"white"}
-            opacity={0.045}
-            seed={0.1}
-            bounds={[1200, 10, 500]}
-            volume={800}
-            segments={10}
-          />
-          <Cloud
+
+          {/* <Cloud
             position={[0, 0, 700]}
             // concentrate="outside"
             growth={1000}
@@ -115,8 +106,8 @@ function Sky() {
             bounds={[1200, 10, 500]}
             volume={800}
             segments={30}
-          />
-          <Cloud
+          /> */}
+          {/* <Cloud
             position={[0, 0, 300]}
             // concentrate="outside"
             growth={1000}
@@ -127,7 +118,7 @@ function Sky() {
             bounds={[1200, 10, 500]}
             volume={800}
             segments={30}
-          />
+          /> */}
 
           {/* <Cloud
             // concentrate="outside"

@@ -69,124 +69,6 @@ import Contacts from "./Contacts";
 import workExamples from "../data/WorkExamplesData";
 import Popup from "./components/Popup";
 
-const ControlsForScroll = () => {
-  const moonRef = useRef();
-  const textRef = useRef();
-  const pigMesh = useRef();
-
-  const data = useScroll();
-  useFrame(() => {
-    // console.log(data);
-    // data.offset = current scroll position, between 0 and 1, dampened
-    // data.delta = current delta, between 0 and 1, dampened
-
-    // Will be 0 when the scrollbar is at the starting position,
-    // then increase to 1 until 1 / 3 of the scroll distance is reached
-    const firstSection = data.range(0, 1 / 5);
-    // Will start increasing when 1 / 3 of the scroll distance is reached,
-    // and reach 1 when it reaches 2 / 3rds.
-    const secondSection = data.range(0, 1 / 5);
-    const thirdSection = data.range(0, 1 / 5);
-    // Same as above but with a margin of 0.1 on both ends
-    const c = data.range(1 / 3, 1 / 3, 0.1);
-    // Will move between 0-1-0 for the selected range
-    const d = data.curve(1 / 3, 1 / 3);
-    // Same as above, but with a margin of 0.1 on both ends
-    const e = data.curve(1 / 3, 2 / 3, 0.1);
-    // Returns true if the offset is in range and false if it isn't
-    const f = data.visible(2 / 3, 1 / 3);
-    // The visible function can also receive a margin
-    const g = data.visible(2 / 3, 1 / 3, 0.1);
-    const fullRange = data.range(0, 1);
-
-    // ref.current.position.x = fullRange * 100;
-    // moonRef.current.position.y = 60 + -firstSection * 300;
-    moonRef.current.position.z = 100 - firstSection * 3000;
-    // textRef.current.position.z = firstSection * -1350;
-    // pigMesh.current.position.x = b * 150.5;
-    pigMesh.current.position.x = -220 + secondSection * 750;
-    // pigMesh.current.position.x = -310;
-    // pigMesh.current.position.x = 190;
-    if (secondSection > 0) {
-      // console.log("secondSection", secondSection);
-    }
-
-    // pigMesh.current.position.x = -310 + secondSection * 370;
-
-    // pigMesh.current.position.y = -0 + secondSection * 40;
-    // pigMesh.current.position.z = -0 + secondSection * 300;
-
-    // pigMesh.current.position.x = fullRange / 3 - 220;
-    if (pigMesh.current.position.x < 0) {
-    }
-    // ref.current.position.x += 0.01;
-    // console.log(pigMesh.current.position.x + b * 0);
-  });
-
-  let position = [0, 70, 100];
-
-  // const [photoMap] = useLoader(TextureLoader, ["images/about/aboutPhoto.jpg"]);
-
-  return (
-    <>
-      <Moon referens={moonRef} position={position} />;
-      {/* <Text
-        ref={textRef}
-        color={"white"}
-        fontSize={34}
-        position={[150, 40, 250]}
-        maxWidth={600}
-        rotateZ={90}
-      >
-        Hello, I m frontend-developer
-      </Text> */}
-      <mesh ref={pigMesh} position={[-220, 60, 200]}>
-        <boxGeometry args={[70, 70, 4]} />
-        <meshPhysicalMaterial
-          // color={"red"}
-          // side={THREE.DoubleSide}
-          map={photoMap}
-          emissiveIntensity={4}
-          // emissiveMap={colorMap2}
-          // emissiveIntensity={2}
-          // alphaMap={colorMap2}
-          roughness={0.1}
-          metalness={0.5}
-          transmission={0.8}
-          reflectivity={0.1}
-          thickness={0.6}
-        />
-      </mesh>
-    </>
-  );
-};
-
-const CameraControls = ({ position, target, move, z }) => {
-  //Initialize camera controls
-  const {
-    camera,
-    gl: { domElement },
-  } = useThree();
-  const ref = useRef(null);
-
-  if (move) {
-    gsap.to(camera.position, { z: z, duration: 2 });
-    // gsap.to(camera.l, { z: 100, duration: 2 });
-  }
-  // Determines camera up Axis
-  // camera.up = new Vector3(0, 1, 0);
-
-  // return the controls object
-  return (
-    <OrbitControls
-      ref={ref}
-      args={[camera, domElement]}
-      panSpeed={1}
-      maxPolarAngle={Math.PI / 2}
-    />
-  );
-};
-
 const GlowingObj = ({ glowObjRef, lightRef1 }) => {
   const circleMesh = useRef(null);
   const lightRef = useRef(null);
@@ -1014,7 +896,7 @@ const MainSection = ({ userAgent }) => {
           },
           "<"
         );
-        // ПОЯВЛЕНИЕ HTML
+        // // ПОЯВЛЕНИЕ HTML
         tl.to(thirdSectionRef.current, {
           opacity: 1,
           duration: 0.3,
@@ -1229,27 +1111,27 @@ const MainSection = ({ userAgent }) => {
           <ul>
             <li>
               <a onClick={(e) => headerHandler(e)} id="1" href="/">
-                Home
+                Главная
               </a>
             </li>
             <li>
               <a onClick={(e) => headerHandler(e)} id="2" href="/about">
-                About
+                Обо мне
               </a>
             </li>
             <li>
               <a onClick={(e) => headerHandler(e)} id="3" href="/expirience">
-                Expirience
+                Опыт
               </a>
             </li>
             <li>
               <a onClick={(e) => headerHandler(e)} id="4" href="/works">
-                Works
+                Работы
               </a>
             </li>
             <li>
               <a onClick={(e) => headerHandler(e)} id="5" href="/contacts">
-                Contacts
+                Контакты
               </a>
             </li>
           </ul>
@@ -1257,8 +1139,8 @@ const MainSection = ({ userAgent }) => {
       </header>
       <div className={popup ? "wrapper blured" : "wrapper"}>
         <div className="app-inner">
-          <About secondSectionRef={secondSectionRef} />
-          <WorkExpierence thirdSectionRef={thirdSectionRef} />
+          {/* <About secondSectionRef={secondSectionRef} />
+          <WorkExpierence thirdSectionRef={thirdSectionRef} /> */}
           <Works
             popup={popup}
             popupCall={popupCall}
@@ -1266,7 +1148,7 @@ const MainSection = ({ userAgent }) => {
             fourSectionRef={fourSectionRef}
             workExamples={workExamples}
           />
-          <Contacts fiveSectionRef={fiveSectionRef} />
+          {/* <Contacts fiveSectionRef={fiveSectionRef} /> */}
         </div>
       </div>
       <Popup popup={popup} popupData={popupData} popupCall={popupCall} />
@@ -1309,10 +1191,14 @@ const MainSection = ({ userAgent }) => {
               attach={"background"}
               args={["linear-gradient(#031730 15%, #000002 45%)"]}
             /> */}
-            {/* <pointLight position={[0, 300, 0]} intensity={5} /> */}
-            {/* <spotLight position={[0, 200, 0]} intensity={10} /> */}
+            <pointLight position={[0, 300, 0]} intensity={50} />
+            <spotLight position={[0, 200, 0]} color={"green"} intensity={100} />
             <ambientLight ref={ambientLightRef} intensity={5} />
-            {/* <directionalLight position={[0, -200, -400]} intensity={10} /> */}
+            {/* <directionalLight
+              color={"white"}
+              position={[0, -200, 1700]}
+              intensity={5}
+            /> */}
             {/* <directionalLight position={[0, -200, 400]} intensity={10} /> */}
 
             {/* <Environment
@@ -1384,7 +1270,7 @@ const MainSection = ({ userAgent }) => {
               skyBoxMatRef={skyBoxMatRef}
               skyBoxRef={skyBoxRef}
             />
-            <CloudsComp />
+            {/* <CloudsComp /> */}
 
             <Stars
               radius={600}

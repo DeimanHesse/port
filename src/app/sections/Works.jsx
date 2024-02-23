@@ -19,9 +19,13 @@ const Works = ({ fourSectionRef, workExamples, popupCall }) => {
                   </div>
                 </div>
                 <div className="card__face-2">
-                  {/* <h1>{work.title}</h1> */}
                   <p>{work.short_description}</p>
-                  <button onClick={() => popupCall(index)}>Подробнее</button>
+                  <button
+                    className="card__button"
+                    onClick={() => popupCall(index)}
+                  >
+                    Подробнее
+                  </button>
                 </div>
               </div>
             ))}
