@@ -41,6 +41,7 @@ import {
   Center,
   MapControls,
   FlyControls,
+  Trail,
 } from "@react-three/drei";
 import "./MainSection.scss";
 import { Perf } from "r3f-perf";
@@ -69,6 +70,7 @@ import Stack from "./components/Stack/Stack";
 import Landscape from "./components/Landscape/Landscape";
 import Pyramids from "./components/Pyramids";
 import CloudsComp from "./components/Clouds/Clouds";
+import CloudsComp2 from "./components/Clouds/Clouds2";
 
 import WorkExpierence from "./WorkExpirience";
 import About from "./About";
@@ -729,12 +731,14 @@ const MainSection = ({ userAgent }) => {
       if (!direction) {
         // tl.to(moonRef.current.position, { z: -1800, duration: 1 });
         // tl.to(moonRef.current.position, { y: -30, duration: 1 }, "<");
-
-        // tl.to(canvasRef.current, {
-        //   // background: "linear-gradient(#031730 15%, #000002 45%)",
-        //   background: "#08082f",
-        //   duration: 1,
-        // });
+        // tl.to(
+        //   "canvas",
+        //   {
+        //     filter: "blur(0px) grayscale(0) contrast(1)",
+        //     duration: 1,
+        //   },
+        //   "<"
+        // );
 
         tl.eventCallback("onComplete", null);
       } else {
@@ -758,13 +762,37 @@ const MainSection = ({ userAgent }) => {
           "<"
         );
         tl.to(
-          "canvas",
+          ".blur",
           {
-            filter: "blur(0px) grayscale(0) contrast(1)",
-            duration: 1,
+            opacity: 0,
+            duration: 0.5,
           },
           "<"
         );
+        // tl.to(
+        //   "canvas",
+        //   {
+        //     filter: "blur(0px) grayscale(0) contrast(1)",
+        //     duration: 1,
+        //   },
+        //   "<"
+        // );
+        // tl.fromTo(
+        //   dTextref.current.position,
+        //   {
+        //     x: -500,
+        //   },
+        //   {
+        //     // background: "linear-gradient(#031730 15%, #000002 45%)",
+        //     x: 0,
+        //     duration: 0.4,
+        //   }
+        // );
+        // tl.to(dTextref.current.position, {
+        //   // background: "linear-gradient(#031730 15%, #000002 45%)",
+        //   y: 0,
+        //   duration: 0.4,
+        // });
         // tl.to(
         //   skyBoxMatRef.current.color,
         //   {
@@ -783,6 +811,10 @@ const MainSection = ({ userAgent }) => {
     function two(direction) {
       console.log("two", skyBoxMatRef.current);
       if (direction) {
+        tl.to(".blur", {
+          opacity: 1,
+          duration: 0.4,
+        });
         tl.to(cameraRef.current.position0, {
           y: 23,
           duration: 0.5,
@@ -841,32 +873,63 @@ const MainSection = ({ userAgent }) => {
           },
           "<"
         );
-        tl.to("canvas", {
-          filter: "blur(3px) grayscale(1) contrast(1.1)",
-          // filter: "grayscale(1) contrast(1.1)",
-          duration: 0.3,
-        });
+
         tl.to(secondSectionRef.current, {
           opacity: 1,
-          duration: 2,
+          duration: 0.5,
           pointerEvents: "all",
         });
-        tl.to(
-          ".about__text",
+        tl.fromTo(
+          ".rabout-card22",
           {
-            // backgroundColor: "#ffffff69",
-            backgroundColor: "#0d2c4f91",
-            // filter: "blur(0px)",
-            duration: 1,
+            translateX: "0",
+            translateY: "50%",
+            opacity: 0,
+          },
+          {
+            opacity: 1,
+            translateY: "0",
+            // translateX: "100%",
+            duration: 0.5,
+            ease: "back.out(1.7)",
+            // pointerEvents: "none",
+            onUpdate: () => {
+              // secondSectionRef.current.reset();
+            },
+          }
+        );
+        tl.fromTo(
+          ".about__image",
+          { translateX: "0", translateY: "-50%", opacity: 0 },
+          {
+            opacity: 1,
+            duration: 0.5,
+            translateY: "0",
+            pointerEvents: "none",
+            ease: "back.out(1.7)",
+            onUpdate: () => {
+              // secondSectionRef.current.reset();
+            },
           },
           "<"
         );
-        tl.to(".about__text", {
-          // backgroundColor: "#ffffff69",
-          // filter: "blur(0px)",
-          opacity: 1,
-          duration: 0.3,
-        });
+        // tl.to(
+        //   ".about__text",
+        //   {
+        //     // backgroundColor: "#ffffff69",
+        //     // backgroundColor: "#0d2c4f91",
+        //     // filter: "blur(0px)",
+        //     duration: 1,
+        //   },
+        //   "<"
+        // );
+
+        // tl.to(".about__text", {
+        //   // backgroundColor: "#ffffff69",
+        //   // filter: "blur(0px)",
+        //   opacity: 1,
+        //   duration: 0.3,
+        // });
 
         tl.eventCallback("onComplete", null);
       } else {
@@ -875,9 +938,32 @@ const MainSection = ({ userAgent }) => {
         //   // filter: "grayscale(1) contrast(1.1)",
         //   duration: 0.1,
         // });
+
+        tl.to(".rabout-card22", {
+          opacity: 0,
+          translateX: "100%",
+          duration: 0.5,
+          pointerEvents: "none",
+          onUpdate: () => {
+            // secondSectionRef.current.reset();
+          },
+        });
+        tl.to(
+          ".about__image",
+          {
+            opacity: 0,
+            duration: 0.5,
+            translateX: "-100%",
+            pointerEvents: "none",
+            onUpdate: () => {
+              // secondSectionRef.current.reset();
+            },
+          },
+          "<"
+        );
         tl.to(secondSectionRef.current, {
           opacity: 0,
-          duration: 0.3,
+          duration: 0.5,
           pointerEvents: "none",
           onUpdate: () => {
             // secondSectionRef.current.reset();
@@ -910,20 +996,27 @@ const MainSection = ({ userAgent }) => {
           },
           "<"
         );
-
         tl.to(
-          "canvas",
+          ".blur",
           {
-            filter: "blur(3px) grayscale(1) contrast(1.1)",
-            // filter: "grayscale(1) contrast(1.1)",
-            duration: 0.2,
+            backdropFilter: "blur(5px) grayscale(1) contrast(1)",
+            duration: 1,
           },
           "<"
         );
+        // tl.to(
+        //   "canvas",
+        //   {
+        //     filter: "blur(3px) grayscale(1) contrast(1.1)",
+        //     // filter: "grayscale(1) contrast(1.1)",
+        //     duration: 0.2,
+        //   },
+        //   "<"
+        // );
         // // ПОЯВЛЕНИЕ HTML
         tl.to(thirdSectionRef.current, {
           opacity: 1,
-          duration: 0.3,
+          duration: 1.3,
           pointerEvents: "all",
         });
         tl.to(".work-expirience__line-inner", {
@@ -1000,6 +1093,14 @@ const MainSection = ({ userAgent }) => {
             cameraRef.current.reset();
           },
         });
+        tl.to(
+          ".blur",
+          {
+            backdropFilter: "blur(5px) grayscale(1) contrast(1)",
+            duration: 1,
+          },
+          "<"
+        );
         // tl.to(
         //   cameraRef.current.position0,
         //   {
@@ -1015,11 +1116,11 @@ const MainSection = ({ userAgent }) => {
         //   "<"
         // );
 
-        tl.to("canvas", {
-          filter: "blur(6px) grayscale(1) contrast(1.1)",
-          // filter: "grayscale(1) contrast(1.1)",
-          duration: 1,
-        });
+        // tl.to("canvas", {
+        //   filter: "blur(6px) grayscale(1) contrast(1.1)",
+        //   // filter: "grayscale(1) contrast(1.1)",
+        //   duration: 1,
+        // });
         // ПОЯВЛЕНИЕ HTML
         tl.to(fourSectionRef.current, {
           opacity: 1,
@@ -1038,11 +1139,11 @@ const MainSection = ({ userAgent }) => {
     },
     function five(direction) {
       if (direction) {
-        tl.to("canvas", {
-          filter: "blur(0px) grayscale(0) contrast(1)",
-          // filter: "grayscale(1) contrast(1.1)",
-          duration: 0.3,
-        });
+        // tl.to("canvas", {
+        //   filter: "blur(0px) grayscale(0) contrast(1.5)",
+        //   // filter: "grayscale(1) contrast(1.1)",
+        //   duration: 0.3,
+        // });
         tl.to(cameraRef.current.target0, {
           x: cameraRef.current.position0.x,
           z: cameraRef.current.position0.z,
@@ -1066,11 +1167,7 @@ const MainSection = ({ userAgent }) => {
           },
           "<"
         );
-        tl.to("canvas", {
-          filter: "blur(0px) grayscale(0) contrast(1)",
-          // filter: "grayscale(1) contrast(1.1)",
-          duration: 1,
-        });
+
         tl.to(fiveSectionRef.current, {
           opacity: 1,
           pointerEvents: "all",
@@ -1083,6 +1180,11 @@ const MainSection = ({ userAgent }) => {
           pointerEvents: "none",
           duration: 0.3,
         });
+        // tl.to("canvas", {
+        //   filter: "blur(0px) grayscale(0) contrast(1)",
+        //   // filter: "grayscale(1) contrast(1.1)",
+        //   duration: 1,
+        // });
         tl.eventCallback("onComplete", null);
       }
     },
@@ -1145,12 +1247,12 @@ const MainSection = ({ userAgent }) => {
             </li>
             <li>
               <a onClick={(e) => headerHandler(e)} id="3" href="/expirience">
-                Опыт
+                Опыт работы
               </a>
             </li>
             <li>
               <a onClick={(e) => headerHandler(e)} id="4" href="/works">
-                Работы
+                Портфолио
               </a>
             </li>
             <li>
@@ -1161,6 +1263,7 @@ const MainSection = ({ userAgent }) => {
           </ul>
         </nav>
       </header>
+      <div className="blur"></div>
       <div className={popup ? "wrapper blured" : "wrapper"}>
         <div className="app-inner">
           <About secondSectionRef={secondSectionRef} />
@@ -1202,21 +1305,11 @@ const MainSection = ({ userAgent }) => {
             // }}
           >
             {/* <fog attach="fog" args={["white", 1500, 6000]} /> */}
-            {/* <MapControls
-              enableDamping={true}
-              dampingFactor={0.05}
-              screenSpacePanning={false}
-              minDistance={100}
-              maxDistance={500}
-              maxPolarAngle={Math.PI / 2}
-            /> */}
+
             {/* <FrameLimiter fps={5} /> */}
-            <color attach={"background"} args={["black"]} />
-            {/* <color
-              ref={canvasRef}
-              attach={"background"}
-              args={["linear-gradient(#031730 15%, #000002 45%)"]}
-            /> */}
+            {/* <color attach={"background"} args={["black"]} /> */}
+
+            <Moon referens={moonRef} position={[0, 210, -2500]} />
             <pointLight position={[0, 300, 0]} intensity={50} />
             <spotLight position={[0, 200, 0]} color={"green"} intensity={100} />
             <ambientLight ref={ambientLightRef} intensity={5} />
@@ -1234,6 +1327,8 @@ const MainSection = ({ userAgent }) => {
             ></Environment> */}
             {/* <MovingPlane /> */}
             {/* <Center top left> */}
+
+            {/* If `target` is not defined, Trail will use the first `Object3D` child as the target. */}
             <Text3D
               position={[-110, 110.8, 420]}
               // position={[-120, 110.8, 460]}
@@ -1269,6 +1364,9 @@ const MainSection = ({ userAgent }) => {
                 thickness={0.3}
               />
             </Text3D>
+            {/* You can optionally define a custom meshLineMaterial to use. */}
+            {/* <meshLineMaterial color={"red"} /> */}
+
             {/* <EffectComposer>
               <SelectiveBloom
                 // ref={lightRef}
@@ -1297,6 +1395,7 @@ const MainSection = ({ userAgent }) => {
               skyBoxRef={skyBoxRef}
             />
             <CloudsComp userAgent={userAgent} />
+            <CloudsComp2 userAgent={userAgent} />
 
             <Stars
               radius={600}
@@ -1308,7 +1407,6 @@ const MainSection = ({ userAgent }) => {
               speed={1}
             />
 
-            <Moon referens={moonRef} position={[0, 210, -2500]} />
             {/* <Greeting userAgent={userAgent} /> */}
             {/* <OrbitControls
               target={[0, 0, -330]}

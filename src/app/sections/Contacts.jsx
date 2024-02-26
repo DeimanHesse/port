@@ -46,11 +46,10 @@ const Contacts = ({ fiveSectionRef }) => {
     <>
       <section ref={fiveSectionRef} className="contacts">
         <div className="contacts__inner">
-          <div className="contacts__title">Contacts</div>
-          {/* <div className="contacts__form-wrapper">
-
-        </div> */}
+          <div className="contacts__title">Контакты</div>
+          <div className="contacts__form-wrapper"></div>
           <form className="contacts__form contacts-form">
+            <div className="contacts-form__shabow"></div>
             <div className="contacts-form__item">
               <label className="contacts-form__label" htmlFor="name">
                 Введите своё имя

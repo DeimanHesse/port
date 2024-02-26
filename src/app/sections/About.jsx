@@ -4,7 +4,7 @@ const About = ({ secondSectionRef }) => {
   return (
     <>
       <section ref={secondSectionRef} className="about">
-        <div className="about__title">About</div>
+        <div className="about__title">Обо мне</div>
         <div className="about__content">
           <div className="about__image">
             <Image
@@ -22,7 +22,7 @@ const About = ({ secondSectionRef }) => {
               // height={"100%"}
             />
           </div>
-          <div className="about__text">
+          {/* <div className="about__text">
             <p className="about-text">
               Здравствуйте! Меня зовут Дмитрий Сиников. Я Frontend-разработчик
               из города Калуга. Первый сайт создал ещё в школе на хостинге
@@ -33,6 +33,27 @@ const About = ({ secondSectionRef }) => {
               сайта
             </p>
             <p className="about-text"></p>
+          </div> */}
+          <div className="rabout-card22">
+            {/* <div className="rabout-card22__neon"></div> */}
+            <p>
+              Здравствуйте! Меня зовут Дмитрий Сиников. Я Frontend-разработчик
+              из города Калуга. Первый сайт создал ещё в школе на хостинге
+              Яндекс.Народ. С того времени начал интересоваться веб-разработкой:
+              появился опыт работы с HTML и CSS, научился верстать сайты. На
+              данный момент работаю Frontend-разработчиком в компании АО
+              «Торговый дом «ПЕРЕКРЕСТОК». Занимаюсь поддержкой и развитием
+              сайта
+            </p>
+            <p>
+              Здравствуйте! Меня зовут Дмитрий Сиников. Я Frontend-разработчик
+              из города Калуга. Первый сайт создал ещё в школе на хостинге
+              Яндекс.Народ. С того времени начал интересоваться веб-разработкой:
+              появился опыт работы с HTML и CSS, научился верстать сайты. На
+              данный момент работаю Frontend-разработчиком в компании АО
+              «Торговый дом «ПЕРЕКРЕСТОК». Занимаюсь поддержкой и развитием
+              сайта
+            </p>
           </div>
         </div>
       </section>

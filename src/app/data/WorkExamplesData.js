@@ -39,13 +39,12 @@ const workExamples = [
       "Разработка сайта для автоматизированной торговли криптовалютами.",
     work_description: "",
     work_link: "https://tbs-bot.com/ru",
-    stack: "Laravel, Blade, VanillaJs, SCSS",
+    stack: "Laravel, Blade, VanillaJs, SCSS, TailWind",
   },
   {
     title: "Hermes",
     picture: "/images/work/hermes.png",
-    short_description:
-      "Гидроцилиндры, гидроклапанная аппаратура, фильтры ЕГА ЕГА",
+    short_description: "Конструктор веб-страниц для Hermes",
     company_description:
       "Промышленная группа «Гермес»- группа машиностроительных предприятий полного цикла со 100% локализованной продукцией, производимой на европейском оборудовании по немецкой технологии, и включает заводы «Гермес-Урал» в Свердловской области, «Гермес-Липецк» в Липецкой области и сбытовую и управляющую компанию ООО «Гермес» в Москве.",
     work_description: "",

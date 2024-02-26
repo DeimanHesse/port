@@ -8,15 +8,17 @@ import {
   Sky as SkyImpl,
   StatsGl,
 } from "@react-three/drei";
-import { useControls } from "leva";
+
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const CloudsComp = ({ userAgent }) => {
   if (userAgent && userAgent.toLowerCase().includes("mobile")) {
     console.log("NOagent");
     return;
   } else {
-    console.log("agent");
-    console.log(userAgent);
+    // console.log("agent");
+    // console.log(userAgent);
     return (
       <>
         <Sky />
@@ -43,6 +45,13 @@ function Sky() {
   //   z: { value: 1, min: 0, max: 100, step: 1 },
   //   color: "white",
   // });
+
+  // useGSAP(
+  //   () => {
+  //     gsap.to(ref.current, { y: Math.cos(state.clock.elapsedTime / 2) / 25 }); // <-- automatically reverted
+  //   },
+  //   { scope: container }
+  // ); // <-- scope is for selector text (optional)
 
   const { invalidate, camera, gl } = useThree();
   useFrame((state, delta) => {
