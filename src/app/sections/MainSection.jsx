@@ -52,33 +52,28 @@ import { EffectComposer, SelectiveBloom } from "@react-three/postprocessing";
 
 import { BlurPass, Resizer, KernelSize, Resolution } from "postprocessing";
 
-import WaterMesh from "./components/Water/WaterMesh.jsx";
-import Moon from "./components/Moon/Moon.jsx";
-import { Effects2 } from "./components/Effects";
-import SkyBox from "./components/SkyBox";
-import TestShadersScene from "./components/TestShadersScene";
-// import Points from "./components/Fog/App";
-// import App from "./components/Fog/App";
-import MovingPlane from "./components/MovingPlane/MovingPlane";
+import WaterMesh from "../components/Water/WaterMesh.jsx";
+import Moon from "../components/Moon/Moon.jsx";
+import { Effects2 } from "../components/Effects";
+import SkyBox from "../components/SkyBox";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import { BrowserView, MobileView } from "react-device-detect";
 
-import Stack from "./components/Stack/Stack";
-import Landscape from "./components/Landscape/Landscape";
-import Pyramids from "./components/Pyramids";
-import CloudsComp from "./components/Clouds/Clouds";
-import CloudsComp2 from "./components/Clouds/Clouds2";
+import Landscape from "../components/Landscape/Landscape";
+import Pyramids from "../components/Pyramids";
+import CloudsComp from "../components/Clouds/Clouds";
+import CloudsComp2 from "../components/Clouds/Clouds2";
 
-import WorkExpierence from "./WorkExpirience";
-import About from "./About";
-import Works from "./Works";
-import Contacts from "./Contacts";
+import WorkExpierence from "./Expirience/WorkExpirience";
+import About from "./About/About";
+import Works from "./Portfolio/Portfolio";
+import Contacts from "./Contacts/Contacts";
 
 import workExamples from "../data/WorkExamplesData";
-import Popup from "./components/Popup";
+import Popup from "../components/Popup";
 
 const GlowingObj = ({ glowObjRef, lightRef1 }) => {
   const circleMesh = useRef(null);
@@ -169,414 +164,6 @@ function Greeting({ userAgent }) {
   }
 }
 
-// const Pyramids = () => {
-//   const pyramidRef = useRef();
-//   const gRef = useRef();
-//   const pyramidRefOuter = useRef();
-//   const roadRef1 = useRef();
-//   const roadRef2 = useRef();
-//   const texture = useTexture("/grid.png");
-//   const texture2 = useTexture("/displacementmap.png");
-//   useFrame(({ clock, camera }) => {
-//     // pyramidRef.current.rotation.y = clock.getElapsedTime();
-//     // gRef.current.rotation.y = clock.getElapsedTime();
-//     // gRef.current.rotation.y += 0.005;
-//     // camera.lookAt(100, 100, 4);
-//   });
-//   return (
-//     <>
-//       <mesh
-//         ref={pyramidRef}
-//         rotation={[0, -Math.PI / 4, 0]}
-//         position={[340, 55, -300]}
-//       >
-//         <coneGeometry args={[100, 100, 4]} />
-//         {/* <boxGeometry args={[3, 10, 700]} /> */}
-//         {/* <meshStandardMaterial
-//       // transparent
-//       opacity={1}
-//       color={"#008e8e"}
-//       // emissiveIntensity={5}
-//       emissiveMap={pyramidMap}
-
-//     /> */}
-//         <meshPhysicalMaterial
-//           // color={"red"}
-//           side={THREE.DoubleSide}
-//           // map={colorMap2}
-//           emissiveIntensity={0.1}
-//           // emissiveMap={colorMap2}
-//           // emissiveIntensity={2}
-//           // alphaMap={colorMap2}
-//           // emissive={"blue"}
-//           roughness={0}
-//           metalness={0}
-//           transmission={1}
-//           reflectivity={0}
-//           ior={2.33}
-//           thickness={0.3}
-//         />
-//         {/* <meshStandardMaterial color={"blue"} /> */}
-//       </mesh>
-//       {/* <Text3D
-//         ref={gRef}
-//         position={[-40, 10.8, 10]}
-//         letterSpacing={0.2}
-//         size={50.3}
-//         font="/Inter_Bold.json"
-//         smooth={4}
-//       >
-//         JS
-//         <meshStandardMaterial color="white" />
-//       </Text3D> */}
-//       <Gltf
-//         ref={gRef}
-//         scale={110}
-//         position={[0, 40, 0]}
-//         src="/react.glb"
-//         receiveShadow
-//         castShadow
-//       />
-//       <mesh rotation={[0, -Math.PI / 4, 0]} position={[-200, 30, 350]}>
-//         <coneGeometry args={[50, 50, 4]} />
-//         {/* <boxGeometry args={[3, 10, 700]} /> */}
-//         <meshPhysicalMaterial
-//           // color={"red"}
-//           // side={THREE.DoubleSide}
-//           // map={colorMap2}
-//           emissiveIntensity={0.5}
-//           // emissiveMap={colorMap2}
-//           // emissiveIntensity={2}
-//           // alphaMap={colorMap2}
-//           emissive={"black"}
-//           roughness={0}
-//           metalness={0}
-//           transmission={1}
-//           reflectivity={5.1}
-//           ior={2.33}
-//           thickness={1.3}
-//         />
-//       </mesh>
-//       <mesh rotation={[0, -Math.PI / 4, 0]} position={[0, 75, 0]}>
-//         <coneGeometry args={[150, 150, 4]} />
-//         {/* <boxGeometry args={[3, 10, 700]} /> */}
-//         <meshPhysicalMaterial
-//           // color={"red"}
-//           side={THREE.DoubleSide}
-//           // map={colorMap2}
-//           emissiveIntensity={0.5}
-//           // emissiveMap={colorMap2}
-//           // emissiveIntensity={2}
-//           // alphaMap={colorMap2}
-//           // envMap={hdrEq}
-//           emissive={"black"}
-//           roughness={0}
-//           metalness={0}
-//           transmission={1}
-//           reflectivity={1}
-//           ior={2.33}
-//           thickness={0.3}
-//         />
-//         {/* <meshPhongMaterial shininess={30} color={"red"} /> */}
-//         {/* <meshLambertMaterial /> */}
-//       </mesh>
-
-//       <mesh position={[0, -13, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-//         <planeGeometry args={[2000, 2000]} />
-//         <meshPhysicalMaterial
-//           // color={"black"}
-//           side={THREE.DoubleSide}
-//           // map={colorMap2}
-//           emissiveIntensity={0.5}
-//           // emissiveMap={colorMap2}
-//           // emissiveIntensity={2}
-//           // alphaMap={colorMap2}
-//           // envMap={hdrEq}
-//           emissive={"black"}
-//           roughness={0.8}
-//           metalness={0.8}
-//           transmission={0.1}
-//           reflectivity={0.3}
-//           ior={2.33}
-//           thickness={0}
-//           displacementMap={texture2}
-//           map={texture}
-//           displacementScale={7}
-//         />
-//       </mesh>
-//       <group
-//         // scale={0.4}
-//         // ref={testMesh2}
-//         rotation={[0, Math.PI / 2, 0]}
-//         position={[60, 6, -305]}
-//         // rotation={[0, -Math.PI / 2, 0]}
-//       >
-//         <mesh rotation={[-Math.PI / 2, 0, 0]}>
-//           <planeGeometry args={[20, 500]} />
-//           <meshPhysicalMaterial
-//             // color={"red"}
-//             // side={THREE.DoubleSide}
-//             // map={colorMap2}
-//             emissiveIntensity={0.5}
-//             // emissiveMap={colorMap2}
-//             // emissiveIntensity={2}
-//             // alphaMap={colorMap2}
-//             emissive={"black"}
-//             roughness={0}
-//             metalness={0}
-//             transmission={1}
-//             reflectivity={6.1}
-//             ior={2.33}
-//             thickness={1.3}
-//           />
-//         </mesh>
-//         <mesh ref={roadRef2} position={[-10, 2, 0]}>
-//           <boxGeometry args={[2, 5, 470]} />
-//           <meshPhysicalMaterial
-//             // color={"red"}
-//             side={THREE.DoubleSide}
-//             // map={colorMap2}
-//             emissiveIntensity={0.5}
-//             // emissiveMap={colorMap2}
-//             // emissiveIntensity={2}
-//             // alphaMap={colorMap2}
-//             emissive={"black"}
-//             roughness={0}
-//             metalness={0}
-//             transmission={1}
-//             reflectivity={6.1}
-//             ior={2.33}
-//             thickness={1.3}
-//           />
-//         </mesh>
-//         <mesh ref={roadRef1} position={[10, 2, 25]}>
-//           <boxGeometry args={[2, 5, 600]} />
-//           <meshPhysicalMaterial
-//             // color={"red"}
-//             side={THREE.DoubleSide}
-//             // map={colorMap2}
-//             emissiveIntensity={0.5}
-//             // emissiveMap={colorMap2}
-//             // emissiveIntensity={2}
-//             // alphaMap={colorMap2}
-//             emissive={"black"}
-//             roughness={0}
-//             metalness={0}
-//             transmission={1}
-//             reflectivity={6.1}
-//             ior={2.33}
-//             thickness={1.3}
-//           />
-//         </mesh>
-//       </group>
-//       <group
-//         // scale={0.4}
-//         // ref={testMesh2}
-//         // rotation={[0, Math.PI / 2, 0]}
-//         position={[-200, 6, 10]}
-//         // rotation={[0, -Math.PI / 2, 0]}
-//       >
-//         <mesh rotation={[-Math.PI / 2, 0, 0]}>
-//           <planeGeometry args={[20, 650]} />
-//           <meshPhysicalMaterial
-//             // color={"red"}
-//             side={THREE.DoubleSide}
-//             // map={colorMap2}
-//             emissiveIntensity={0.5}
-//             // emissiveMap={colorMap2}
-//             // emissiveIntensity={2}
-//             // alphaMap={colorMap2}
-//             emissive={"black"}
-//             roughness={0}
-//             metalness={0}
-//             transmission={1}
-//             reflectivity={6.1}
-//             ior={2.33}
-//             thickness={1.3}
-//           />
-//         </mesh>
-//         <mesh ref={roadRef2} position={[-10, 2, 5]}>
-//           <boxGeometry args={[2, 5, 650]} />
-//           <meshPhysicalMaterial
-//             // color={"red"}
-//             side={THREE.DoubleSide}
-//             // map={colorMap2}
-//             emissiveIntensity={0.5}
-//             // emissiveMap={colorMap2}
-//             // emissiveIntensity={2}
-//             // alphaMap={colorMap2}
-//             emissive={"black"}
-//             roughness={0}
-//             metalness={0}
-//             transmission={1}
-//             reflectivity={6.1}
-//             ior={2.33}
-//             thickness={1.3}
-//           />
-//         </mesh>
-//         <mesh ref={roadRef1} position={[10, 2, 25]}>
-//           <boxGeometry args={[2, 5, 650]} />
-//           <meshPhysicalMaterial
-//             // color={"red"}
-//             side={THREE.DoubleSide}
-//             // map={colorMap2}
-//             emissiveIntensity={0.5}
-//             // emissiveMap={colorMap2}
-//             // emissiveIntensity={2}
-//             // alphaMap={colorMap2}
-//             emissive={"black"}
-//             roughness={0}
-//             metalness={0}
-//             transmission={1}
-//             reflectivity={6.1}
-//             ior={2.33}
-//             thickness={1.3}
-//           />
-//         </mesh>
-//       </group>
-//       <Environment background resolution={512}>
-//         {/* Ceiling */}
-//         <Lightformer
-//           intensity={2}
-//           rotation-x={Math.PI / 2}
-//           position={[0, 4, -9]}
-//           scale={[10, 1, 1]}
-//         />
-//         <Lightformer
-//           intensity={10}
-//           rotation-x={Math.PI / 2}
-//           position={[0, 4, -6]}
-//           scale={[10, 1, 1]}
-//           color={"red"}
-//         />
-//         <Lightformer
-//           intensity={2}
-//           rotation-x={Math.PI / 2}
-//           position={[0, 4, -3]}
-//           scale={[10, 1, 1]}
-//         />
-//         <Lightformer
-//           intensity={2}
-//           rotation-x={Math.PI / 2}
-//           position={[0, 4, 0]}
-//           scale={[10, 1, 1]}
-//         />
-//         <Lightformer
-//           intensity={2}
-//           rotation-x={Math.PI / 2}
-//           position={[0, 4, 3]}
-//           scale={[10, 1, 1]}
-//         />
-//         <Lightformer
-//           intensity={2}
-//           rotation-x={Math.PI / 2}
-//           position={[0, 4, 6]}
-//           scale={[10, 1, 1]}
-//           color={"blue"}
-//         />
-//         <Lightformer
-//           intensity={2}
-//           rotation-x={Math.PI / 2}
-//           position={[0, 4, 9]}
-//           scale={[10, 1, 1]}
-//         />
-//         {/* Sides */}
-//         <Lightformer
-//           intensity={2}
-//           rotation-y={Math.PI / 2}
-//           position={[-50, 2, 0]}
-//           scale={[100, 2, 1]}
-//         />
-//         <Lightformer
-//           intensity={2}
-//           rotation-y={-Math.PI / 2}
-//           position={[50, 2, 0]}
-//           scale={[100, 2, 1]}
-//         />
-//         {/* Key */}
-//         <Lightformer
-//           form="ring"
-//           color="red"
-//           intensity={10}
-//           scale={2}
-//           position={[10, 5, 10]}
-//           onUpdate={(self) => self.lookAt(0, 0, 0)}
-//         />
-//       </Environment>
-//     </>
-//   );
-// };
-
-function CloudsSky() {
-  const ref = useRef();
-  const cloud0 = useRef();
-  const { color, x, y, z, range, ...config } = useControls({
-    seed: { value: 1, min: 1, max: 100, step: 1 },
-    segments: { value: 20, min: 1, max: 80, step: 1 },
-    volume: { value: 6, min: 0, max: 100, step: 0.1 },
-    opacity: { value: 0.8, min: 0, max: 1, step: 0.01 },
-    fade: { value: 10, min: 0, max: 400, step: 1 },
-    growth: { value: 4, min: 0, max: 20, step: 1 },
-    speed: { value: 0.1, min: 0, max: 1, step: 0.01 },
-    x: { value: 6, min: 0, max: 100, step: 1 },
-    y: { value: 1, min: 0, max: 100, step: 1 },
-    z: { value: 1, min: 0, max: 100, step: 1 },
-    color: "white",
-  });
-  useFrame((state, delta) => {
-    ref.current.rotation.y = Math.cos(state.clock.elapsedTime / 2) / 2;
-    ref.current.rotation.x = Math.sin(state.clock.elapsedTime / 2) / 2;
-    cloud0.current.rotation.y -= delta;
-  });
-  return (
-    <>
-      <SkyImpl />
-      <group ref={ref}>
-        <Clouds material={THREE.MeshLambertMaterial} limit={400} range={range}>
-          <Cloud ref={cloud0} {...config} bounds={[x, y, z]} color={color} />
-          <Cloud
-            {...config}
-            bounds={[x, y, z]}
-            color="#eed0d0"
-            seed={2}
-            position={[15, 0, 0]}
-          />
-          <Cloud
-            {...config}
-            bounds={[x, y, z]}
-            color="#d0e0d0"
-            seed={3}
-            position={[-15, 0, 0]}
-          />
-          <Cloud
-            {...config}
-            bounds={[x, y, z]}
-            color="#a0b0d0"
-            seed={4}
-            position={[0, 0, -12]}
-          />
-          <Cloud
-            {...config}
-            bounds={[x, y, z]}
-            color="#c0c0dd"
-            seed={5}
-            position={[0, 0, 12]}
-          />
-          <Cloud
-            concentrate="outside"
-            growth={100}
-            color="#ffccdd"
-            opacity={1.25}
-            seed={0.3}
-            bounds={200}
-            volume={200}
-          />
-        </Clouds>
-      </group>
-    </>
-  );
-}
-
 const ScrollText = () => {
   const scrollTextCounterRef = useRef(0);
   const scrollTextRef = useRef(null);
@@ -640,17 +227,6 @@ const ScrollText = () => {
 };
 
 const CameraSearch = ({ cameraRef }) => {
-  // const {
-  //   gl, // WebGL renderer
-  //   scene, // Default scene
-  //   camera, // Default camera
-
-  //   setDefaultCamera, // Sets the default camera
-  // } = useThree();
-  // console.log(camera);
-  // const orbChange = (e) => {
-  //   console.log(camera.position);
-  // };
   return (
     <OrbitControls
       target={[0, 0, -330]}
@@ -660,21 +236,6 @@ const CameraSearch = ({ cameraRef }) => {
       enableRotate={false}
     />
   );
-};
-
-const FrameLimiter = ({ fps = 60 }) => {
-  const previousTimeRef = useRef(0);
-  const interval = 1000 / fps;
-
-  useFrame(({ clock }) => {
-    const elapsedTime = clock.getElapsedTime() * 1000;
-    if (elapsedTime - previousTimeRef.current > interval) {
-      previousTimeRef.current = elapsedTime;
-      // Ваш код для обновления сцены с заданной частотой FPS
-    }
-  });
-
-  return null;
 };
 
 const MainSection = ({ userAgent }) => {
@@ -712,34 +273,19 @@ const MainSection = ({ userAgent }) => {
   const popupCall = (index) => {
     if (!popup) {
       workExampleRef.current?.focus();
-      console.log("hhhh");
       setPopupData(workExamples[index]);
     }
     workExampleRef.current?.blur();
     setPopup(!popup);
-    // console.log(popupData);
   };
 
   let tl = gsap.timeline();
   const cPosRef = useRef(true);
   const dTextref = useRef();
 
-  // const [pyramidMap] = useLoader(TextureLoader, ["images/pyramid.jpg"]);
-
   const animArr = [
     function one(direction) {
       if (!direction) {
-        // tl.to(moonRef.current.position, { z: -1800, duration: 1 });
-        // tl.to(moonRef.current.position, { y: -30, duration: 1 }, "<");
-        // tl.to(
-        //   "canvas",
-        //   {
-        //     filter: "blur(0px) grayscale(0) contrast(1)",
-        //     duration: 1,
-        //   },
-        //   "<"
-        // );
-
         tl.eventCallback("onComplete", null);
       } else {
         tl.to(cameraRef.current.position0, {
@@ -809,7 +355,6 @@ const MainSection = ({ userAgent }) => {
       }
     },
     function two(direction) {
-      console.log("two", skyBoxMatRef.current);
       if (direction) {
         tl.to(".blur", {
           opacity: 1,
@@ -996,14 +541,11 @@ const MainSection = ({ userAgent }) => {
           },
           "<"
         );
-        tl.to(
-          ".blur",
-          {
-            backdropFilter: "blur(5px) grayscale(1) contrast(1)",
-            duration: 1,
-          },
-          "<"
-        );
+        tl.to(".blur", {
+          opacity: 1,
+          duration: 0.4,
+        });
+
         // tl.to(
         //   "canvas",
         //   {
@@ -1093,14 +635,10 @@ const MainSection = ({ userAgent }) => {
             cameraRef.current.reset();
           },
         });
-        tl.to(
-          ".blur",
-          {
-            backdropFilter: "blur(5px) grayscale(1) contrast(1)",
-            duration: 1,
-          },
-          "<"
-        );
+        tl.to(".blur", {
+          opacity: 1,
+          duration: 0.4,
+        });
         // tl.to(
         //   cameraRef.current.position0,
         //   {
@@ -1139,11 +677,10 @@ const MainSection = ({ userAgent }) => {
     },
     function five(direction) {
       if (direction) {
-        // tl.to("canvas", {
-        //   filter: "blur(0px) grayscale(0) contrast(1.5)",
-        //   // filter: "grayscale(1) contrast(1.1)",
-        //   duration: 0.3,
-        // });
+        tl.to(".blur", {
+          opacity: 0,
+          duration: 0.4,
+        });
         tl.to(cameraRef.current.target0, {
           x: cameraRef.current.position0.x,
           z: cameraRef.current.position0.z,
@@ -1297,38 +834,10 @@ const MainSection = ({ userAgent }) => {
               near: 0.01,
               far: 4000,
             }}
-            // camera={{
-            //   position: [100, 110, 350],
-            //   fov: 75,
-            //   near: 0.01,
-            //   far: 4000,
-            // }}
           >
-            {/* <fog attach="fog" args={["white", 1500, 6000]} /> */}
-
-            {/* <FrameLimiter fps={5} /> */}
-            {/* <color attach={"background"} args={["black"]} /> */}
-
-            <Moon referens={moonRef} position={[0, 210, -2500]} />
             <pointLight position={[0, 300, 0]} intensity={50} />
             <spotLight position={[0, 200, 0]} color={"green"} intensity={100} />
             <ambientLight ref={ambientLightRef} intensity={5} />
-            {/* <directionalLight
-              color={"white"}
-              position={[0, -200, 1700]}
-              intensity={5}
-            /> */}
-            {/* <directionalLight position={[0, -200, 400]} intensity={10} /> */}
-
-            {/* <Environment
-              background
-              preset="night"
-              resolution={512}
-            ></Environment> */}
-            {/* <MovingPlane /> */}
-            {/* <Center top left> */}
-
-            {/* If `target` is not defined, Trail will use the first `Object3D` child as the target. */}
             <Text3D
               position={[-110, 110.8, 420]}
               // position={[-120, 110.8, 460]}
@@ -1343,9 +852,7 @@ const MainSection = ({ userAgent }) => {
               bevelThickness={1.1}
               ref={dTextref}
             >
-              {/* {`hello\nworld`} */}
               {`Hello, I'm \n frontend-developer`}
-              {/* <meshStandardMaterial /> */}
               <meshPhysicalMaterial
                 // color={"#0077ff"}
                 side={THREE.DoubleSide}
@@ -1364,39 +871,17 @@ const MainSection = ({ userAgent }) => {
                 thickness={0.3}
               />
             </Text3D>
-            {/* You can optionally define a custom meshLineMaterial to use. */}
-            {/* <meshLineMaterial color={"red"} /> */}
-
-            {/* <EffectComposer>
-              <SelectiveBloom
-                // ref={lightRef}
-                // lights={[lightRef1, lightRef2]} // ⚠️ REQUIRED! all relevant lights
-                selection={[dTextref]} // selection of objects that will have bloom effect
-                selectionLayer={1} // selection layer
-                intensity={0.9} // The bloom intensity.
-                //   blurPass={undefined} // A blur pass.
-                //   width={Resizer.AUTO_SIZE} // render width
-                //   height={Resizer.AUTO_SIZE} // render height
-                kernelSize={KernelSize.LARGE} // blur kernel size
-                luminanceThreshold={0.01} // luminance threshold. Raise this value to mask out darker elements in the scene.
-                luminanceSmoothing={0.025} // smoothness of the luminance threshold. Range is [0, 1]
-                mipmapBlur
-              />
-            </EffectComposer> */}
             <ScrollText />
-
+            <Moon referens={moonRef} position={[0, 210, -2500]} />
             <Pyramids />
-            {/* <Stack /> */}
             {/* <Landscape /> */}
-            {/* <TestShadersScene /> */}
             <SkyBox
               color={"#0e1925"}
               skyBoxMatRef={skyBoxMatRef}
               skyBoxRef={skyBoxRef}
             />
             <CloudsComp userAgent={userAgent} />
-            <CloudsComp2 userAgent={userAgent} />
-
+            {/* <CloudsComp2 userAgent={userAgent} /> */}
             <Stars
               radius={600}
               depth={60}
@@ -1406,15 +891,6 @@ const MainSection = ({ userAgent }) => {
               fade
               speed={1}
             />
-
-            {/* <Greeting userAgent={userAgent} /> */}
-            {/* <OrbitControls
-              target={[0, 0, -330]}
-              ref={cameraRef}
-              onChange={(e) => orbChange(e)}
-              // enableZoom={false}
-              // enableRotate={false}
-            /> */}
             <CameraSearch cameraRef={cameraRef} />
           </Canvas>
         </div>
