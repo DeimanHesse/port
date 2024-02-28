@@ -1,6 +1,6 @@
-import Popup from "../../components/Popup";
+import Popup from "../../components/Popup/Popup";
 import { useState, useRef } from "react";
-
+import "./Portfolio.scss";
 const Works = ({ fourSectionRef, workExamples, popupCall }) => {
   const workExampleRef = useRef();
 

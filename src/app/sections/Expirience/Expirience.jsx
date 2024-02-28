@@ -1,33 +1,35 @@
 "use client";
-import {
-  useState,
-  useRef,
-  useEffect,
-  Suspense,
-  useMemo,
-  useLayoutEffect,
-} from "react";
-import {
-  Canvas,
-  useFrame,
-  extend,
-  useThree,
-  useLoader,
-  useFrameLoop,
-} from "@react-three/fiber";
+import { useEffect, Suspense, useMemo, useLayoutEffect, useRef } from "react";
+import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Events, animateScroll, scrollSpy } from "react-scroll";
 
 import { OrbitControls } from "@react-three/drei";
 
-import "./WorkExpierence.scss";
+import "./Expierence.scss";
 
 function Room() {
-  const gltf = useLoader(GLTFLoader, "/rat.gltf");
-  return <primitive object={gltf.scene} />;
+  const gantelRef = useRef(null);
+  useFrame((state) => {
+    // gantelRef.current.rotation.x += 0.01;
+    gantelRef.current.rotation.y += 0.005;
+  });
+  // const gltf = useLoader(GLTFLoader, "/rat.gltf");
+  const gltf = useLoader(GLTFLoader, "models/untitled.glb");
+  return (
+    <group ref={gantelRef}>
+      <primitive object={gltf.scene} />;
+      <mesh>
+        <boxGeometry args={[10, 1, 10]} />
+        <meshStandardMaterial color={"green"} />
+      </mesh>
+    </group>
+  );
 }
 
-const WorkExpierence = ({ thirdSectionRef }) => {
+const Expierence = ({ thirdSectionRef }) => {
+  const ref = useRef();
+
   useEffect(() => {
     // Registering the 'begin' event and logging it to the console when triggered.
     Events.scrollEvent.register("begin", (to, element) => {
@@ -115,18 +117,6 @@ const WorkExpierence = ({ thirdSectionRef }) => {
         // onScroll={(e) => handleScroll(e)}
         // onClick={(e) => handleScroll(e)}
       >
-        {/* <button
-          style={{
-            zIndex: 800000,
-            width: "200px",
-            height: "100px",
-            position: "absolute",
-            top: 0,
-          }}
-          onClick={(e) => scrollForward(e)}
-        >
-          dfgfdgdf
-        </button> */}
         <div className="work-expirience__inner">
           <div className="work-expirience__title">Опыт работы</div>
           <div className="work-expirience__content-wrapper">
@@ -141,7 +131,7 @@ const WorkExpierence = ({ thirdSectionRef }) => {
                 {/* <div className="work-expirience__viniette"></div> */}
                 <div className="work-expirience__card card-expierence">
                   <div className="card-expierence__date">
-                    2021 - Октябрь 2022
+                    Февраль 2022 - Октябрь 2022
                   </div>
                   <div className="card-expierence__content">
                     <div className="card-expierence__company">Фриланс</div>
@@ -159,19 +149,16 @@ const WorkExpierence = ({ thirdSectionRef }) => {
                       and spearheading the development of internal tools.
                     </div>
                     <div className="card-expierence__stack">
-                      Laravel, Interia, Blade, GrapesJS, VueJs, VanillaJs,
-                      SCSS,Laravel, Interia, Blade, GrapesJS, VueJs, VanillaJs,
-                      SCSS,Laravel, Interia, Blade, GrapesJS, VueJs, VanillaJs,
-                      SCSS
+                      React, JS, SCSS, Express, Nest, Gulp
                     </div>
                   </div>
                 </div>
                 <div className="work-expirience__card card-expierence">
                   <div className="card-expierence__date">
-                    2021 - Октябрь 2022
+                    Октябрь 2022 - Сентябрь 2023
                   </div>
                   <div className="card-expierence__content">
-                    <div className="card-expierence__company">Фриланс</div>
+                    <div className="card-expierence__company">Goodfellazz</div>
                     <div className="card-expierence__company">
                       Frontend-developer
                     </div>
@@ -186,19 +173,20 @@ const WorkExpierence = ({ thirdSectionRef }) => {
                       and spearheading the development of internal tools.
                     </div>
                     <div className="card-expierence__stack">
-                      Laravel, Interia, Blade, GrapesJS, VueJs, VanillaJs,
-                      SCSS,Laravel, Interia, Blade, GrapesJS, VueJs, VanillaJs,
-                      SCSS,Laravel, Interia, Blade, GrapesJS, VueJs, VanillaJs,
-                      SCSS
+                      Laravel, Interia, Blade, GrapesJS, Vue, JS, Tailwind,
+                      SCSS, Gulp
                     </div>
                   </div>
                 </div>
+
                 <div className="work-expirience__card card-expierence">
                   <div className="card-expierence__date">
-                    2021 - Октябрь 2022
+                    Сентябрь 2023 - Ноябрь 2023
                   </div>
                   <div className="card-expierence__content">
-                    <div className="card-expierence__company">Фриланс</div>
+                    <div className="card-expierence__company">
+                      KolibriStudio
+                    </div>
                     <div className="card-expierence__company">
                       Frontend-developer
                     </div>
@@ -213,10 +201,7 @@ const WorkExpierence = ({ thirdSectionRef }) => {
                       and spearheading the development of internal tools.
                     </div>
                     <div className="card-expierence__stack">
-                      Laravel, Interia, Blade, GrapesJS, VueJs, VanillaJs,
-                      SCSS,Laravel, Interia, Blade, GrapesJS, VueJs, VanillaJs,
-                      SCSS,Laravel, Interia, Blade, GrapesJS, VueJs, VanillaJs,
-                      SCSS
+                      Next, TS, JS, Pug, SCSS, CSSModules, Vite
                     </div>
                   </div>
                 </div>
@@ -224,11 +209,11 @@ const WorkExpierence = ({ thirdSectionRef }) => {
             </div>
             <div className="work-expirience__model">
               <Canvas
-                frameloop="demand"
+                // frameloop="demand"
                 opacity={1}
                 // ref={canvasRef}
                 camera={{
-                  position: [0, 5, 40],
+                  position: [0, 5, 20],
                   fov: 75,
                   near: 0.01,
                   far: 4000,
@@ -242,6 +227,7 @@ const WorkExpierence = ({ thirdSectionRef }) => {
                   intensity={5}
                 />
                 <Room />
+
                 <color attach={"background"} args={["#0d2c4f00"]} />
                 <OrbitControls
                 // target={[0, 0, -330]}
@@ -259,80 +245,4 @@ const WorkExpierence = ({ thirdSectionRef }) => {
   );
 };
 
-export default WorkExpierence;
-
-// const WorkExpierence = ({ thirdSectionRef }) => {
-//   return (
-//     <>
-//       <section ref={thirdSectionRef} className="work-expirience">
-//         <div className="work-expirience__inner">
-//           <div className="work-expirience__title">Work Expirience</div>
-//           <div className="work-expirience__cards">
-//             <div className="work-expirience__card-wrapper">
-//               <div className="work-expirience__card">
-//                 <h2 className="work-expirience__card-title">
-//                   Frontend-разработчик
-//                 </h2>
-//                 <h4 className="work-expirience__card-subtitle">GoodFellaz</h4>
-//                 <p className="work-expirience__card-text">
-//                   You can also call me a product designer, experience designer,
-//                   interaction, UI, UX or by any other market defined
-//                   function-title. I'm also a multi-disciplinary maker with over
-//                   10 years of experiences in wide range of design disciplines,
-//                   manager, advisor, entrepreneur, front-end developer, music
-//                   enthusiast, traveler, photographer and more.
-//                 </p>
-//               </div>
-//               <div className="work-expirience__card-date">
-//                 - 2021 - Октябрь 2022
-//               </div>
-//             </div>
-//             <div className="work-expirience__card-wrapper two">
-//               <div className="work-expirience__card-date two">
-//                 Октябрь 2022 - Сентябрь 2023 -
-//               </div>
-//               <div className="work-expirience__card">
-//                 <h2 className="work-expirience__card-title">
-//                   Frontend-разработчик
-//                 </h2>
-//                 <h4 className="work-expirience__card-subtitle">GoodFellaz</h4>
-//                 <p className="work-expirience__card-text">
-//                   You can also call me a product designer, experience designer,
-//                   interaction, UI, UX or by any other market defined
-//                   function-title. I'm also a multi-disciplinary maker with over
-//                   10 years of experiences in wide range of design disciplines,
-//                   manager, advisor, entrepreneur, front-end developer, music
-//                   enthusiast, traveler, photographer and more.
-//                 </p>
-//               </div>
-//             </div>
-//             <div className="work-expirience__card-wrapper">
-//               <div className="work-expirience__card">
-//                 <h2 className="work-expirience__card-title">
-//                   Frontend-разработчик
-//                 </h2>
-//                 <h4 className="work-expirience__card-subtitle">GoodFellaz</h4>
-//                 <p className="work-expirience__card-text">
-//                   You can also call me a product designer, experience designer,
-//                   interaction, UI, UX or by any other market defined
-//                   function-title. I'm also a multi-disciplinary maker with over
-//                   10 years of experiences in wide range of design disciplines,
-//                   manager, advisor, entrepreneur, front-end developer, music
-//                   enthusiast, traveler, photographer and more.
-//                 </p>
-//               </div>
-//               <div className="work-expirience__card-date">
-//                 Сентябрь 2023 - Ноябрь 2023
-//               </div>
-//             </div>
-//           </div>
-//           <div className="work-expirience__line">
-//             <div className="work-expirience__line-inner"></div>
-//           </div>
-//         </div>
-//       </section>
-//     </>
-//   );
-// };
-
-// export default WorkExpierence;
+export default Expierence;

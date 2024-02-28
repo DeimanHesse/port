@@ -67,13 +67,13 @@ import Pyramids from "../components/Pyramids";
 import CloudsComp from "../components/Clouds/Clouds";
 import CloudsComp2 from "../components/Clouds/Clouds2";
 
-import WorkExpierence from "./Expirience/WorkExpirience";
+import WorkExpierence from "./Expirience/Expirience";
 import About from "./About/About";
 import Works from "./Portfolio/Portfolio";
 import Contacts from "./Contacts/Contacts";
 
 import workExamples from "../data/WorkExamplesData";
-import Popup from "../components/Popup";
+import Popup from "../components/Popup/Popup";
 
 const GlowingObj = ({ glowObjRef, lightRef1 }) => {
   const circleMesh = useRef(null);
@@ -561,65 +561,74 @@ const MainSection = ({ userAgent }) => {
           duration: 1.3,
           pointerEvents: "all",
         });
-        tl.to(".work-expirience__line-inner", {
-          height: "100%",
-          duration: 0.6,
-          ease: "back.out(2)",
-        });
-        tl.fromTo(
-          ".work-expirience__card-date",
-          {
-            scale: 0,
-          },
-          {
-            scale: 1,
-            duration: 0.5,
-            ease: "back.out(2)",
-            // repeat: -1,
-            // delay: 1,
-            // // reversed: true,
-            // yoyo: true,
-          },
-          "+=1"
-        );
+
+        // tl.fromTo(
+        //   ".work-expirience__card-date",
+        //   {
+        //     scale: 0,
+        //   },
+        //   {
+        //     scale: 1,
+        //     duration: 0.5,
+        //     ease: "back.out(2)",
+        //     // repeat: -1,
+        //     // delay: 1,
+        //     // // reversed: true,
+        //     // yoyo: true,
+        //   },
+        //   "+=1"
+        // );
         tl.fromTo(
           ".work-expirience__card",
           {
-            scale: 0,
+            translateY: "-50px",
+            opacity: 0,
           },
           {
-            scale: 1,
+            opacity: 1,
+            translateY: "0px",
             duration: 0.8,
             ease: "back.out(2)",
             // repeat: -1,
             // delay: 1,
             // // reversed: true,
             // yoyo: true,
+            onComplete: () => {
+              setTimeout(() => {
+                document
+                  .querySelector(".work-expirience__cards-inner")
+                  .classList.add("active");
+              }, 300);
+            },
           }
         );
+        // tl.add(".work-expirience__cards-inner", { className: "active" });
 
         // tl.eventCallback("onComplete", null);
       } else {
-        tl.to(".work-expirience__card", {
-          scale: 0,
+        // tl.to(".work-expirience__card", {
+        //   scale: 0,
 
-          duration: 1.3,
-          ease: "back.out(2)",
-          // repeat: -1,
-          // delay: 1,
-          // // reversed: true,
-          // yoyo: true,
-        });
+        //   duration: 1.3,
+        //   ease: "back.out(2)",
+        //   // repeat: -1,
+        //   // delay: 1,
+        //   // // reversed: true,
+        //   // yoyo: true,
+        // });
         tl.to(thirdSectionRef.current, {
           opacity: 0,
           pointerEvents: "none",
           duration: 0.3,
+          onComplete: () => {
+            setTimeout(() => {
+              document
+                .querySelector(".work-expirience__cards-inner")
+                .classList.add("active");
+            }, 300);
+          },
         });
-        tl.to(".work-expirience__line-inner", {
-          height: "0%",
-          duration: 0.3,
-          ease: "back.out(2)",
-        });
+
         tl.eventCallback("onComplete", null);
       }
     },
@@ -759,12 +768,10 @@ const MainSection = ({ userAgent }) => {
     e.preventDefault();
     let targetStage;
     targetStage = Number(e.target.id);
+
+    if (targetStage === currentStageRef.current) return;
     setStage(targetStage, currentStageRef.current);
     currentStageRef.current = targetStage;
-  };
-
-  const orbChange = (e) => {
-    console.log(e.target);
   };
 
   return (
@@ -881,7 +888,7 @@ const MainSection = ({ userAgent }) => {
               skyBoxRef={skyBoxRef}
             />
             <CloudsComp userAgent={userAgent} />
-            {/* <CloudsComp2 userAgent={userAgent} /> */}
+            <CloudsComp2 userAgent={userAgent} />
             <Stars
               radius={600}
               depth={60}

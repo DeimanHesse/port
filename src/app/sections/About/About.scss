@@ -1,0 +1,141 @@
+.about {
+  font-family: "CenturyExpanded";
+  letter-spacing: 1.5px;
+  font-size: 1rem;
+  position: relative;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  // background-color: yellow;
+  box-sizing: border-box;
+  color: white;
+  // background-color: rgba(173, 173, 173, 0.333);
+  padding-top: 70px;
+  overflow: hidden;
+  width: 100%;
+  // backdrop-filter: blur(10px) grayscale(1);
+
+  &__title {
+    // animation: flicker 3.5s infinite alternate;
+    // display: inline-block;
+    // margin-bottom: 32px;
+    font-size: 36px;
+    margin-bottom: 32px;
+    height: 10%;
+    color: #fff;
+    // text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 5px #fff, 0 0 11px #0fa,
+    //   0 0 20px #0fa, 0 0 30px #0fa, 0 0 55px #0fa, 0 0 80px #0fa;
+    text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 5px #fff, 0 0 11px #0077ff,
+      0 0 20px #0077ff, 0 0 30px #0077ff, 0 0 55px #0077ff, 0 0 80px #0077ff;
+  }
+  &__content {
+    display: flex;
+    gap: 50px;
+    // align-items: center;
+    justify-content: center;
+    // height: 90%;
+    @media (max-width: 900px) {
+      flex-wrap: wrap-reverse;
+    }
+  }
+  &__text {
+    color: rgb(255, 255, 255);
+    width: 50%;
+    // background-color: #0d2c4fa3;
+    // background-color: #ffffff69;
+    padding: 27px;
+    border-radius: 14px;
+    line-height: 1.4;
+    transition: filter 0.4s;
+    border: 2px solid white;
+    // box-shadow: 0px 0px 0px 2px red, inset 0px 0px 0px 2px red,
+    //   0px 0px 20px 4px red, inset 0px 0px 20px 4px red;
+    box-shadow: 0px 0px 0px 2px blue, inset 0px 0px 0px 2px blue,
+      0px 0px 20px 4px blue, inset 0px 0px 20px 4px blue;
+    // box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 2px white,
+    //   0px 0px 20px 4px white, inset 0px 0px 20px 4px white;
+    // box-shadow: 0px 0px 0px 2px green, inset 0px 0px 0px 2px green,
+    //   0px 0px 20px 4px green, inset 0px 0px 20px 4px green;
+    // filter: blur(20px);
+    opacity: 0;
+    &:hover {
+      // filter: blur(10px);
+    }
+    @media (max-width: 900px) {
+      width: 100%;
+    }
+  }
+  &__image {
+    position: relative;
+    width: 30%;
+    border-radius: 10px;
+    overflow: hidden;
+    filter: grayscale(0.8) saturate(4);
+    // box-shadow: 10px 10px 40px 1px #5500ff4c;
+
+    @media (max-width: 900px) {
+      width: 100%;
+    }
+    img {
+      mask-image: linear-gradient(#000, transparent);
+      mask-image: linear-gradient(#000 0%, #000 70%, transparent 90%);
+      // mask-image: radial-gradient(#000 15%, #000 40%, transparent 75%);
+
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.rabout-card22 {
+  backdrop-filter: blur(17px);
+
+  // height: 500px;
+  font-family: "Garmond";
+  position: relative;
+  // background-color: yellow;
+  // background-color: #0d2c4fb1;
+  background: linear-gradient(
+    to right bottom,
+    #0d2c4f68 20%,
+    #21ce97ae 40%,
+    #0d2c4fc9 50%,
+    #0d2c4f00 80%,
+    #0077ff3c 90%
+  );
+  mask-image: linear-gradient(#000 0%, #000 70%, transparent 90%);
+  border-radius: 10px;
+  padding: 20px;
+  width: 50%;
+  // height: 300px;
+  line-height: 1.4;
+
+  // box-shadow: 0px 0px 0px 2px blue, inset 0px 0px 0px 2px blue,
+  //   0px 0px 20px 4px blue, inset 0px 0px 20px 4px blue;
+  box-shadow: 15px 15px 50px 1px #0095ff44;
+  // border: 1px solid rgba(255, 255, 255, 0.516);
+  // animation: neonlight 8s infinite ease-in-out;
+  p {
+    font-size: 16px;
+    font-weight: 400;
+    text-indent: 30px;
+    color: rgb(240, 240, 240);
+  }
+  &__neon {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    // box-shadow: 0px 0px 0px 2px #0077ff, inset 0px 0px 0px 2px #0077ff,
+    //   0px 0px 20px 4px #0077ff, inset 0px 0px 20px 4px #0077ff;
+    // border: 2px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.514);
+    // animation: neonlight2 4s infinite ease-in-out;
+  }
+}

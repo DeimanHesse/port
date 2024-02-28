@@ -1,31 +1,27 @@
 "use client";
-import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
+import "./Contacts.scss";
 
 const Contacts = ({ fiveSectionRef }) => {
-  const [message, setMessage] = useState("");
-  const [name, setName] = useState("");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ defaultValues: {} });
 
   const baseUrl =
     "https://api.telegram.org/bot6515309705:AAG2rAjFjfDJNTzj4MIfELZfWJiPvDpJWQw";
 
-  const sendMessage = async (e, name, message) => {
-    e.preventDefault();
-    const url = `${baseUrl}/sendMessage?chat_id=-4197712278&text=${message}`;
-    // const response = await fetch(url);
-    // const url = `${baseUrl}/sendMessage/`;
+  const submit = async (data) => {
+    console.log(data);
+    const url = `${baseUrl}/sendMessage?chat_id=-4197712278&text=${data.message}`;
     const chatId = "-4197712278";
 
-    // const res3 = await axios.get(`${baseUrl}/sendMessage`, {
-    //   params: {
-    //     chat_id: chatId,
-    //     text: message,
-    //   },
-    // });
-
     const mess = `
-    <b>${name}</b>
-    ${message}
+    <strong>${data.name}</strong>
+    <i>${data.message}</i>
     `;
 
     const res3 = await axios.post(`${baseUrl}/sendMessage`, {
@@ -33,13 +29,10 @@ const Contacts = ({ fiveSectionRef }) => {
       parse_mode: "html",
       text: mess,
     });
-    // const res = await axios.get(
-    //   `${baseUrl}/sendMessage?chat_id=-4197712278&text=${message}`
-    // );
-    // console.log(res.data);
-
-    setMessage("");
-    setName("");
+    reset();
+  };
+  const error = (data) => {
+    console.log(data);
   };
 
   return (
@@ -48,20 +41,30 @@ const Contacts = ({ fiveSectionRef }) => {
         <div className="contacts__inner">
           <div className="contacts__title">Контакты</div>
           <div className="contacts__form-wrapper"></div>
-          <form className="contacts__form contacts-form">
+          <form
+            onSubmit={handleSubmit(submit, error)}
+            className="contacts__form contacts-form"
+          >
             <div className="contacts-form__shabow"></div>
-            <div className="contacts-form__item">
+            <div
+              className={
+                errors.name
+                  ? "contacts-form__item error"
+                  : "contacts-form__item"
+              }
+            >
               <label className="contacts-form__label" htmlFor="name">
                 Введите своё имя
               </label>
               <input
                 className="contacts__name"
                 id="name"
-                name="name"
+                // name="name"
                 type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                {...register("name", { required: "Пожалуйста, назовитесь )" })}
+                aria-invalid={errors.name ? true : false}
               />
+              {errors.name && <p role="alert">{errors.name.message}</p>}
             </div>
             <div className="contacts-form__item">
               <label className="contacts-form__label" htmlFor="message">
@@ -70,15 +73,16 @@ const Contacts = ({ fiveSectionRef }) => {
               <textarea
                 className="contacts-form__message"
                 id="message"
-                name="message"
+                // name="message"
                 type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                {...register("message", {
+                  required: "Кажется, Вы забыли написать сообщение",
+                })}
+                aria-invalid={errors.message ? true : false}
               />
+              {errors.name && <p role="alert">{errors.message.message}</p>}
             </div>
-
             <button
-              onClick={(e) => sendMessage(e, name, message)}
               className="contacts-form__button neon-btn neon-btn--blue"
               type="submit"
             >

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import "./About.scss";
 const About = ({ secondSectionRef }) => {
   // const blurFilter = useMemo(() => new BlurFilter(4), []);
   return (
@@ -38,7 +39,7 @@ const About = ({ secondSectionRef }) => {
             {/* <div className="rabout-card22__neon"></div> */}
             <p>
               Здравствуйте! Меня зовут Дмитрий Сиников. Я Frontend-разработчик
-              из города Калуга. Первый сайт создал ещё в школе на хостинге
+              из города Гродно. Первый сайт создал ещё в школе на хостинге
               Яндекс.Народ. С того времени начал интересоваться веб-разработкой:
               появился опыт работы с HTML и CSS, научился верстать сайты. На
               данный момент работаю Frontend-разработчиком в компании АО
@@ -54,6 +55,9 @@ const About = ({ secondSectionRef }) => {
               «Торговый дом «ПЕРЕКРЕСТОК». Занимаюсь поддержкой и развитием
               сайта
             </p>
+            <div className="rabout-card22__stack">
+              Стек: Next, React, JS, TS, ThreeJS, GSAP, React3fiber, SCSS, Git
+            </div>
           </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import "./Popup.scss";
 const Popup = ({ data, workExampleRef, popup, popupCall, popupData }) => {
   return (
     <section
