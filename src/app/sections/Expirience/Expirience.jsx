@@ -109,9 +109,6 @@ const Expierence = ({ thirdSectionRef }) => {
     <>
       <section
         ref={thirdSectionRef}
-        // style={{ height: "100vh", overflow: "auto" }}
-        // onWheel={(e) => handleScroll(e)}
-        // onScroll={(e) => handleScroll(e)}
         className="work-expirience"
 
         // onWheel={(e) => handleScroll(e.deltaY || e.detail || e.wheelDelta)}
