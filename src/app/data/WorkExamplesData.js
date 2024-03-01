@@ -18,7 +18,7 @@ const workExamples = [
     company_description: "",
     work_description: "",
     work_link: "https://poemesdeprovence.ru/",
-    stack: "Pug, VanillaJs, SCSS",
+    stack: "Vite, Pug, JS, SCSS",
   },
   {
     title: "Tehnograd",
@@ -28,7 +28,7 @@ const workExamples = [
       "Техноград - официальный поставщик ведущих компаний климатического оборудования: Haier, Gree, Kentatsu, Daichi, AUX, Бирюса и др. Наш опыт работы - более 16 лет.",
     work_description: "",
     work_link: "https://tehnograd-crimea.ru/",
-    stack: "VanillaJs, SCSS, PHP",
+    stack: "JS, SCSS, PHP",
   },
 
   {
@@ -39,7 +39,7 @@ const workExamples = [
       "Разработка сайта для автоматизированной торговли криптовалютами.",
     work_description: "",
     work_link: "https://tbs-bot.com/ru",
-    stack: "Laravel, Blade, VanillaJs, SCSS, TailWind",
+    stack: "Laravel, Blade, JS, SCSS, Tailwind, GSAP",
   },
   {
     title: "Hermes",
@@ -49,7 +49,7 @@ const workExamples = [
       "Промышленная группа «Гермес»- группа машиностроительных предприятий полного цикла со 100% локализованной продукцией, производимой на европейском оборудовании по немецкой технологии, и включает заводы «Гермес-Урал» в Свердловской области, «Гермес-Липецк» в Липецкой области и сбытовую и управляющую компанию ООО «Гермес» в Москве.",
     work_description: "",
     work_link: "https://hermes-industries.ru/",
-    stack: "Laravel, Interia, Blade, GrapesJS, VueJs, VanillaJs, SCSS",
+    stack: "Laravel, Interia, Blade, GrapesJS, Vue, JS, Tailwind, SCSS",
   },
 ];
 

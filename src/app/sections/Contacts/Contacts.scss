@@ -1,10 +1,12 @@
 .contacts {
-  padding: 24px;
   opacity: 0;
   pointer-events: none;
   height: 100%;
-  padding-top: 70px;
+  padding: 16px;
+
   &__title {
+    padding-top: 40px;
+    padding-left: 16px;
     position: absolute;
     top: 0;
     left: 0;
@@ -76,7 +78,6 @@
   background: linear-gradient(
     to right bottom,
     #00000068 0%,
-
     #0077ff3c 50% #0077ff00 90%
   );
   // width: 500px;rgba(0, 0, 0, 0.18)rgba(0, 0, 0, 0.381)rgba(0, 0, 0, 0.55)
@@ -88,6 +89,9 @@
     0px 0px 52px 1px #0fd2ff, inset 0px 0px 20px 1px #0fd2ff;
   // box-shadow: 0px 0px 0px 2px green, inset 0px 0px 0px 2px green,
   //   0px 0px 20px 4px green, inset 0px 0px 20px 4px green;
+  @media (max-width: 900px) {
+    width: 100%;
+  }
   &__shabow {
     position: absolute;
     top: 0;

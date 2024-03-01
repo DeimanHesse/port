@@ -1,21 +1,10 @@
 .works {
-  // position: relative;
-  // z-index: -50;
   opacity: 0;
   z-index: 10;
-
   pointer-events: none;
-  // position: absolute;
-  // top: 0;
-  // left: 0;
-  // z-index: 40;
   height: 100%;
-  overflow-y: hidden;
   max-height: 100%;
-  padding: 24px;
-  padding-top: 70px;
 
-  // background-color: rgba(173, 173, 173, 0.333);
   &__inner {
     position: relative;
     height: 100%;
@@ -23,6 +12,8 @@
     align-items: center;
   }
   &__title {
+    padding-top: 16px;
+    padding-left: 16px;
     position: absolute;
     top: 0;
     left: 0;
@@ -35,6 +26,7 @@
   &__cards {
     // width: 900px;
     width: 100%;
+    height: 100%;
     margin: 0 auto;
     display: flex;
     gap: 52px;
@@ -47,17 +39,23 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     padding-top: 50px;
+    // overflow-y: hidden;
+    // padding: 16px 24px;
     @media (max-width: 900px) {
       grid-template-columns: 1fr 1fr;
     }
-    @media (max-width: 550px) {
+    @media (max-width: 768px) {
+      height: 100%;
       grid-template-columns: 1fr;
+      overflow-y: scroll;
+      // overflow-x: visible;
+      padding: 16px 24px;
     }
   }
 }
 
 .card {
-  aspect-ratio: 10 / 7;
+  aspect-ratio: 12 / 7;
   position: relative;
   cursor: pointer;
   &__button {

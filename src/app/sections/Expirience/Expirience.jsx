@@ -15,11 +15,12 @@ function Room() {
     gantelRef.current.rotation.y += 0.005;
   });
   // const gltf = useLoader(GLTFLoader, "/rat.gltf");
-  const gltf = useLoader(GLTFLoader, "models/untitled.glb");
+  // const gltf = useLoader(GLTFLoader, "models/untitled.glb");
+  const gltf = useLoader(GLTFLoader, "models/cheesmoon.glb");
   return (
     <group ref={gantelRef}>
       <primitive object={gltf.scene} />;
-      <mesh>
+      <mesh position={[0, -5, 0]}>
         <boxGeometry args={[10, 1, 10]} />
         <meshStandardMaterial color={"green"} />
       </mesh>
@@ -219,8 +220,8 @@ const Expierence = ({ thirdSectionRef }) => {
                   far: 4000,
                 }}
               >
-                <ambientLight intensity={5} />
-                <ambientLight intensity={5} />
+                <ambientLight intensity={2} />
+
                 <directionalLight
                   color={"white"}
                   position={[0, -200, 1700]}
