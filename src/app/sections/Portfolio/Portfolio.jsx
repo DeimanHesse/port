@@ -8,7 +8,7 @@ const Works = ({ fourSectionRef, workExamples, popupCall }) => {
     <>
       <section ref={fourSectionRef} className="works">
         <div className="works__inner">
-          <div className="works__title">Works</div>
+          <div className="works__title">Портфолио</div>
           <div className="works__cards">
             {workExamples.map((work, index) => (
               <div key={index} className="works__card card">

@@ -76,6 +76,7 @@ import Header from "../layout/Header/Header";
 
 import workExamples from "../data/WorkExamplesData";
 import Popup from "../components/Popup/Popup";
+import Preloader from "../components/Preloader/Preloader";
 
 const GlowingObj = ({ glowObjRef, lightRef1 }) => {
   const circleMesh = useRef(null);
@@ -796,7 +797,7 @@ const MainSection = ({ userAgent }) => {
       </div>
       <Popup popup={popup} popupData={popupData} popupCall={popupCall} />
 
-      <Suspense fallback={<h1>loading</h1>}>
+      <Suspense fallback={<Preloader />}>
         <div
           ref={canvasRef}
           // onWheel={(e) => weelHandler(e)}
