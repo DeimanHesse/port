@@ -41,7 +41,13 @@ const Header = ({ headerHandler }) => {
       </nav>
       {/* <Burger headerHandler={headerHandler} /> */}
       <div onClick={burgerHandler} className="burger">
-        <div className="burger__icon">Burger</div>
+        <div className="burger__icon">
+          <div className="burger__icon-inner">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
         <div className={active ? "burger__inner active" : "burger__inner"}>
           <nav className="buger__nav">
             <ul>
