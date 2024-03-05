@@ -816,7 +816,7 @@ const MainSection = ({ userAgent }) => {
             }}
           >
             <pointLight position={[0, 300, 0]} intensity={50} />
-            <spotLight position={[0, 200, 0]} color={"green"} intensity={100} />
+            {/* <spotLight position={[0, 200, 0]} color={"green"} intensity={100} /> */}
             <ambientLight ref={ambientLightRef} intensity={5} />
             <Text3D
               position={[-110, 110.8, 420]}

@@ -12,15 +12,15 @@ function Room() {
   const gantelRef = useRef(null);
   useFrame((state) => {
     // gantelRef.current.rotation.x += 0.01;
-    gantelRef.current.rotation.y += 0.005;
+    // gantelRef.current.rotation.y += 0.005;
   });
   // const gltf = useLoader(GLTFLoader, "/rat.gltf");
   // const gltf = useLoader(GLTFLoader, "models/untitled.glb");
-  const gltf = useLoader(GLTFLoader, "models/cheesmoon.glb");
+  const gltf = useLoader(GLTFLoader, "models/bloombox.glb");
   return (
     <group ref={gantelRef}>
       <primitive object={gltf.scene} />;
-      <mesh position={[0, -5, 0]}>
+      <mesh position={[0, -1, 0]}>
         <boxGeometry args={[10, 1, 10]} />
         <meshStandardMaterial color={"green"} />
       </mesh>
@@ -137,14 +137,9 @@ const Expierence = ({ thirdSectionRef }) => {
                       Frontend-developer
                     </div>
                     <div className="card-expierence__work-description">
-                      Build, style, and ship high-quality websites, design
-                      systems, mobile apps, and digital experiences for a
-                      diverse array of projects for clients including Harvard
-                      Business School, Everytown for Gun Safety, Pratt
-                      Institute, Koala Health, Vanderbilt University, The 19th
-                      News, and more. Provide leadership within engineering
-                      department through close collaboration, knowledge shares,
-                      and spearheading the development of internal tools.
+                      Период обучения. В основном, выполнял различные задачи по
+                      вёрстке. Некоторое время работал аутстафф на крупном
+                      проекте
                     </div>
                     <div className="card-expierence__stack">
                       React, JS, SCSS, Express, Nest, Gulp
@@ -226,7 +221,6 @@ const Expierence = ({ thirdSectionRef }) => {
                 />
                 <Room />
 
-                <color attach={"background"} args={["#0d2c4f00"]} />
                 <OrbitControls
                 // target={[0, 0, -330]}
                 // ref={cameraRef}

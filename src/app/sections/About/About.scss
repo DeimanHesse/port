@@ -16,10 +16,10 @@
   width: 100%;
   // backdrop-filter: blur(10px) grayscale(1);
 
-  @media (max-width: 900px) {
-    overflow-y: scroll;
-    overflow-x: visible;
-  }
+  // @media (max-width: 900px) {
+  //   overflow-y: scroll;
+  //   overflow-x: visible;
+  // }
 
   &__title {
     padding-top: 40px;
@@ -42,6 +42,7 @@
 
     @media (max-width: 900px) {
       flex-wrap: wrap;
+      overflow-y: scroll;
     }
   }
   &__text {
