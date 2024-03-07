@@ -7,6 +7,7 @@ import {
   useState,
   useEffect,
   useLayoutEffect,
+  lazy,
 } from "react";
 import * as THREE from "three";
 import { TextureLoader } from "three";
@@ -72,79 +73,21 @@ import About from "./About/About";
 import Works from "./Portfolio/Portfolio";
 import Contacts from "./Contacts/Contacts";
 import Burger from "../components/Burger/Burger";
-import Header from "../layout/Header/Header";
 
 import workExamples from "../data/WorkExamplesData";
 import Popup from "../components/Popup/Popup";
 import Preloader from "../components/Preloader/Preloader";
 
-const GlowingObj = ({ glowObjRef, lightRef1 }) => {
-  const circleMesh = useRef(null);
-  const lightRef = useRef(null);
-  const tl = gsap.timeline({ repeat: -1 });
-  // tl.reverse(-1);
-  // tl.reversed(true);
+import MainScene from "../components/MainScene/MainScene";
 
-  useEffect(() => {
-    // gsap.fromTo(
-    //   lightRef.current,
-    //   {
-    //     intensity: 1,
-    //   },
-    //   {
-    //     intensity: 8,
-    //     duration: 2,
-    //     repeat: -1,
-    //     delay: 1,
-    //     // reversed: true,
-    //     yoyo: true,
-    //   }
-    // );
-    // tl.to(circleMesh.current.material, {
-    //   emissiveIntensity: 1,
-    //   // b: 1,
-    //   duration: 2,
-    //   // ease: "back.out(1.7)",
-    // });
-    // lightRef.current.intensity = 5;
-    // circleMesh.current.material.emissiveIntensity = 15;
-  }, []);
-  // myMesh.current.material.color = "red";
-  // useFrame((state) => {
-  //   circleMesh.current.rotation.x += 0.001;
-  //   // circleMesh.current.rotation.z += 0.01;
-  //   // circleMesh.current.rotation.y += 0.0005;
-  // });
-  return (
-    <>
-      <mesh ref={glowObjRef} position={[-400, 20, -180]}>
-        <torusGeometry args={[25, 2.1, 11, 70]} />
-        <meshStandardMaterial
-          emissive="red"
-          // color={"aqua"}
-          emissiveIntensity={3.7}
-          toneMapped={false}
-        />
-      </mesh>
-      <EffectComposer>
-        <SelectiveBloom
-          // ref={lightRef}
-          // lights={[lightRef1]} // ⚠️ REQUIRED! all relevant lights
-          selection={[glowObjRef]} // selection of objects that will have bloom effect
-          selectionLayer={1} // selection layer
-          intensity={1.5} // The bloom intensity.
-          blurPass={undefined} // A blur pass.
-          width={Resizer.AUTO_SIZE} // render width
-          height={Resizer.AUTO_SIZE} // render height
-          kernelSize={KernelSize.LARGE} // blur kernel size
-          luminanceThreshold={0.01} // luminance threshold. Raise this value to mask out darker elements in the scene.
-          luminanceSmoothing={0.0025} // smoothness of the luminance threshold. Range is [0, 1]
-          mipmapBlur
-        />
-      </EffectComposer>
-    </>
-  );
-};
+import dynamic from "next/dynamic";
+
+// Client Components:
+import Header from "../layout/Header/Header";
+// const Header = dynamic(() => import("../layout/Header/Header"));
+// const Header = lazy(() => import("../layout/Header/Header"));
+// const Header = dynamic(() => import("../layout/Header/Header"));
+// const MainScene = dynamic(() => import('../components/B'))
 
 function Greeting({ userAgent }) {
   console.log(userAgent);
@@ -777,9 +720,18 @@ const MainSection = ({ userAgent }) => {
     currentStageRef.current = targetStage;
   };
 
+  const [headerState, setHeaderStete] = useState(false);
+
+  const headerVisible = useRef(false);
+
+  const [showContent, setShowContent] = useState(false);
+
+  useEffect(() => {
+    setShowContent(true);
+  }, []);
+
   return (
     <div ref={domnodeRef} className="mainSection">
-      <Header headerHandler={headerHandler} />
       <div className="blur"></div>
       <div className={popup ? "wrapper blured" : "wrapper"}>
         <div className="app-inner">
@@ -797,84 +749,118 @@ const MainSection = ({ userAgent }) => {
       </div>
       <Popup popup={popup} popupData={popupData} popupCall={popupCall} />
 
-      <Suspense fallback={<Preloader />}>
-        <div
-          ref={canvasRef}
-          // onWheel={(e) => weelHandler(e)}
-          id="canvas-container"
-          className={popup ? "canvas-container blured" : "canvas-container"}
+      {/* <Suspense fallback={<Preloader />}>
+        <MainScene
+          canvasRef={canvasRef}
+          moonRef={moonRef}
+          skyBoxMatRef={skyBoxMatRef}
+          skyBoxRef={skyBoxRef}
+          cameraRef={cameraRef}
+          popup={popup}
+          ambientLightRef={ambientLightRef}
+          dTextref={dTextref}
+          userAgent={userAgent}
+        />
+      </Suspense> */}
+      <div
+        ref={canvasRef}
+        // onWheel={(e) => weelHandler(e)}
+        id="canvas-container"
+        className={popup ? "canvas-container blured" : "canvas-container"}
+      >
+        <Suspense
+          fallback={
+            <Preloader
+              headerVisible={headerVisible}
+              setHeaderState={setHeaderStete}
+              showContent={showContent}
+            />
+          }
         >
-          <Canvas
-            frameloop="demand"
-            opacity={0}
-            ref={canvasRef}
-            camera={{
-              position: [0, 65, 520],
-              fov: 75,
-              near: 0.01,
-              far: 4000,
-            }}
-          >
-            <pointLight position={[0, 300, 0]} intensity={50} />
-            {/* <spotLight position={[0, 200, 0]} color={"green"} intensity={100} /> */}
-            <ambientLight ref={ambientLightRef} intensity={5} />
-            <Text3D
-              position={[-110, 110.8, 420]}
-              // position={[-120, 110.8, 460]}
-              letterSpacing={0.2}
-              lineHeight={0.6}
-              size={7.3}
-              font="/Inter_Bold.json"
-              // smooth={4}
-              curveSegments={32}
-              bevelEnabled
-              bevelSize={0.04}
-              bevelThickness={1.1}
-              ref={dTextref}
-            >
-              {`Hello, I'm \n frontend-developer`}
-              <meshPhysicalMaterial
-                // color={"#0077ff"}
-                side={THREE.DoubleSide}
-                // map={colorMap2}
-                emissiveIntensity={0.1}
-                // emissiveMap={colorMap2}
-                // emissiveIntensity={2}
-                // alphaMap={colorMap2}
-                emissive={"red"}
-                // emissive={"#003153"}
-                roughness={0.2}
-                metalness={0.7}
-                transmission={1}
-                reflectivity={0.1}
-                ior={2.33}
-                thickness={0.3}
+          {showContent && (
+            <>
+              <Header
+                headerState={headerState}
+                headerVisible={headerVisible}
+                headerHandler={headerHandler}
               />
-            </Text3D>
-            <ScrollText />
-            <Moon referens={moonRef} position={[0, 210, -2500]} />
-            <Pyramids />
-            {/* <Landscape /> */}
-            <SkyBox
-              color={"#0e1925"}
-              skyBoxMatRef={skyBoxMatRef}
-              skyBoxRef={skyBoxRef}
-            />
-            <CloudsComp userAgent={userAgent} />
-            <CloudsComp2 userAgent={userAgent} />
-            <Stars
-              radius={600}
-              depth={60}
-              count={15000}
-              factor={10}
-              saturation={3.2}
-              fade
-              speed={1}
-            />
-            <CameraSearch cameraRef={cameraRef} />
-          </Canvas>
-        </div>
-      </Suspense>
+              <Canvas
+                frameloop="demand"
+                opacity={0}
+                ref={canvasRef}
+                camera={{
+                  position: [0, 65, 520],
+                  fov: 75,
+                  near: 0.01,
+                  far: 4000,
+                }}
+              >
+                <pointLight position={[0, 300, 0]} intensity={50} />
+                {/* <spotLight position={[0, 200, 0]} color={"green"} intensity={100} /> */}
+                <ambientLight ref={ambientLightRef} intensity={5} />
+                <Text3D
+                  position={
+                    userAgent && userAgent.toLowerCase().includes("mobile")
+                      ? [-50, 110.8, 350]
+                      : [-110, 110.8, 420]
+                  }
+                  // position={[-120, 110.8, 460]}
+                  letterSpacing={0.2}
+                  lineHeight={0.6}
+                  size={7.3}
+                  font="/Inter_Bold.json"
+                  // smooth={4}
+                  curveSegments={32}
+                  bevelEnabled
+                  bevelSize={0.04}
+                  bevelThickness={1.1}
+                  ref={dTextref}
+                >
+                  {`Hello, I'm \n frontend-developer`}
+                  <meshPhysicalMaterial
+                    // color={"#0077ff"}
+                    side={THREE.DoubleSide}
+                    // map={colorMap2}
+                    emissiveIntensity={0.1}
+                    // emissiveMap={colorMap2}
+                    // emissiveIntensity={2}
+                    // alphaMap={colorMap2}
+                    emissive={"red"}
+                    // emissive={"#003153"}
+                    roughness={0.2}
+                    metalness={0.7}
+                    transmission={1}
+                    reflectivity={0.1}
+                    ior={2.33}
+                    thickness={0.3}
+                  />
+                </Text3D>
+                <ScrollText />
+                <Moon referens={moonRef} position={[0, 210, -2500]} />
+                <Pyramids />
+                {/* <Landscape /> */}
+                <SkyBox
+                  color={"#0e1925"}
+                  skyBoxMatRef={skyBoxMatRef}
+                  skyBoxRef={skyBoxRef}
+                />
+                <CloudsComp userAgent={userAgent} />
+                <CloudsComp2 userAgent={userAgent} />
+                <Stars
+                  radius={600}
+                  depth={60}
+                  count={15000}
+                  factor={10}
+                  saturation={3.2}
+                  fade
+                  speed={1}
+                />
+                <CameraSearch cameraRef={cameraRef} />
+              </Canvas>
+            </>
+          )}
+        </Suspense>
+      </div>
     </div>
   );
 };

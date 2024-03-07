@@ -133,13 +133,16 @@ const Expierence = ({ thirdSectionRef }) => {
                   </div>
                   <div className="card-expierence__content">
                     <div className="card-expierence__company">Фриланс</div>
-                    <div className="card-expierence__company">
+                    <div className="card-expierence__position">
                       Frontend-developer
                     </div>
                     <div className="card-expierence__work-description">
                       Период обучения. В основном, выполнял различные задачи по
                       вёрстке. Некоторое время работал аутстафф на крупном
-                      проекте
+                      проекте. В рамках обучения создал блог на react и express,
+                      магазин пиццерии на Next js и nest, также сделал чат на
+                      вебсокетах: express на бэке и клиенты на react js для веба
+                      и react native для мобильных устройств
                     </div>
                     <div className="card-expierence__stack">
                       React, JS, SCSS, Express, Nest, Gulp
@@ -152,18 +155,14 @@ const Expierence = ({ thirdSectionRef }) => {
                   </div>
                   <div className="card-expierence__content">
                     <div className="card-expierence__company">Goodfellazz</div>
-                    <div className="card-expierence__company">
+                    <div className="card-expierence__position">
                       Frontend-developer
                     </div>
                     <div className="card-expierence__work-description">
-                      Build, style, and ship high-quality websites, design
-                      systems, mobile apps, and digital experiences for a
-                      diverse array of projects for clients including Harvard
-                      Business School, Everytown for Gun Safety, Pratt
-                      Institute, Koala Health, Vanderbilt University, The 19th
-                      News, and more. Provide leadership within engineering
-                      department through close collaboration, knowledge shares,
-                      and spearheading the development of internal tools.
+                      Занимался разработкой фронтенда на Laravel Blade, со
+                      стороны бэкэнда делал несложные задачи в рамках CRUD,
+                      работал с tailwind, занимался поддержкой сайтов с легаси
+                      кодом, работал в команде
                     </div>
                     <div className="card-expierence__stack">
                       Laravel, Interia, Blade, GrapesJS, Vue, JS, Tailwind,
@@ -180,18 +179,13 @@ const Expierence = ({ thirdSectionRef }) => {
                     <div className="card-expierence__company">
                       KolibriStudio
                     </div>
-                    <div className="card-expierence__company">
+                    <div className="card-expierence__position">
                       Frontend-developer
                     </div>
                     <div className="card-expierence__work-description">
-                      Build, style, and ship high-quality websites, design
-                      systems, mobile apps, and digital experiences for a
-                      diverse array of projects for clients including Harvard
-                      Business School, Everytown for Gun Safety, Pratt
-                      Institute, Koala Health, Vanderbilt University, The 19th
-                      News, and more. Provide leadership within engineering
-                      department through close collaboration, knowledge shares,
-                      and spearheading the development of internal tools.
+                      Работал над несколькими проектами. В мои задачи входила
+                      верстка на нативном js, разработка интерактивных
+                      компонентах, реализация анимаций Также работал с Next js
                     </div>
                     <div className="card-expierence__stack">
                       Next, TS, JS, Pug, SCSS, CSSModules, Vite

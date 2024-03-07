@@ -42,10 +42,13 @@ const Popup = ({ data, workExampleRef, popup, popupCall, popupData }) => {
               </div>
               <div className="work-example__description-item-text">
                 <ul>
-                  <li>Вёрстка</li>
+                  {popupData.work_description?.map((work, index) => (
+                    <li key={index}>{work}</li>
+                  ))}
+                  {/* <li>Вёрстка</li>
                   <li>Написание запросов на фронте</li>
                   <li>Круд-на бэке</li>
-                  <li>Поддержка легаси кода</li>
+                  <li>Поддержка легаси кода</li> */}
                 </ul>
               </div>
             </div>

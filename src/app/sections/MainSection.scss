@@ -25,6 +25,12 @@
 
 $border-color: yellow;
 
+body {
+  // overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
 canvas {
   // mask-image: linear-gradient(
   //   transparent 0%,

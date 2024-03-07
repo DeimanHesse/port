@@ -9,11 +9,13 @@
     position: relative;
     height: 100%;
     display: grid;
-    align-items: center;
+    // align-items: center;
+    // background-color: rgba(255, 255, 0, 0.274);
   }
   &__title {
+    padding: 16px 24px;
     padding-top: 40px;
-    padding-left: 16px;
+    // padding-left: 16px;
     // position: absolute;
     // top: 0;
     // left: 0;
@@ -39,6 +41,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     padding-top: 50px;
+    padding: 16px 24px;
+    padding-bottom: 50px;
     // overflow-y: hidden;
     // padding: 16px 24px;
     @media (max-width: 900px) {
@@ -50,6 +54,7 @@
       overflow-y: scroll;
       // overflow-x: visible;
       padding: 16px 24px;
+      padding-bottom: 50px;
     }
   }
 }
