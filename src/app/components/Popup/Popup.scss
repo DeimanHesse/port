@@ -61,7 +61,7 @@
       #ffc0cb00 70%
     );
 
-    color: black;
+    color: #105aa91f;
     @media (max-width: 900px) {
       order: 1;
       padding-top: 100px;
@@ -100,11 +100,19 @@
       0px 0px 15px 2px #1aa7e8, inset 0px 0px 10px 1px #1aa7e8;
     background: linear-gradient(
       to right bottom,
-      #07141f9c 20%,
-      #fc29498c 40%,
+      #0d0c1a90 20%,
+
+      #d24858b3 40%,
       #0d2c4f1b 50%,
-      #0d2c4f75 70%,
+      #0347728f 70%,
       #0000000f 90%
+    );
+    background: linear-gradient(
+      to right bottom,
+      #0d0c1ab3 0%,
+      #ffffff00 40%,
+      #0347728f 70%,
+      #d24858b3 // #03477215 70%
     );
     box-shadow: 15px 15px 20px 2px #292929a8, inset 0 0 30px #ffffff4e;
 
@@ -140,14 +148,12 @@
     display: block;
     border: 3px solid white;
     transition: 0.3s ease-out;
-    box-shadow: 0px 0px 0px 2px #fc2947, inset 0px 0px 0px 2px #fc2947,
-      0px 0px 20px 4px #fc2947, inset 0px 0px 20px 4px #fc2947;
+    box-shadow: 0px 0px 0px 2px #d24858, inset 0px 0px 0px 2px #d24858,
+      0px 0px 20px 4px #d24858, inset 0px 0px 20px 4px #d24858;
+    // box-shadow: 0px 0px 0px 2px #fc2947, inset 0px 0px 0px 2px #fc2947,
+    //   0px 0px 20px 4px #fc2947, inset 0px 0px 20px 4px #fc2947;
     text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 5px #fff, 0 0 11px #0077ff,
       0 0 20px #e0e0e0, 0 0 30px #dbdbdb, 0 0 55px #0077ff, 0 0 80px #0077ff;
-    // box-shadow: 0px 0px 0px 2px red, inset 0px 0px 0px 2px red,
-    //   0px 0px 20px 4px red, inset 0px 0px 20px 4px red;
-    // text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 5px #fff, 0 0 11px #0077ff,
-    //   0 0 20px #e0e0e0, 0 0 30px #dbdbdb, 0 0 55px #0077ff, 0 0 80px #0077ff;
 
     &:hover {
       transform: scale(1.05);
@@ -167,10 +173,6 @@
   }
   &__button-visit {
     color: white;
-    // position: absolute;
-    // bottom: 30px;
-    // right: calc(50% - 150px);
-    // right: 50%;
     width: 300px;
     height: 60px;
     font-size: 18px;
@@ -178,16 +180,15 @@
     // background: #0077ff42;
     background: linear-gradient(
       to right bottom,
-      #0d2c4fd4 0%,
-      #ffffff00 70%,
-      #0077ff29 90%
+      #0d0c1ab3 0%,
+      #ffffff00 50%,
+      #d2485865 // #03477215 70%
     );
     box-shadow: 8px 4px 14px 3px #2c2c2c;
     border-radius: 5px;
     border: none;
     cursor: pointer;
     display: block;
-    // border: 3px solid rgba(255, 255, 255, 0);
     transition: 0.3s;
     // box-shadow: 0px 0px 0px 2px #1aa7e8, inset 0px 0px 0px 2px #1aa7e8,
     //   0px 0px 15px 4px #1aa7e8, inset 0px 0px 10px 4px #1aa7e8;

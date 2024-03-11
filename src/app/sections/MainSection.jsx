@@ -45,7 +45,6 @@ import {
   Trail,
 } from "@react-three/drei";
 import "./MainSection.scss";
-import { Perf } from "r3f-perf";
 
 import { useControls } from "leva";
 
@@ -81,7 +80,7 @@ import Preloader from "../components/Preloader/Preloader";
 import MainScene from "../components/MainScene/MainScene";
 
 import dynamic from "next/dynamic";
-
+import { Perf } from "r3f-perf";
 // Client Components:
 import Header from "../layout/Header/Header";
 // const Header = dynamic(() => import("../layout/Header/Header"));
@@ -110,76 +109,14 @@ function Greeting({ userAgent }) {
   }
 }
 
-const ScrollText = () => {
-  const scrollTextCounterRef = useRef(0);
-  const scrollTextRef = useRef(null);
-  useFrame((state) => {
-    // scrollTextCounterRef.current += 0.1;
-    // if (scrollTextCounterRef.current < 1) {
-    //   scrollTextRef.current.rotation.y += 0.01;
-    // } else if (scrollTextCounterRef.current > 1) {
-    //   scrollTextRef.current.rotation.y -= 0.01;
-    // }
-  });
-
-  useEffect(() => {
-    // console.log(scrollTextRef.current);
-    // gsap.to(
-    //   scrollTextRef.current.rotation,
-    //   {
-    //     y: 10,
-    //     duration: 4,
-    //   },
-    //   "<"
-    // );
-  }, []);
-
-  return (
-    <Text3D
-      ref={scrollTextRef}
-      rotation={[-0.5, -0.25, 0]}
-      position={[-7, 6, 435]}
-      letterSpacing={0.2}
-      lineHeight={0.6}
-      size={3.3}
-      font="/Inter_Bold.json"
-      // smooth={4}
-      curveSegments={32}
-      bevelEnabled
-      bevelSize={0.04}
-      bevelThickness={1.1}
-    >
-      {/* {`hello\nworld`} */}
-      {`scroll\ndown`}
-      {/* <meshStandardMaterial /> */}
-      <meshPhysicalMaterial
-        // color={"#0077ff"}
-        side={THREE.DoubleSide}
-        // map={colorMap2}
-        emissiveIntensity={0.1}
-        // emissiveMap={colorMap2}
-        // emissiveIntensity={2}
-        // alphaMap={colorMap2}
-        emissive={"blue"}
-        roughness={0.2}
-        metalness={1}
-        transmission={1}
-        reflectivity={1.1}
-        ior={2.33}
-        thickness={0.3}
-      />
-    </Text3D>
-  );
-};
-
 const CameraSearch = ({ cameraRef }) => {
   return (
     <OrbitControls
       target={[0, 0, -330]}
       ref={cameraRef}
       // onChange={(e) => orbChange(e)}
-      enableZoom={false}
-      enableRotate={false}
+      // enableZoom={false}
+      // enableRotate={false}
     />
   );
 };
@@ -683,9 +620,6 @@ const MainSection = ({ userAgent }) => {
   ];
 
   const setStage = (targetStage, currentStage) => {
-    // console.log("currentStage", currentStage);
-    // console.log("targetStage", targetStage);
-
     animArr[currentStage - 1](false);
     animArr[targetStage - 1](true);
   };
@@ -730,9 +664,11 @@ const MainSection = ({ userAgent }) => {
     setShowContent(true);
   }, []);
 
+  console.log(skyBoxRef.current);
+
   return (
     <div ref={domnodeRef} className="mainSection">
-      <div className="blur"></div>
+      {/* <div className="blur"></div>
       <div className={popup ? "wrapper blured" : "wrapper"}>
         <div className="app-inner">
           <About secondSectionRef={secondSectionRef} />
@@ -748,7 +684,14 @@ const MainSection = ({ userAgent }) => {
         </div>
       </div>
       <Popup popup={popup} popupData={popupData} popupCall={popupCall} />
-
+      <div className="scroll-text">
+        <div className="scroll-text__dots">
+          <div className="scroll-text__dot"></div>
+          <div className="scroll-text__dot"></div>
+          <div className="scroll-text__dot"></div>
+        </div>
+        <div className="scroll-text__content">Scroll down</div>
+      </div> */}
       {/* <Suspense fallback={<Preloader />}>
         <MainScene
           canvasRef={canvasRef}
@@ -770,23 +713,25 @@ const MainSection = ({ userAgent }) => {
       >
         <Suspense
           fallback={
-            <Preloader
-              headerVisible={headerVisible}
-              setHeaderState={setHeaderStete}
-              showContent={showContent}
-            />
+            // <Preloader
+            //   headerVisible={headerVisible}
+            //   setHeaderState={setHeaderStete}
+            //   showContent={showContent}
+            // />
+            "ffffffffffffffff"
           }
         >
           {showContent && (
             <>
-              <Header
+              {/* <Header
                 headerState={headerState}
                 headerVisible={headerVisible}
                 headerHandler={headerHandler}
-              />
+              /> */}
               <Canvas
-                frameloop="demand"
-                opacity={0}
+                // frameloop="demand"
+                // opacity={0}
+                // resize={{ scroll: true, debounce: { scroll: 50, resize: 0 } }}
                 ref={canvasRef}
                 camera={{
                   position: [0, 65, 520],
@@ -797,7 +742,7 @@ const MainSection = ({ userAgent }) => {
               >
                 <pointLight position={[0, 300, 0]} intensity={50} />
                 {/* <spotLight position={[0, 200, 0]} color={"green"} intensity={100} /> */}
-                <ambientLight ref={ambientLightRef} intensity={5} />
+                <ambientLight ref={ambientLightRef} intensity={3} />
                 <Text3D
                   position={
                     userAgent && userAgent.toLowerCase().includes("mobile")
@@ -825,7 +770,7 @@ const MainSection = ({ userAgent }) => {
                     // emissiveMap={colorMap2}
                     // emissiveIntensity={2}
                     // alphaMap={colorMap2}
-                    emissive={"red"}
+                    emissive={"#f2055d"}
                     // emissive={"#003153"}
                     roughness={0.2}
                     metalness={0.7}
@@ -835,12 +780,12 @@ const MainSection = ({ userAgent }) => {
                     thickness={0.3}
                   />
                 </Text3D>
-                <ScrollText />
+
                 <Moon referens={moonRef} position={[0, 210, -2500]} />
                 <Pyramids />
                 {/* <Landscape /> */}
                 <SkyBox
-                  color={"#0e1925"}
+                  color={"#00040d"}
                   skyBoxMatRef={skyBoxMatRef}
                   skyBoxRef={skyBoxRef}
                 />
@@ -856,6 +801,7 @@ const MainSection = ({ userAgent }) => {
                   speed={1}
                 />
                 <CameraSearch cameraRef={cameraRef} />
+                <Perf />
               </Canvas>
             </>
           )}

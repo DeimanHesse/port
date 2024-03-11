@@ -1,6 +1,7 @@
 import { TextureLoader } from "three";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
+import { GradientTexture } from "@react-three/drei";
 
 const SkyBox = ({ color, skyBoxRef, skyBoxMatRef }) => {
   const skyTexture = useTexture("/images/sky/sky.jpg");
@@ -8,22 +9,23 @@ const SkyBox = ({ color, skyBoxRef, skyBoxMatRef }) => {
   const skyTexture3 = useTexture("/images/sky/sky3.jpg");
   const skyTexture4 = useTexture("/images/sky/sky4.jpg");
 
+  console.log("skybox");
   return (
     <mesh ref={skyBoxRef} position={[0, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
       <sphereGeometry args={[2900, 64, 32]} />
       {/* <boxGeometry args={[1200, 1200, 1200]} /> */}
       {/* <meshStandardMaterial
-          // map={skyTexture}
-          // emissiveMap={skyTexture}
-          // side={THREE.DoubleSide}
-          emissiveIntensity={0.7}
-          em
-          emissive={1.7}
-          // opacity={0.1}
-          // transparent
-          // color={"green"}
-          // flatShading
-        /> */}
+        // map={skyTexture}
+        // emissiveMap={skyTexture}
+        side={THREE.DoubleSide}
+        // emissiveIntensity={0.7}
+        color={"black"}
+        emissive={1.7}
+        // opacity={0.1}
+        // transparent
+        // color={"green"}
+        // flatShading
+      /> */}
       <meshPhysicalMaterial
         ref={skyBoxMatRef}
         // color={"#0b1a25"}
@@ -39,7 +41,7 @@ const SkyBox = ({ color, skyBoxRef, skyBoxMatRef }) => {
         // flatShading
         // emissiveMap={skyTexture4}
         // alphaMap={skyTexture}
-        emissive={"white"}
+        emissive={"green"}
         roughness={0.2}
         metalness={0.2}
         // transmission={0.8}

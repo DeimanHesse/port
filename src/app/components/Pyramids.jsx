@@ -155,32 +155,32 @@ const Pyramids = () => {
       >
         <planeGeometry args={[2000, 2000]} />
         <meshPhysicalMaterial
-          // color={"black"}
+          color={"white"}
           side={THREE.DoubleSide}
-          // map={colorMap2}
+          map={texture}
           emissiveIntensity={0.7}
           // emissiveMap={colorMap2}
           // emissiveIntensity={2}
           // alphaMap={colorMap2}
           // envMap={hdrEq}
-          emissive={"black"}
-          roughness={1}
-          metalness={1.5}
+          // emissive={"black"}
+          roughness={1.1}
+          metalness={0}
           transmission={0.1}
-          reflectivity={0.3}
+          reflectivity={0}
           ior={1.33}
-          emissiveMap={texture01}
+          // emissiveMap={texture01}
           thickness={1}
           //   displacementMap={texture2}
-          map={texture01}
+          // map={texture01}
           //   map={ground2}
           // displacementScale={7}
         />
-        <meshStandardMaterial map={texture01} />
+        {/* <meshStandardMaterial color={"#011641"} /> */}
       </mesh>
       {/* ОТРАЖАЮЩИЙ ЛАНШАФТ */}
-
-      {/* <mesh position={[0, -15, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+      {/* 
+      <mesh position={[0, -15, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[2000, 2000]} />
         <MeshReflectorMaterial
           envMapIntensity={0}
@@ -190,7 +190,7 @@ const Pyramids = () => {
           map={texture}
           dithering={true}
           // color={[0.015, 0.015, 0.025]}
-          roughness={0.8}
+          roughness={0.4}
           blur={[2000, 2000]} // Blur ground reflections (width, heigt), 0 skips blur
           mixBlur={2} // How much blur mixes with surface roughness (default = 1)
           mixStrength={50} // Strength of the reflections
@@ -202,6 +202,7 @@ const Pyramids = () => {
           maxDepthThreshold={1} // Upper edge for the depthTexture interpolation (default = 0)
           depthToBlurRatioBias={0.25} // Adds a bias factor to the depthTexture before calculating the blur amount [blurFactor = blurTexture * (depthTexture + bias)]. It accepts values between 0 and 1, default is 0.25. An amount > 0 of bias makes sure that the blurTexture is not too sharp because of the multiplication with the depthTexture
           debug={0}
+          emissiveIntensity={5}
           reflectorOffset={0.02} // Offsets the virtual camera that projects the reflection. Useful when the reflective surface is some distance from the object's origin (default = 0)
         />
       </mesh> */}
@@ -388,14 +389,14 @@ const Pyramids = () => {
           rotation-x={Math.PI / 2}
           position={[0, 4, -6]}
           scale={[10, 1, 1]}
-          color={"blue"}
+          color={"#011641"}
         />
         <Lightformer
           intensity={5}
           rotation-x={Math.PI / 2}
           position={[0, 4, -8]}
           scale={[10, 1, 1]}
-          color={"red"}
+          color={"#f2055d"}
         />
         <Lightformer
           intensity={2}
@@ -420,7 +421,7 @@ const Pyramids = () => {
           rotation-x={Math.PI / 2}
           position={[0, 4, 6]}
           scale={[10, 1, 1]}
-          color={"blue"}
+          color={"#011641"}
         />
         <Lightformer
           intensity={2}
@@ -443,7 +444,7 @@ const Pyramids = () => {
         {/* Key */}
         <Lightformer
           form="ring"
-          color="red"
+          color="#f2055d"
           intensity={10}
           scale={2}
           position={[10, 5, 10]}

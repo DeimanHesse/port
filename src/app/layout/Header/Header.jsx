@@ -41,8 +41,8 @@ const Header = ({ headerHandler, headerVisible, headerState }) => {
         </ul>
       </nav>
       {/* <Burger headerHandler={headerHandler} /> */}
-      <div onClick={burgerHandler} className="burger">
-        <div className="burger__icon">
+      <div className="burger">
+        <div onClick={burgerHandler} className="burger__icon">
           <div className="burger__icon-inner">
             <span></span>
             <span></span>

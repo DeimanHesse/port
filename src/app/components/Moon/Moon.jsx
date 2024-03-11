@@ -65,7 +65,7 @@ export default function Moon({ position, referens }) {
           metalness={0.5}
           // transmission={0.5}
           // reflectivity={1.8}
-          emissiveIntensity={0.01}
+          emissiveIntensity={1}
           // emissive={"white"}
           // emissiveMap={colorMap}
           map={colorMap}
@@ -87,7 +87,7 @@ export default function Moon({ position, referens }) {
           // lights={[lightRef1, lightRef2]} // ⚠️ REQUIRED! all relevant lights
           selection={[ref]} // selection of objects that will have bloom effect
           selectionLayer={1} // selection layer
-          intensity={1.01} // The bloom intensity.
+          intensity={2.01} // The bloom intensity.
           //   blurPass={undefined} // A blur pass.
           //   width={Resizer.AUTO_SIZE} // render width
           //   height={Resizer.AUTO_SIZE} // render height
