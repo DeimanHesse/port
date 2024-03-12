@@ -14,10 +14,11 @@ import {
   MeshDistortMaterial,
   GradientTexture,
   useCursor,
+  Merged,
 } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 
-const Pyramids = () => {
+const Pyramids = ({ red }) => {
   const pyramidRef = useRef();
   const gRef = useRef();
   const pyramidRefOuter = useRef();
@@ -61,19 +62,11 @@ const Pyramids = () => {
         ref={pyramidRef}
         rotation={[0, -Math.PI / 4, 0]}
         position={[340, 55, -300]}
-        receiveShadow
+        // receiveShadow
+        material={red}
       >
         <coneGeometry args={[100, 100, 4]} />
-        {/* <boxGeometry args={[3, 10, 700]} /> */}
-        {/* <meshStandardMaterial
-        // transparent
-        opacity={1}
-        color={"#008e8e"}
-        // emissiveIntensity={5}
-        emissiveMap={pyramidMap}
-        
-      /> */}
-        <meshPhysicalMaterial
+        {/* <meshPhysicalMaterial
           // color={"red"}
           side={THREE.DoubleSide}
           // map={colorMap2}
@@ -88,7 +81,7 @@ const Pyramids = () => {
           reflectivity={0.2}
           ior={2.33}
           thickness={0.3}
-        />
+        /> */}
         {/* <meshStandardMaterial color={"blue"} /> */}
       </mesh>
       <Gltf
@@ -96,17 +89,17 @@ const Pyramids = () => {
         scale={110}
         position={[0, 40, 0]}
         src="/react.glb"
-        receiveShadow
-        castShadow
+        // receiveShadow
+        // castShadow
       />
       <mesh
-        receiveShadow
+        // receiveShadow
         rotation={[0, -Math.PI / 4, 0]}
         position={[-200, 30, 350]}
+        material={red}
       >
         <coneGeometry args={[50, 50, 4]} />
-        {/* <boxGeometry args={[3, 10, 700]} /> */}
-        <meshPhysicalMaterial
+        {/* <meshPhysicalMaterial
           // color={"red"}
           // side={THREE.DoubleSide}
           // map={colorMap2}
@@ -121,12 +114,17 @@ const Pyramids = () => {
           reflectivity={5.1}
           ior={2.33}
           thickness={1.3}
-        />
+        /> */}
       </mesh>
-      <mesh receiveShadow rotation={[0, -Math.PI / 4, 0]} position={[0, 75, 0]}>
+      <mesh
+        // receiveShadow
+        material={red}
+        rotation={[0, -Math.PI / 4, 0]}
+        position={[0, 75, 0]}
+      >
         <coneGeometry args={[150, 150, 4]} />
         {/* <boxGeometry args={[3, 10, 700]} /> */}
-        <meshPhysicalMaterial
+        {/* <meshPhysicalMaterial
           // color={"red"}
           // side={THREE.DoubleSide}
           // map={colorMap2}
@@ -142,12 +140,12 @@ const Pyramids = () => {
           reflectivity={1}
           ior={2.33}
           thickness={1}
-        />
+        /> */}
         {/* <meshPhongMaterial shininess={30} color={"red"} /> */}
         {/* <meshLambertMaterial /> */}
       </mesh>
       {/* ЛАНДШАФТ */}
-      <mesh
+      {/* <mesh
         castShadow
         receiveShadow
         position={[0, -13, 0]}
@@ -164,7 +162,7 @@ const Pyramids = () => {
           // alphaMap={colorMap2}
           // envMap={hdrEq}
           // emissive={"black"}
-          roughness={1.1}
+          roughness={1}
           metalness={0}
           transmission={0.1}
           reflectivity={0}
@@ -176,27 +174,34 @@ const Pyramids = () => {
           //   map={ground2}
           // displacementScale={7}
         />
-        {/* <meshStandardMaterial color={"#011641"} /> */}
-      </mesh>
+
+      </mesh> */}
       {/* ОТРАЖАЮЩИЙ ЛАНШАФТ */}
-      {/* 
-      <mesh position={[0, -15, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[2000, 2000]} />
-        <MeshReflectorMaterial
+
+      {/* <mesh position={[0, -15, 0]} rotation={[-Math.PI / 2, 0, 0]}> */}
+      {/* <planeGeometry args={[2000, 2000]} /> */}
+      {/* <meshStandardMaterial
+          metalness={0.6}
+          roughness={1}
+          // color={"white"}
+          map={texture}
+          wireframe
+        /> */}
+      {/* <MeshReflectorMaterial
           envMapIntensity={0}
           // normalMap={normal}
-          normalScale={[0.55, 0.55]}
-          roughnessMap={roughness}
+          // normalScale={[0.55, 0.55]}
+          // roughnessMap={roughness}
           map={texture}
           dithering={true}
           // color={[0.015, 0.015, 0.025]}
-          roughness={0.4}
+          roughness={0.7}
           blur={[2000, 2000]} // Blur ground reflections (width, heigt), 0 skips blur
           mixBlur={2} // How much blur mixes with surface roughness (default = 1)
           mixStrength={50} // Strength of the reflections
           mixContrast={1} // Contrast of the reflections
           resolution={1024} // Off-buffer resolution, lower=faster, higher=better quality, slower
-          mirror={0.5} // Mirror environment, 0 = texture colors, 1 = pick up env colors
+          mirror={0} // Mirror environment, 0 = texture colors, 1 = pick up env colors
           depthScale={0.01} // Scale the depth factor (0 = no depth, default = 0)
           minDepthThreshold={0.9} // Lower edge for the depthTexture interpolation (default = 0)
           maxDepthThreshold={1} // Upper edge for the depthTexture interpolation (default = 0)
@@ -204,15 +209,15 @@ const Pyramids = () => {
           debug={0}
           emissiveIntensity={5}
           reflectorOffset={0.02} // Offsets the virtual camera that projects the reflection. Useful when the reflective surface is some distance from the object's origin (default = 0)
-        />
-      </mesh> */}
+        /> */}
+      {/* </mesh> */}
       {/* ГОРОД */}
       <mesh
         position={[0, -10, -600]}
         // scale={1.2}
         rotation={[-Math.PI / 2, 0, -Math.PI / 2]}
-        receiveShadow
-        castShadow
+        // receiveShadow
+        // castShadow
       >
         <planeGeometry args={[300, 1400, 100, 175]} />
         <meshPhysicalMaterial
@@ -254,7 +259,7 @@ const Pyramids = () => {
         position={[60, 6, -305]}
         // rotation={[0, -Math.PI / 2, 0]}
       >
-        <mesh rotation={[-Math.PI / 2, 0, 0]}>
+        {/* <mesh rotation={[-Math.PI / 2, 0, 0]}>
           <planeGeometry args={[20, 500]} />
           <meshPhysicalMaterial
             // color={"red"}
@@ -310,7 +315,7 @@ const Pyramids = () => {
             ior={2.33}
             thickness={1.3}
           />
-        </mesh>
+        </mesh> */}
       </group>
       <group
         // scale={0.4}
@@ -377,7 +382,7 @@ const Pyramids = () => {
           />
         </mesh>
       </group>
-      <Environment background resolution={512}>
+      <Environment background resolution={256}>
         <Lightformer
           intensity={2}
           rotation-x={Math.PI / 2}

@@ -32,26 +32,6 @@ export default CloudsComp;
 function Sky() {
   const ref = useRef();
   const cloud0 = useRef();
-  // const { color, x, y, z, range, ...config } = useControls({
-  //   seed: { value: 1, min: 1, max: 100, step: 1 },
-  //   segments: { value: 20, min: 1, max: 80, step: 1 },
-  //   volume: { value: 6, min: 0, max: 100, step: 0.1 },
-  //   opacity: { value: 0.1, min: 0, max: 1, step: 0.01 },
-  //   fade: { value: 10, min: 0, max: 400, step: 1 },
-  //   growth: { value: 4, min: 0, max: 20, step: 1 },
-  //   speed: { value: 0.1, min: 0, max: 1, step: 0.01 },
-  //   x: { value: 6, min: 0, max: 100, step: 1 },
-  //   y: { value: 10, min: 0, max: 100, step: 1 },
-  //   z: { value: 1, min: 0, max: 100, step: 1 },
-  //   color: "white",
-  // });
-
-  // useGSAP(
-  //   () => {
-  //     gsap.to(ref.current, { y: Math.cos(state.clock.elapsedTime / 2) / 25 }); // <-- automatically reverted
-  //   },
-  //   { scope: container }
-  // ); // <-- scope is for selector text (optional)
 
   const { invalidate, camera, gl } = useThree();
   useFrame((state, delta) => {
@@ -64,7 +44,7 @@ function Sky() {
   return (
     <>
       {/* <SkyImpl /> */}
-      <group position={[0, -150, -600]} ref={ref}>
+      <group position={[0, -100, -600]} ref={ref}>
         <Clouds
           // position={[0, 0, 100]}
           material={THREE.MeshLambertMaterial}
@@ -106,9 +86,9 @@ function Sky() {
             // concentrate="outside"
             growth={400}
             color={"white"}
-            opacity={0.45}
+            opacity={0.6}
             seed={0.1}
-            bounds={[1120, 100, 100]}
+            bounds={[1120, 20, 100]}
             volume={800}
             segments={20}
           />

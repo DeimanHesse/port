@@ -115,8 +115,8 @@ const CameraSearch = ({ cameraRef }) => {
       target={[0, 0, -330]}
       ref={cameraRef}
       // onChange={(e) => orbChange(e)}
-      // enableZoom={false}
-      // enableRotate={false}
+      enableZoom={false}
+      enableRotate={false}
     />
   );
 };
@@ -666,9 +666,21 @@ const MainSection = ({ userAgent }) => {
 
   console.log(skyBoxRef.current);
 
+  const red = new THREE.MeshPhysicalMaterial({
+    side: THREE.DoubleSide,
+    emissiveIntensity: 0.1,
+    emissive: "black",
+    roughness: 0.05,
+    metalness: 0.5,
+    transmission: 1,
+    reflectivity: 0.2,
+    ior: 2.33,
+    thickness: 0.3,
+  });
+
   return (
     <div ref={domnodeRef} className="mainSection">
-      {/* <div className="blur"></div>
+      <div className="blur"></div>
       <div className={popup ? "wrapper blured" : "wrapper"}>
         <div className="app-inner">
           <About secondSectionRef={secondSectionRef} />
@@ -691,7 +703,7 @@ const MainSection = ({ userAgent }) => {
           <div className="scroll-text__dot"></div>
         </div>
         <div className="scroll-text__content">Scroll down</div>
-      </div> */}
+      </div>
       {/* <Suspense fallback={<Preloader />}>
         <MainScene
           canvasRef={canvasRef}
@@ -713,21 +725,21 @@ const MainSection = ({ userAgent }) => {
       >
         <Suspense
           fallback={
-            // <Preloader
-            //   headerVisible={headerVisible}
-            //   setHeaderState={setHeaderStete}
-            //   showContent={showContent}
-            // />
-            "ffffffffffffffff"
+            <Preloader
+              headerVisible={headerVisible}
+              setHeaderState={setHeaderStete}
+              showContent={showContent}
+            />
+            // "ffffffffffffffff"
           }
         >
           {showContent && (
             <>
-              {/* <Header
+              <Header
                 headerState={headerState}
                 headerVisible={headerVisible}
                 headerHandler={headerHandler}
-              /> */}
+              />
               <Canvas
                 // frameloop="demand"
                 // opacity={0}
@@ -782,7 +794,7 @@ const MainSection = ({ userAgent }) => {
                 </Text3D>
 
                 <Moon referens={moonRef} position={[0, 210, -2500]} />
-                <Pyramids />
+                <Pyramids red={red} />
                 {/* <Landscape /> */}
                 <SkyBox
                   color={"#00040d"}
@@ -801,7 +813,7 @@ const MainSection = ({ userAgent }) => {
                   speed={1}
                 />
                 <CameraSearch cameraRef={cameraRef} />
-                <Perf />
+                {/* <Perf /> */}
               </Canvas>
             </>
           )}
