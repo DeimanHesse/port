@@ -801,7 +801,7 @@ const MainSection = ({ userAgent }) => {
                   skyBoxMatRef={skyBoxMatRef}
                   skyBoxRef={skyBoxRef}
                 />
-                <CloudsComp userAgent={userAgent} />
+                <CloudsComp />
                 <CloudsComp2 userAgent={userAgent} />
                 <Stars
                   radius={600}

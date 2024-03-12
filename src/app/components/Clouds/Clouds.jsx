@@ -13,18 +13,18 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 const CloudsComp = ({ userAgent }) => {
-  if (userAgent && userAgent.toLowerCase().includes("mobile")) {
-    console.log("NOagent");
-    return;
-  } else {
-    // console.log("agent");
-    // console.log(userAgent);
-    return (
-      <>
-        <Sky />
-      </>
-    );
-  }
+  // if (userAgent && userAgent.toLowerCase().includes("mobile")) {
+  //   console.log("NOagent");
+  //   return;
+  // } else {
+  // console.log("agent");
+  // console.log(userAgent);
+  return (
+    <>
+      <Sky />
+    </>
+  );
+  // }
 };
 
 export default CloudsComp;
