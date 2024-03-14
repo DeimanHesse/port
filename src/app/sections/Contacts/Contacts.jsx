@@ -41,7 +41,9 @@ const Contacts = ({ fiveSectionRef }) => {
         <div className="contacts__inner">
           <div className="contacts__title">
             <div className="front-text2">
-              <div className="front-text2__title">Dmitry Sinikov</div>
+              <div className="front-text2__title">
+                <span>Dmitry </span> <span>Sinikov</span>
+              </div>
               <div className="front-text2__subtitle">Web-Development</div>
             </div>
           </div>

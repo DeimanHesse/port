@@ -602,22 +602,27 @@ const MainSection = ({ userAgent }) => {
   };
 
   const weelHandler = async (e) => {
-    if (stopFlagRef.current) {
-      console.log("call");
-      stopFlagRef.current = false;
-      let targetStage;
-      if (e.deltaY > 0 && currentStageRef.current + 1 < 6) {
-        targetStage = currentStageRef.current + 1;
-        setStage(targetStage, currentStageRef.current);
-        currentStageRef.current = currentStageRef.current + 1;
-      } else if (e.deltaY < 0 && currentStageRef.current - 1 > 0) {
-        targetStage = currentStageRef.current - 1;
-        setStage(targetStage, currentStageRef.current);
-        currentStageRef.current = currentStageRef.current - 1;
+    console.log("ffffffffdfd");
+    console.log(userAgent);
+    if (userAgent && !userAgent.toLowerCase().includes("mobile")) {
+      console.log(userAgent);
+      if (stopFlagRef.current) {
+        console.log("call");
+        stopFlagRef.current = false;
+        let targetStage;
+        if (e.deltaY > 0 && currentStageRef.current + 1 < 6) {
+          targetStage = currentStageRef.current + 1;
+          setStage(targetStage, currentStageRef.current);
+          currentStageRef.current = currentStageRef.current + 1;
+        } else if (e.deltaY < 0 && currentStageRef.current - 1 > 0) {
+          targetStage = currentStageRef.current - 1;
+          setStage(targetStage, currentStageRef.current);
+          currentStageRef.current = currentStageRef.current - 1;
+        }
+        setTimeout(() => {
+          stopFlagRef.current = true;
+        }, 2000);
       }
-      setTimeout(() => {
-        stopFlagRef.current = true;
-      }, 2000);
     }
   };
 

@@ -104,24 +104,6 @@ section {
   }
 }
 
-canvas {
-  // z-index: 10000;
-  // color: #db6565;
-  // &.work-expirience__canvas {
-  //   min-height: 100%;
-  //   max-width: 100%;
-  //   width: 100%;
-  //   background-color: #0077ff2c !important;
-  // }
-  // min-height: 100vh;
-  // height: 100%;
-  // background: #030313;
-  // background: #23234f;
-  // z-index: 500;
-  // position: relative;
-  // background: linear-gradient(#031730 15%, #000002 45%);
-}
-
 @keyframes neonlight {
   0% {
     box-shadow: 15px 15px 50px 2px #0095ff45;
@@ -190,6 +172,9 @@ svg.active .svg-elem-1 {
   bottom: 42px;
   left: 50%;
   transform: translateX(-50%);
+  @media (max-width: 1000px) {
+    display: none;
+  }
 
   &__dots {
     display: flex;
@@ -279,16 +264,26 @@ svg.active .svg-elem-1 {
   color: #141414;
   text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px #fff, 0 0 9px #dfdfdf,
     0 0 20px #d7d7d7, 0 0 30px #b5b5b5, 0 0 55px #c3e5ff, 0 0 80px #75c3ff;
+  @media (max-width: 500px) {
+    top: 45px;
+    left: 23px;
+  }
   &__title {
     text-transform: uppercase;
     font-size: 56px;
     font-weight: 600;
     margin-bottom: 18px;
     letter-spacing: 8px;
+    @media (max-width: 500px) {
+      font-size: 26px;
+    }
   }
   &__subtitle {
     font-size: 36px;
     font-weight: 400;
+    @media (max-width: 500px) {
+      font-size: 22px;
+    }
   }
 }
 .front-text2 {
@@ -304,13 +299,44 @@ svg.active .svg-elem-1 {
     0 0 20px #d7d7d7, 0 0 30px #b5b5b5, 0 0 55px #c3e5ff, 0 0 80px #75c3ff;
   &__title {
     text-transform: uppercase;
+    display: flex;
+    justify-content: center;
     font-size: 56px;
     font-weight: 600;
     margin-bottom: 18px;
     letter-spacing: 8px;
+    font-size: calc((100vw - 375px) / (1920 - 375) * (56 - 32) + 32px);
+    @media (min-width: 1920px) {
+      font-size: 56px;
+    }
+    @media (max-width: 700px) {
+      // font-size: 26px;
+      hyphens: none;
+      -webkit-hyphens: none;
+    }
+    @media (max-width: 800px) {
+    }
+    @media (min-width: 800px) {
+    }
+    @media (max-width: 800px) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    span {
+      @media (max-width: 500px) {
+        display: block;
+        width: 100%;
+      }
+      &:first-child {
+        margin-right: 10px;
+      }
+    }
   }
   &__subtitle {
     font-size: 36px;
     font-weight: 400;
+    @media (max-width: 700px) {
+      font-size: 22px;
+    }
   }
 }
