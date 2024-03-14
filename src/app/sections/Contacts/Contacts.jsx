@@ -39,7 +39,12 @@ const Contacts = ({ fiveSectionRef }) => {
     <>
       <section ref={fiveSectionRef} className="contacts">
         <div className="contacts__inner">
-          <div className="contacts__title">Контакты</div>
+          <div className="contacts__title">
+            <div className="front-text2">
+              <div className="front-text2__title">Dmitry Sinikov</div>
+              <div className="front-text2__subtitle">Web-Development</div>
+            </div>
+          </div>
           <div className="contacts__form-wrapper"></div>
           <form
             onSubmit={handleSubmit(submit, error)}

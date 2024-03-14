@@ -84,26 +84,38 @@ function Sky() {
           <Cloud
             // position={[0, 0, 0]}
             // concentrate="outside"
-            growth={400}
+            growth={600}
             color={"white"}
-            opacity={0.6}
+            opacity={0.25}
             seed={0.1}
             bounds={[1120, 20, 100]}
             volume={800}
             segments={20}
           />
 
-          {/* <Cloud
-            position={[0, 0, 700]}
+          <Cloud
+            position={[0, -150, -200]}
             // concentrate="outside"
             growth={1000}
             // color="#ffccdd"
-            color={"white"}
-            opacity={0.055}
+            color={"grey"}
+            opacity={0.9}
             seed={0.1}
-            bounds={[1200, 10, 500]}
-            volume={800}
-            segments={30}
+            bounds={[500, 10, 100]}
+            volume={600}
+            segments={20}
+          />
+          {/* <Cloud
+            position={[0, 100, 100]}
+            // concentrate="outside"
+            growth={200}
+            // color="#ffccdd"
+            color={"red"}
+            opacity={0.9}
+            seed={1}
+            bounds={[1000, 10, 900]}
+            volume={1000}
+            segments={6}
           /> */}
           {/* <Cloud
             position={[0, 0, 300]}

@@ -203,7 +203,7 @@ svg.active .svg-elem-1 {
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background-color: #ffffff;
+    background-color: #191919;
     animation: scrollDots 2s ease-in-out infinite;
     // filter: drop-shadow(2px 2px 7px #0091ff);
     box-shadow: 0px 0px 10px 0.5px #ffffff, 0px 0px 1px 0.5px #ffffff;
@@ -220,11 +220,12 @@ svg.active .svg-elem-1 {
   }
 
   &__content {
+    color: #152531d3;
     font-size: 20px;
-    color: rgb(255, 255, 255);
+    color: rgb(22, 22, 22);
     text-transform: uppercase;
     text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px #fff, 0 0 9px #dfdfdf,
-      0 0 20px #d7d7d7, 0 0 30px #b5b5b5, 0 0 55px #c3e5ff, 0 0 80px #0091ff;
+      0 0 20px #d7d7d7, 0 0 30px #b5b5b5, 0 0 55px #ffffff, 0 0 80px #ffffff;
     animation: scrollText 2s ease-in-out 1s infinite;
   }
 }
@@ -250,5 +251,66 @@ svg.active .svg-elem-1 {
   }
   100% {
     transform: translateY(0);
+  }
+}
+@keyframes mainText {
+  0% {
+    opacity: 0.5;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(2);
+  }
+  100% {
+    opacity: 0.5;
+    filter: brightness(1);
+  }
+}
+
+.front-text {
+  position: fixed;
+  z-index: 80;
+  top: 70px;
+  // animation: mainText 6s ease-in-out 1s infinite;
+  left: 70px;
+  text-align: center;
+  font-size: 42px;
+  color: #141414;
+  text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px #fff, 0 0 9px #dfdfdf,
+    0 0 20px #d7d7d7, 0 0 30px #b5b5b5, 0 0 55px #c3e5ff, 0 0 80px #75c3ff;
+  &__title {
+    text-transform: uppercase;
+    font-size: 56px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    letter-spacing: 8px;
+  }
+  &__subtitle {
+    font-size: 36px;
+    font-weight: 400;
+  }
+}
+.front-text2 {
+  // position: fixed;
+  z-index: 80;
+  // top: 70px;
+  // animation: mainText 6s ease-in-out 1s infinite;
+  // left: 70px;
+  text-align: center;
+  font-size: 42px;
+  color: #141414;
+  text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px #fff, 0 0 9px #dfdfdf,
+    0 0 20px #d7d7d7, 0 0 30px #b5b5b5, 0 0 55px #c3e5ff, 0 0 80px #75c3ff;
+  &__title {
+    text-transform: uppercase;
+    font-size: 56px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    letter-spacing: 8px;
+  }
+  &__subtitle {
+    font-size: 36px;
+    font-weight: 400;
   }
 }

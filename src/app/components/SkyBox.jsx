@@ -4,12 +4,6 @@ import * as THREE from "three";
 import { GradientTexture } from "@react-three/drei";
 
 const SkyBox = ({ color, skyBoxRef, skyBoxMatRef }) => {
-  const skyTexture = useTexture("/images/sky/sky.jpg");
-  const skyTexture2 = useTexture("/images/sky/sky2.jpg");
-  const skyTexture3 = useTexture("/images/sky/sky3.jpg");
-  const skyTexture4 = useTexture("/images/sky/sky4.jpg");
-
-  console.log("skybox");
   return (
     <mesh ref={skyBoxRef} position={[0, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
       <sphereGeometry args={[2900, 64, 32]} />

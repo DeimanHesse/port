@@ -1,24 +1,7 @@
 "use client";
-import Image from "next/image";
-import {
-  Suspense,
-  useRef,
-  useMemo,
-  useState,
-  useEffect,
-  useLayoutEffect,
-  lazy,
-} from "react";
+import { Suspense, useRef, useState, useEffect } from "react";
 import * as THREE from "three";
-import { TextureLoader } from "three";
-import {
-  Canvas,
-  useFrame,
-  extend,
-  useThree,
-  useLoader,
-  useFrameLoop,
-} from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import {
   Html,
   OrbitControls,
@@ -44,25 +27,12 @@ import {
   FlyControls,
   Trail,
 } from "@react-three/drei";
+import gsap from "gsap";
 import "./MainSection.scss";
 
-import { useControls } from "leva";
-
-import { EffectComposer, SelectiveBloom } from "@react-three/postprocessing";
-
-import { BlurPass, Resizer, KernelSize, Resolution } from "postprocessing";
-
-import WaterMesh from "../components/Water/WaterMesh.jsx";
 import Moon from "../components/Moon/Moon.jsx";
-import { Effects2 } from "../components/Effects";
 import SkyBox from "../components/SkyBox";
 
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-
-import { BrowserView, MobileView } from "react-device-detect";
-
-import Landscape from "../components/Landscape/Landscape";
 import Pyramids from "../components/Pyramids";
 import CloudsComp from "../components/Clouds/Clouds";
 import CloudsComp2 from "../components/Clouds/Clouds2";
@@ -71,13 +41,10 @@ import WorkExpierence from "./Expirience/Expirience";
 import About from "./About/About";
 import Works from "./Portfolio/Portfolio";
 import Contacts from "./Contacts/Contacts";
-import Burger from "../components/Burger/Burger";
 
 import workExamples from "../data/WorkExamplesData";
 import Popup from "../components/Popup/Popup";
 import Preloader from "../components/Preloader/Preloader";
-
-import MainScene from "../components/MainScene/MainScene";
 
 import dynamic from "next/dynamic";
 import { Perf } from "r3f-perf";
@@ -112,7 +79,7 @@ function Greeting({ userAgent }) {
 const CameraSearch = ({ cameraRef }) => {
   return (
     <OrbitControls
-      target={[0, 0, -330]}
+      target={[0, 150, -330]}
       ref={cameraRef}
       // onChange={(e) => orbChange(e)}
       enableZoom={false}
@@ -144,6 +111,7 @@ const MainSection = ({ userAgent }) => {
 
   const ambientLightRef = useRef();
   const workExampleRef = useRef();
+  const pointLightRef = useRef();
 
   const [popup, setPopup] = useState(false);
 
@@ -169,11 +137,23 @@ const MainSection = ({ userAgent }) => {
   const animArr = [
     function one(direction) {
       if (!direction) {
+        tl.to(".scroll-text", {
+          opacity: 0,
+          duration: 1,
+        });
+        tl.to(
+          ".front-text",
+          {
+            opacity: 0,
+            duration: 1,
+          },
+          "<"
+        );
         tl.eventCallback("onComplete", null);
       } else {
         tl.to(cameraRef.current.position0, {
           x: 0,
-          y: 65,
+          y: 80,
           z: 520,
           duration: 2,
           onUpdate: () => {
@@ -184,7 +164,7 @@ const MainSection = ({ userAgent }) => {
           cameraRef.current.target0,
           {
             x: 0,
-            y: 0,
+            y: 150,
             z: -330,
             duration: 1,
           },
@@ -198,41 +178,30 @@ const MainSection = ({ userAgent }) => {
           },
           "<"
         );
-        // tl.to(
-        //   "canvas",
-        //   {
-        //     filter: "blur(0px) grayscale(0) contrast(1)",
-        //     duration: 1,
-        //   },
-        //   "<"
-        // );
-        // tl.fromTo(
-        //   dTextref.current.position,
-        //   {
-        //     x: -500,
-        //   },
-        //   {
-        //     // background: "linear-gradient(#031730 15%, #000002 45%)",
-        //     x: 0,
-        //     duration: 0.4,
-        //   }
-        // );
-        // tl.to(dTextref.current.position, {
-        //   // background: "linear-gradient(#031730 15%, #000002 45%)",
-        //   y: 0,
-        //   duration: 0.4,
-        // });
-        // tl.to(
-        //   skyBoxMatRef.current.color,
-        //   {
-        //     // color: "#0e1925",
-        //     r: 0.014,
-        //     g: 0.025,
-        //     b: 0.037,
-        //     duration: 4,
-        //   },
-        //   "<"
-        // );
+        tl.to(".scroll-text", {
+          opacity: 1,
+          duration: 1,
+        });
+        tl.to(
+          ".front-text",
+          {
+            opacity: 1,
+            duration: 1,
+          },
+          "<"
+        );
+        tl.to(
+          pointLightRef.current,
+          {
+            intensity: 0.9,
+            duration: 0.5,
+            ease: "power1.out",
+            onUpdate: () => {
+              cameraRef.current.reset();
+            },
+          },
+          "<"
+        );
 
         tl.eventCallback("onComplete", null);
       }
@@ -279,8 +248,9 @@ const MainSection = ({ userAgent }) => {
         tl.to(
           cameraRef.current.target0,
           {
+            z: -330,
             x: -200,
-            z: -1000,
+            y: -150,
             duration: 1,
             ease: "power1.out",
             onUpdate: () => {
@@ -317,10 +287,8 @@ const MainSection = ({ userAgent }) => {
           {
             opacity: 1,
             translateY: "0",
-            // translateX: "100%",
             duration: 0.5,
             ease: "back.out(1.7)",
-            // pointerEvents: "none",
             onUpdate: () => {
               // secondSectionRef.current.reset();
             },
@@ -341,23 +309,6 @@ const MainSection = ({ userAgent }) => {
           },
           "<"
         );
-        // tl.to(
-        //   ".about__text",
-        //   {
-        //     // backgroundColor: "#ffffff69",
-        //     // backgroundColor: "#0d2c4f91",
-        //     // filter: "blur(0px)",
-        //     duration: 1,
-        //   },
-        //   "<"
-        // );
-
-        // tl.to(".about__text", {
-        //   // backgroundColor: "#ffffff69",
-        //   // filter: "blur(0px)",
-        //   opacity: 1,
-        //   duration: 0.3,
-        // });
 
         tl.eventCallback("onComplete", null);
       } else {
@@ -405,6 +356,7 @@ const MainSection = ({ userAgent }) => {
         tl.to(cameraRef.current.target0, {
           x: 20,
           z: -300,
+          y: 200,
           duration: 1,
           onUpdate: () => {
             cameraRef.current.reset();
@@ -421,6 +373,18 @@ const MainSection = ({ userAgent }) => {
             onUpdate: () => {
               cameraRef.current.reset();
             },
+          },
+          "<"
+        );
+        tl.to(
+          pointLightRef.current,
+          {
+            intensity: 0,
+            duration: 1,
+            ease: "power1.out",
+            // onUpdate: () => {
+            //   cameraRef.current.reset();
+            // },
           },
           "<"
         );
@@ -516,6 +480,10 @@ const MainSection = ({ userAgent }) => {
       }
     },
     function four(direction) {
+      tl.to(".blur", {
+        opacity: 1,
+        duration: 0.4,
+      });
       if (direction) {
         tl.to(cameraRef.current.position0, {
           x: 310,
@@ -527,30 +495,20 @@ const MainSection = ({ userAgent }) => {
             cameraRef.current.reset();
           },
         });
-        tl.to(".blur", {
-          opacity: 1,
-          duration: 0.4,
-        });
-        // tl.to(
-        //   cameraRef.current.position0,
-        //   {
-        //     // x: -210,
-        //     // y: 30,
-        //     z: -200,
-        //     duration: 1,
-        //     ease: "power1.out",
-        //     onUpdate: () => {
-        //       cameraRef.current.reset();
-        //     },
-        //   },
-        //   "<"
-        // );
 
-        // tl.to("canvas", {
-        //   filter: "blur(6px) grayscale(1) contrast(1.1)",
-        //   // filter: "grayscale(1) contrast(1.1)",
-        //   duration: 1,
-        // });
+        tl.to(
+          cameraRef.current.target0,
+          {
+            x: 20,
+            z: -300,
+            y: 200,
+            duration: 1,
+            onUpdate: () => {
+              cameraRef.current.reset();
+            },
+          },
+          "<"
+        );
         // ПОЯВЛЕНИЕ HTML
         tl.to(fourSectionRef.current, {
           opacity: 1,
@@ -574,8 +532,8 @@ const MainSection = ({ userAgent }) => {
           duration: 0.4,
         });
         tl.to(cameraRef.current.target0, {
-          x: cameraRef.current.position0.x,
-          z: cameraRef.current.position0.z,
+          x: 0,
+          z: 520,
           y: 500,
           duration: 1,
           onUpdate: () => {
@@ -585,11 +543,10 @@ const MainSection = ({ userAgent }) => {
         tl.to(
           cameraRef.current.position0,
           {
-            x: cameraRef.current.position0.x,
-            y: 100,
-            z: cameraRef.current.position0.z,
+            x: 0,
+            y: 80,
+            z: 520,
             duration: 2,
-            ease: "power1.out",
             onUpdate: () => {
               cameraRef.current.reset();
             },
@@ -600,20 +557,40 @@ const MainSection = ({ userAgent }) => {
         tl.to(fiveSectionRef.current, {
           opacity: 1,
           pointerEvents: "all",
-          duration: 2,
+          duration: 1,
         });
+        tl.to(pointLightRef.current, {
+          intensity: 0.9,
+          duration: 1,
+          ease: "power1.out",
+          onUpdate: () => {
+            cameraRef.current.reset();
+          },
+        });
+
         tl.eventCallback("onComplete", null);
       } else {
+        tl.to(pointLightRef.current, {
+          intensity: 0,
+          duration: 1,
+          ease: "power1.out",
+          onUpdate: () => {
+            cameraRef.current.reset();
+          },
+        });
         tl.to(fiveSectionRef.current, {
           opacity: 0,
           pointerEvents: "none",
           duration: 0.3,
         });
-        // tl.to("canvas", {
-        //   filter: "blur(0px) grayscale(0) contrast(1)",
-        //   // filter: "grayscale(1) contrast(1.1)",
-        //   duration: 1,
-        // });
+        tl.to(
+          ".front-text",
+          {
+            opacity: 0,
+            duration: 1,
+          },
+          "<"
+        );
         tl.eventCallback("onComplete", null);
       }
     },
@@ -678,8 +655,17 @@ const MainSection = ({ userAgent }) => {
     thickness: 0.3,
   });
 
+  useEffect(() => {
+    // const wrap = document.querySelector("html");
+    // window.addEventListener("weel", (e) => weelHandler(e));
+  }, []);
+
   return (
-    <div ref={domnodeRef} className="mainSection">
+    <div
+      ref={domnodeRef}
+      onWheel={(e) => weelHandler(e)}
+      className="mainSection"
+    >
       <div className="blur"></div>
       <div className={popup ? "wrapper blured" : "wrapper"}>
         <div className="app-inner">
@@ -704,22 +690,9 @@ const MainSection = ({ userAgent }) => {
         </div>
         <div className="scroll-text__content">Scroll down</div>
       </div>
-      {/* <Suspense fallback={<Preloader />}>
-        <MainScene
-          canvasRef={canvasRef}
-          moonRef={moonRef}
-          skyBoxMatRef={skyBoxMatRef}
-          skyBoxRef={skyBoxRef}
-          cameraRef={cameraRef}
-          popup={popup}
-          ambientLightRef={ambientLightRef}
-          dTextref={dTextref}
-          userAgent={userAgent}
-        />
-      </Suspense> */}
+
       <div
         ref={canvasRef}
-        // onWheel={(e) => weelHandler(e)}
         id="canvas-container"
         className={popup ? "canvas-container blured" : "canvas-container"}
       >
@@ -740,69 +713,43 @@ const MainSection = ({ userAgent }) => {
                 headerVisible={headerVisible}
                 headerHandler={headerHandler}
               />
+              <div className="front-text">
+                <div className="front-text__title">Dmitry Sinikov</div>
+                <div className="front-text__subtitle">Web-Development</div>
+              </div>
               <Canvas
-                // frameloop="demand"
+                frameloop="demand"
                 // opacity={0}
                 // resize={{ scroll: true, debounce: { scroll: 50, resize: 0 } }}
                 ref={canvasRef}
                 camera={{
-                  position: [0, 65, 520],
+                  position: [0, 80, 520],
                   fov: 75,
                   near: 0.01,
                   far: 4000,
                 }}
               >
-                <pointLight position={[0, 300, 0]} intensity={50} />
-                {/* <spotLight position={[0, 200, 0]} color={"green"} intensity={100} /> */}
-                <ambientLight ref={ambientLightRef} intensity={3} />
-                <Text3D
-                  position={
-                    userAgent && userAgent.toLowerCase().includes("mobile")
-                      ? [-50, 110.8, 350]
-                      : [-110, 110.8, 420]
-                  }
-                  // position={[-120, 110.8, 460]}
-                  letterSpacing={0.2}
-                  lineHeight={0.6}
-                  size={7.3}
-                  font="/Inter_Bold.json"
-                  // smooth={4}
-                  curveSegments={32}
-                  bevelEnabled
-                  bevelSize={0.04}
-                  bevelThickness={1.1}
-                  ref={dTextref}
-                >
-                  {`Hello, I'm \n frontend-developer`}
-                  <meshPhysicalMaterial
-                    // color={"#0077ff"}
-                    side={THREE.DoubleSide}
-                    // map={colorMap2}
-                    emissiveIntensity={0.1}
-                    // emissiveMap={colorMap2}
-                    // emissiveIntensity={2}
-                    // alphaMap={colorMap2}
-                    emissive={"#f2055d"}
-                    // emissive={"#003153"}
-                    roughness={0.2}
-                    metalness={0.7}
-                    transmission={1}
-                    reflectivity={0.1}
-                    ior={2.33}
-                    thickness={0.3}
-                  />
-                </Text3D>
+                <pointLight
+                  color={"white"}
+                  position={[0, 600, 280]}
+                  intensity={0.9}
+                  decay={0.01}
+                  ref={pointLightRef}
+                  // power={0.7}
+                />
+
+                <ambientLight ref={ambientLightRef} intensity={2} />
 
                 <Moon referens={moonRef} position={[0, 210, -2500]} />
                 <Pyramids red={red} />
-                {/* <Landscape /> */}
+
                 <SkyBox
                   color={"#00040d"}
                   skyBoxMatRef={skyBoxMatRef}
                   skyBoxRef={skyBoxRef}
                 />
                 <CloudsComp />
-                <CloudsComp2 userAgent={userAgent} />
+                {/* <CloudsComp2 userAgent={userAgent} /> */}
                 <Stars
                   radius={600}
                   depth={60}
