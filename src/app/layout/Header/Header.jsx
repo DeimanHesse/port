@@ -1,14 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./Header.scss";
 
-const Header = ({ headerHandler, headerVisible, headerState }) => {
-  const [active, setActive] = useState(false);
-  console.log("ffff", headerVisible.current);
-  const burgerHandler = () => {
-    setActive(!active);
-  };
-
+const Header = ({
+  headerHandler,
+  headerVisible,
+  headerState,
+  burgerActive,
+  burgerHandler,
+}) => {
   return (
     <header className={headerState ? "header" : "header invisible"}>
       <nav className="navigation">
@@ -49,7 +49,9 @@ const Header = ({ headerHandler, headerVisible, headerState }) => {
             <span></span>
           </div>
         </div>
-        <div className={active ? "burger__inner active" : "burger__inner"}>
+        <div
+          className={burgerActive ? "burger__inner active" : "burger__inner"}
+        >
           <nav className="buger__nav">
             <ul>
               <li>

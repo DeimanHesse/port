@@ -621,8 +621,24 @@ const MainSection = ({ userAgent }) => {
     }
   };
 
+  const [headerState, setHeaderStete] = useState(false);
+
+  const headerVisible = useRef(false);
+
+  const [showContent, setShowContent] = useState(false);
+
+  const [burgerActive, setBurgerActive] = useState(false);
+
+  const burgerHandler = () => {
+    setBurgerActive(!burgerActive);
+  };
+
   const headerHandler = async (e, id) => {
     e.preventDefault();
+    if (burgerActive) {
+      console.log(burgerActive);
+      setBurgerActive(false);
+    }
     let targetStage;
     targetStage = Number(e.target.id);
 
@@ -630,12 +646,6 @@ const MainSection = ({ userAgent }) => {
     setStage(targetStage, currentStageRef.current);
     currentStageRef.current = targetStage;
   };
-
-  const [headerState, setHeaderStete] = useState(false);
-
-  const headerVisible = useRef(false);
-
-  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
     setShowContent(true);
@@ -712,6 +722,8 @@ const MainSection = ({ userAgent }) => {
                 headerState={headerState}
                 headerVisible={headerVisible}
                 headerHandler={headerHandler}
+                burgerActive={burgerActive}
+                burgerHandler={burgerHandler}
               />
               <div className="front-text">
                 <div className="front-text__title">Dmitry Sinikov</div>
