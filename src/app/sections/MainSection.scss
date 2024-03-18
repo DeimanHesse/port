@@ -265,8 +265,12 @@ svg.active .svg-elem-1 {
   text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px #fff, 0 0 9px #dfdfdf,
     0 0 20px #d7d7d7, 0 0 30px #b5b5b5, 0 0 55px #c3e5ff, 0 0 80px #75c3ff;
   @media (max-width: 500px) {
-    top: 45px;
+    top: 30px;
     left: 23px;
+  }
+  @media (max-width: 800px) {
+    left: 50%;
+    transform: translateX(-50%);
   }
   &__title {
     text-transform: uppercase;
@@ -274,15 +278,26 @@ svg.active .svg-elem-1 {
     font-weight: 600;
     margin-bottom: 18px;
     letter-spacing: 8px;
-    @media (max-width: 500px) {
-      font-size: 26px;
+    text-align: center;
+    font-size: calc((100vw - 375px) / (1920 - 375) * (56 - 32) + 32px);
+    @media (min-width: 1920px) {
+      font-size: 56px;
+    }
+    span {
+      @media (max-width: 500px) {
+        display: block;
+        width: 100%;
+      }
+      &:first-child {
+        margin-right: 10px;
+      }
     }
   }
   &__subtitle {
-    font-size: 36px;
     font-weight: 400;
-    @media (max-width: 500px) {
-      font-size: 22px;
+    font-size: calc((100vw - 375px) / (1920 - 375) * (36 - 22) + 22px);
+    @media (min-width: 1920px) {
+      font-size: 36px;
     }
   }
 }
@@ -333,10 +348,40 @@ svg.active .svg-elem-1 {
     }
   }
   &__subtitle {
-    font-size: 36px;
     font-weight: 400;
-    @media (max-width: 700px) {
-      font-size: 22px;
+    font-size: calc((100vw - 375px) / (1920 - 375) * (36 - 22) + 22px);
+    @media (min-width: 1920px) {
+      font-size: 36px;
     }
+  }
+}
+
+.loader {
+  z-index: 999999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ff000024;
+}
+
+.circle {
+  position: fixed;
+  top: calc(50% - 100px);
+  left: calc(50% - 100px);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: red;
+  transition: 10.5s;
+  &.entering {
+  }
+  &.entered {
+  }
+  &.exiting {
+  }
+  &.exited {
+    opacity: 0;
   }
 }

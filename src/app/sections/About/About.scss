@@ -10,23 +10,30 @@
   height: 100%;
   box-sizing: border-box;
   color: white;
-  // padding-top: 70px;
+
   overflow: hidden;
 
   width: 100%;
-  // backdrop-filter: blur(10px) grayscale(1);
 
-  // @media (max-width: 900px) {
-  //   overflow-y: scroll;
-  //   overflow-x: visible;
+  // &__inner {
+  //   position: relative;
+  //   height: 100%;
+  //   // overflow-y: scroll;
+  //   // display: flex;
+  //   // justify-content: center;
+  //   // align-items: center;
   // }
-
   &__title {
+    // position: absolute;
+    // top: 50px;
+    // left: 60px;
     padding-top: 40px;
     padding-left: 16px;
     font-size: 36px;
-    margin-bottom: 32px;
+    // margin-bottom: 32px;
+    // padding-bottom: 32px;
     height: 10%;
+    // border: 1px solid yellow;
     color: #fff;
     // text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 5px #fff, 0 0 11px #0fa,
     //   0 0 20px #0fa, 0 0 30px #0fa, 0 0 55px #0fa, 0 0 80px #0fa;
@@ -34,19 +41,28 @@
       0 0 20px #21ce97ee, 0 0 30px #21ce97ee, 0 0 55px #21ce97ee,
       0 0 80px #21ce97ee;
   }
+
+  &__content-wrapper {
+    height: 90%;
+    display: flex;
+    align-items: center;
+    @media (max-width: 800px) {
+      overflow-y: scroll;
+    }
+  }
   &__content {
-    // overflow-y: scroll;
     display: flex;
     gap: 50px;
     // align-items: center;
     justify-content: center;
-    // height: 90%;
-    padding-bottom: 50px;
+    height: fit-content;
+    padding-bottom: 150px;
     // background-color: rgba(255, 0, 0, 0.285);
-    // border: 2px solid red;
+    // border: 1px solid red;
 
     @media (max-width: 900px) {
       flex-wrap: wrap;
+      overflow-y: scroll;
     }
   }
   &__text {
@@ -83,6 +99,7 @@
   &__text-stack {
   }
   &__image {
+    height: 450px;
     position: relative;
     width: 30%;
     border-radius: 10px;
@@ -90,6 +107,8 @@
     filter: grayscale(0.8) saturate(4);
     @media (max-width: 900px) {
       width: 100%;
+    }
+    @media (max-width: 500px) {
     }
     img {
       mask-image: linear-gradient(#000, transparent);

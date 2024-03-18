@@ -19,6 +19,7 @@
     "@types/three": "^0.159.0",
     "axios": "^1.6.7",
     "babel-plugin-glsl": "^1.0.0",
+    "framer-motion": "^11.0.14",
     "fs": "^0.0.1-security",
     "glsl-noise": "^0.0.0",
     "glslify": "^7.1.1",
@@ -32,6 +33,7 @@
     "react-hook-form": "^7.50.1",
     "react-scroll": "^1.9.0",
     "react-three-ocean": "^2.0.0",
+    "react-transition-group": "^4.4.5",
     "sass": "^1.69.5",
     "three": "^0.159.0",
     "three-custom-shader-material": "^5.4.0"

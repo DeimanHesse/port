@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useRef, useState, useEffect } from "react";
+import { Suspense, useRef, useState, useEffect, useTransition } from "react";
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import {
@@ -28,6 +28,7 @@ import {
   Trail,
 } from "@react-three/drei";
 import gsap from "gsap";
+import { AnimatePresence, motion, usePresence } from "framer-motion";
 import "./MainSection.scss";
 
 import Moon from "../components/Moon/Moon.jsx";
@@ -46,6 +47,12 @@ import workExamples from "../data/WorkExamplesData";
 import Popup from "../components/Popup/Popup";
 import Preloader from "../components/Preloader/Preloader";
 
+import {
+  Transition,
+  CSSTransition,
+  TransitionGroup,
+} from "react-transition-group";
+
 import dynamic from "next/dynamic";
 import { Perf } from "r3f-perf";
 // Client Components:
@@ -55,36 +62,39 @@ import Header from "../layout/Header/Header";
 // const Header = dynamic(() => import("../layout/Header/Header"));
 // const MainScene = dynamic(() => import('../components/B'))
 
-function Greeting({ userAgent }) {
-  console.log(userAgent);
-  if (userAgent && userAgent.toLowerCase().includes("mobile")) {
-    console.log("NOagent");
-    return;
-  } else {
-    console.log("agent");
-    console.log(userAgent);
-    return (
-      <>
-        <WaterMesh />;
-        <mesh position={[0, -13, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[2000, 2000]} />
-          <meshPhongMaterial opacity={1.2} transparent color={"black"} />
-          {/* <meshPhongMaterial opacity={0.5} transparent color={"blue"} /> */}
-        </mesh>
-      </>
-    );
-  }
-}
-
 const CameraSearch = ({ cameraRef }) => {
   return (
     <OrbitControls
       target={[0, 150, -330]}
       ref={cameraRef}
-      // onChange={(e) => orbChange(e)}
       enableZoom={false}
       enableRotate={false}
     />
+  );
+};
+
+const MainSecText = ({ headerState }) => {
+  if (!headerState) {
+    return;
+  }
+  return (
+    <>
+      <div className="front-text">
+        <div className="front-text__title">
+          <span>Dmitry</span>
+          <span>Sinikov</span>
+        </div>
+        <div className="front-text__subtitle">Web-Development</div>
+      </div>
+      <div className="scroll-text">
+        <div className="scroll-text__dots">
+          <div className="scroll-text__dot"></div>
+          <div className="scroll-text__dot"></div>
+          <div className="scroll-text__dot"></div>
+        </div>
+        <div className="scroll-text__content">Scroll down</div>
+      </div>
+    </>
   );
 };
 
@@ -155,7 +165,8 @@ const MainSection = ({ userAgent }) => {
           x: 0,
           y: 80,
           z: 520,
-          duration: 2,
+          duration: 1,
+          ease: "sine.out",
           onUpdate: () => {
             cameraRef.current.reset();
           },
@@ -238,7 +249,7 @@ const MainSection = ({ userAgent }) => {
             y: 30,
             z: 200,
             duration: 1,
-            ease: "power1.out",
+            ease: "back.out(2)",
             onUpdate: () => {
               cameraRef.current.reset();
             },
@@ -288,7 +299,7 @@ const MainSection = ({ userAgent }) => {
             opacity: 1,
             translateY: "0",
             duration: 0.5,
-            ease: "back.out(1.7)",
+            ease: "back.out(3)",
             onUpdate: () => {
               // secondSectionRef.current.reset();
             },
@@ -490,7 +501,7 @@ const MainSection = ({ userAgent }) => {
           y: 30,
           z: 60,
           duration: 1,
-          ease: "power1.out",
+          ease: "back.out(1)",
           onUpdate: () => {
             cameraRef.current.reset();
           },
@@ -653,6 +664,7 @@ const MainSection = ({ userAgent }) => {
   };
 
   useEffect(() => {
+    console.log("mounted");
     setShowContent(true);
   }, []);
 
@@ -681,6 +693,14 @@ const MainSection = ({ userAgent }) => {
       onWheel={(e) => weelHandler(e)}
       className="mainSection"
     >
+      <Header
+        headerState={headerState}
+        headerVisible={headerVisible}
+        headerHandler={headerHandler}
+        burgerActive={burgerActive}
+        burgerHandler={burgerHandler}
+      />
+      <MainSecText headerState={headerState} />
       <div className="blur"></div>
       <div className={popup ? "wrapper blured" : "wrapper"}>
         <div className="app-inner">
@@ -697,14 +717,6 @@ const MainSection = ({ userAgent }) => {
         </div>
       </div>
       <Popup popup={popup} popupData={popupData} popupCall={popupCall} />
-      <div className="scroll-text">
-        <div className="scroll-text__dots">
-          <div className="scroll-text__dot"></div>
-          <div className="scroll-text__dot"></div>
-          <div className="scroll-text__dot"></div>
-        </div>
-        <div className="scroll-text__content">Scroll down</div>
-      </div>
 
       <div
         ref={canvasRef}
@@ -718,22 +730,10 @@ const MainSection = ({ userAgent }) => {
               setHeaderState={setHeaderStete}
               showContent={showContent}
             />
-            // "ffffffffffffffff"
           }
         >
           {showContent && (
             <>
-              <Header
-                headerState={headerState}
-                headerVisible={headerVisible}
-                headerHandler={headerHandler}
-                burgerActive={burgerActive}
-                burgerHandler={burgerHandler}
-              />
-              <div className="front-text">
-                <div className="front-text__title">Dmitry Sinikov</div>
-                <div className="front-text__subtitle">Web-Development</div>
-              </div>
               <Canvas
                 frameloop="demand"
                 // opacity={0}

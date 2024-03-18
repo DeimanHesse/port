@@ -1,32 +1,7 @@
 "use client";
-import { useEffect, Suspense, useMemo, useLayoutEffect, useRef } from "react";
-import { Canvas, useLoader, useFrame } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { useEffect, useRef } from "react";
 import { Events, animateScroll, scrollSpy } from "react-scroll";
-
-import { OrbitControls } from "@react-three/drei";
-
 import "./Expierence.scss";
-
-function Room() {
-  const gantelRef = useRef(null);
-  useFrame((state) => {
-    // gantelRef.current.rotation.x += 0.01;
-    // gantelRef.current.rotation.y += 0.005;
-  });
-  // const gltf = useLoader(GLTFLoader, "/rat.gltf");
-  // const gltf = useLoader(GLTFLoader, "models/untitled.glb");
-  const gltf = useLoader(GLTFLoader, "models/bloombox.glb");
-  return (
-    <group ref={gantelRef}>
-      <primitive object={gltf.scene} />;
-      <mesh position={[0, -1, 0]}>
-        <boxGeometry args={[10, 1, 10]} />
-        <meshStandardMaterial color={"green"} />
-      </mesh>
-    </group>
-  );
-}
 
 const Expierence = ({ thirdSectionRef }) => {
   const ref = useRef();
@@ -107,14 +82,7 @@ const Expierence = ({ thirdSectionRef }) => {
   };
   return (
     <>
-      <section
-        ref={thirdSectionRef}
-        className="work-expirience"
-
-        // onWheel={(e) => handleScroll(e.deltaY || e.detail || e.wheelDelta)}
-        // onScroll={(e) => handleScroll(e)}
-        // onClick={(e) => handleScroll(e)}
-      >
+      <section ref={thirdSectionRef} className="work-expirience">
         <div className="work-expirience__inner">
           <div className="work-expirience__title">Опыт работы</div>
           <div className="work-expirience__content-wrapper">
@@ -126,7 +94,6 @@ const Expierence = ({ thirdSectionRef }) => {
                 id="er"
                 className="work-expirience__cards-inner"
               >
-                {/* <div className="work-expirience__viniette"></div> */}
                 <div className="work-expirience__card card-expierence">
                   <div className="card-expierence__date">
                     Февраль 2022 - Октябрь 2022
@@ -160,9 +127,9 @@ const Expierence = ({ thirdSectionRef }) => {
                     </div>
                     <div className="card-expierence__work-description">
                       Занимался разработкой фронтенда на Laravel Blade, со
-                      стороны бэкэнда делал несложные задачи в рамках CRUD,
-                      работал с tailwind, занимался поддержкой сайтов с легаси
-                      кодом, работал в команде
+                      стороны бэкэнда делал задачи в рамках CRUD, работал с
+                      tailwind, занимался поддержкой сайтов с легаси кодом,
+                      работал в команде
                     </div>
                     <div className="card-expierence__stack">
                       Laravel, Interia, Blade, GrapesJS, Vue, JS, Tailwind,
@@ -193,36 +160,6 @@ const Expierence = ({ thirdSectionRef }) => {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="work-expirience__model">
-              <Canvas
-                // frameloop="demand"
-                opacity={1}
-                // ref={canvasRef}
-                camera={{
-                  position: [0, 5, 20],
-                  fov: 75,
-                  near: 0.01,
-                  far: 4000,
-                }}
-              >
-                <ambientLight intensity={2} />
-
-                <directionalLight
-                  color={"white"}
-                  position={[0, -200, 1700]}
-                  intensity={5}
-                />
-                <Room />
-
-                <OrbitControls
-                // target={[0, 0, -330]}
-                // ref={cameraRef}
-                // onChange={(e) => orbChange(e)}
-                // enableZoom={false}
-                // enableRotate={false}
-                />
-              </Canvas>
             </div>
           </div>
         </div>

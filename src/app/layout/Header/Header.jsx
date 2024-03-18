@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Header.scss";
 
 const Header = ({
@@ -9,6 +9,9 @@ const Header = ({
   burgerActive,
   burgerHandler,
 }) => {
+  useEffect(() => {
+    console.log(headerState);
+  }, []);
   return (
     <header className={headerState ? "header" : "header invisible"}>
       <nav className="navigation">
@@ -40,7 +43,6 @@ const Header = ({
           </li>
         </ul>
       </nav>
-      {/* <Burger headerHandler={headerHandler} /> */}
       <div className="burger">
         <div onClick={burgerHandler} className="burger__icon">
           <div className="burger__icon-inner">

@@ -34,13 +34,13 @@ function Sky() {
   const cloud0 = useRef();
 
   const { invalidate, camera, gl } = useThree();
-  useFrame((state, delta) => {
-    ref.current.rotation.y = Math.cos(state.clock.elapsedTime / 2) / 25;
-    // ref.current.rotation.y = state.clock.elapsedTime / 2 / 2;
-    ref.current.rotation.x = Math.sin(state.clock.elapsedTime / 2) / 25;
-    // cloud0.current.rotation.y -= delta;
-    ref.current.addEventListener("change", invalidate);
-  });
+  // useFrame((state, delta) => {
+  // ref.current.rotation.y = Math.cos(state.clock.elapsedTime / 2) / 25;
+  // ref.current.rotation.y = state.clock.elapsedTime / 2 / 2;
+  // ref.current.rotation.x = Math.sin(state.clock.elapsedTime / 2) / 25;
+  // cloud0.current.rotation.y -= delta;
+  // ref.current.addEventListener("change", invalidate);
+  // });
   return (
     <>
       {/* <SkyImpl /> */}
