@@ -151,8 +151,8 @@ const Expierence = ({ thirdSectionRef }) => {
                     </div>
                     <div className="card-expierence__work-description">
                       Работал над несколькими проектами. В мои задачи входила
-                      верстка на нативном js, разработка интерактивных
-                      компонентах, реализация анимаций Также работал с Next js
+                      верстка и работа на нативном js, разработка интерактивных
+                      компонентах, реализация анимаций. Также работал с Next js
                     </div>
                     <div className="card-expierence__stack">
                       Next, TS, JS, Pug, SCSS, CSSModules, Vite

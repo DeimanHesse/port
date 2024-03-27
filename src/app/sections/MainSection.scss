@@ -38,6 +38,55 @@ body {
   }
 }
 
+.layoutWall {
+  display: none;
+  z-index: 99999999;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  // background-color: rgba(125, 69, 69, 0.253);
+  opacity: 0;
+  transition: 2s;
+  transition-delay: 2s;
+  border-top: 50% solid red;
+  &__inner {
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+  &__top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50%;
+    width: 100%;
+    background-color: yellow;
+    transition: 1s;
+    transform: translateY(-100%);
+    transition-delay: 2s;
+  }
+  &__bottom {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50%;
+    background-color: #0077ff;
+    transition: 1s;
+    transform: translateY(100%);
+    transition-delay: 2s;
+  }
+  &.active {
+    opacity: 1;
+    .layoutWall__top {
+      transform: translateY(0);
+    }
+    .layoutWall__bottom {
+      transform: translateY(0);
+    }
+  }
+}
+
 section {
   width: 100%;
   // padding: 50px;

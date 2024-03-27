@@ -75,7 +75,7 @@ const Contacts = ({ fiveSectionRef }) => {
             </div>
             <div className="contacts-form__item">
               <label className="contacts-form__label" htmlFor="message">
-                Напините своё сообщение
+                Напишите своё сообщение
               </label>
               <textarea
                 className="contacts-form__message"

@@ -1,5 +1,12 @@
 "use client";
-import { Suspense, useRef, useState, useEffect, useTransition } from "react";
+import {
+  Suspense,
+  useRef,
+  useState,
+  useEffect,
+  useTransition,
+  useLayoutEffect,
+} from "react";
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import {
@@ -28,7 +35,7 @@ import {
   Trail,
 } from "@react-three/drei";
 import gsap from "gsap";
-import { AnimatePresence, motion, usePresence } from "framer-motion";
+
 import "./MainSection.scss";
 
 import Moon from "../components/Moon/Moon.jsx";
@@ -47,20 +54,10 @@ import workExamples from "../data/WorkExamplesData";
 import Popup from "../components/Popup/Popup";
 import Preloader from "../components/Preloader/Preloader";
 
-import {
-  Transition,
-  CSSTransition,
-  TransitionGroup,
-} from "react-transition-group";
-
 import dynamic from "next/dynamic";
 import { Perf } from "r3f-perf";
 // Client Components:
 import Header from "../layout/Header/Header";
-// const Header = dynamic(() => import("../layout/Header/Header"));
-// const Header = lazy(() => import("../layout/Header/Header"));
-// const Header = dynamic(() => import("../layout/Header/Header"));
-// const MainScene = dynamic(() => import('../components/B'))
 
 const CameraSearch = ({ cameraRef }) => {
   return (
@@ -641,7 +638,7 @@ const MainSection = ({ userAgent }) => {
 
   const headerVisible = useRef(false);
 
-  const [showContent, setShowContent] = useState(false);
+  const [showContent, setShowContent] = useState(true);
 
   const [burgerActive, setBurgerActive] = useState(false);
 
@@ -663,11 +660,6 @@ const MainSection = ({ userAgent }) => {
     currentStageRef.current = targetStage;
   };
 
-  useEffect(() => {
-    console.log("mounted");
-    setShowContent(true);
-  }, []);
-
   console.log(skyBoxRef.current);
 
   const red = new THREE.MeshPhysicalMaterial({
@@ -687,12 +679,26 @@ const MainSection = ({ userAgent }) => {
     // window.addEventListener("weel", (e) => weelHandler(e));
   }, []);
 
+  const [wall, setWall] = useState(false);
+  useLayoutEffect(() => {
+    console.log("mounted");
+    console.log(wall);
+
+    // setShowContent(true);
+  }, []);
+
   return (
     <div
       ref={domnodeRef}
       onWheel={(e) => weelHandler(e)}
       className="mainSection"
     >
+      <div className={wall ? "layoutWall" : "layoutWall active"}>
+        <div className="layoutWall__inner">
+          <div className="layoutWall__top"></div>
+          <div className="layoutWall__bottom"></div>
+        </div>
+      </div>
       <Header
         headerState={headerState}
         headerVisible={headerVisible}
@@ -729,6 +735,7 @@ const MainSection = ({ userAgent }) => {
               headerVisible={headerVisible}
               setHeaderState={setHeaderStete}
               showContent={showContent}
+              setWall={setWall}
             />
           }
         >

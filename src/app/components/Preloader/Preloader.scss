@@ -3,13 +3,14 @@
   // transition: 7.5s;
   color: white;
   font-size: 80px;
-  z-index: 9999999;
+  z-index: 999999;
 }
 
 html {
   background-color: #2e2e2e;
 }
 .preload {
+  opacity: 0;
   z-index: 99999999;
   transition: 0.5s;
   position: fixed;

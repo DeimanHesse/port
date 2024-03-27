@@ -25,7 +25,7 @@ const Popup = ({ data, workExampleRef, popup, popupCall, popupData }) => {
                 Описание деятельности компании:
               </div>
               <div className="work-example__description-item-text">
-                {popupData.title}
+                {popupData.company_description}
               </div>
             </div>
             <div className="work-example__description-item">

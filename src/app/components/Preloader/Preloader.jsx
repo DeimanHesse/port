@@ -1,18 +1,20 @@
 "use client";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import "./Preloader.scss";
-const Preloader = ({ headerVisible, setHeaderState, showContent }) => {
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     // Код, который должен выполниться перед размонтированием компонента
-  //   }, 4000); // Задержка в 2 секунды
 
+import "./Preloader.scss";
+const Preloader = ({ headerVisible, setHeaderState, showContent, setWall }) => {
+  // useEffect(() => {
   //   return () => clearTimeout(timeout); // Очистка таймера при размонтировании
   // }, []);
 
+  const closeWall = () => {
+    setWall(true);
+    console.log("rrrrrrrrrrrrrrrrrrrrrr");
+  };
+
   useEffect(() => {
     setHeaderState(true);
+    return () => closeWall(); // Очистка таймера при размонтировании
   }, []);
 
   return (
@@ -238,19 +240,6 @@ const Preloader = ({ headerVisible, setHeaderState, showContent }) => {
         </div>
       </div>
     </div>
-    // <AnimatePresence mode="sync">
-    //   <motion.div
-    //     // transition={{ duration: 16 }}
-    //     transition={{ duration: 10.2 }}
-    //     className="loading-exit"
-    //     key="modal"
-    //     initial={{ opacity: 0 }}
-    //     animate={{ opacity: 1 }}
-    //     exit={{ color: "red" }}
-    //   >
-    //     1111111111
-    //   </motion.div>
-    // </AnimatePresence>
   );
 };
 

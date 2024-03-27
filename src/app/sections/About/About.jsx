@@ -41,8 +41,12 @@ const About = ({ secondSectionRef }) => {
               </p>
 
               <div className="about__text-stack">
-                Стек: Next, React, JS, TS, ThreeJS, React3fiber, GSAP, SCSS,
-                Tailwind, Git
+                <p>
+                  Основной стек: Next, React, JS, TS, ThreeJS, React3fiber,
+                  GSAP, Git
+                </p>
+                <p>Стилизация: scss, css-modules, Tailwind</p>
+                <p>Сборщики: Webpack, Vite</p>
               </div>
             </div>
           </div>

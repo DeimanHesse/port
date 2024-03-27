@@ -19,8 +19,8 @@ const workExamples = [
     picture: "/images/work/poemesdeprovence.png",
     short_description:
       "Магазин селективной парфюмерии для бренда Poemes de Provence",
-    company_description: "",
-    work_description: ["Верстка страниц и компонентов", "sfdfsdfsdfsfsfdds"],
+    company_description: "Продажа парфюмерии",
+    work_description: ["Верстка страниц и компонентов на Pug"],
     work_link: "https://poemesdeprovence.ru/",
     stack: "Vite, Pug, JS, SCSS",
   },
