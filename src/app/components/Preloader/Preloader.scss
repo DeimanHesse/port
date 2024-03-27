@@ -10,16 +10,17 @@ html {
   background-color: #2e2e2e;
 }
 .preload {
-  opacity: 0;
+  // opacity: 0;
   z-index: 99999999;
-  transition: 0.5s;
-  position: fixed;
+  transition: 1s;
+  // position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   // background-color: #05586f;
-  background: linear-gradient(to right bottom, black 0%, #0e2436 50%);
+  // background: linear-gradient(to right bottom, black 0%, #0e2436 50%);
   transition: 0.5s;
   &.hidden {
     opacity: 0;

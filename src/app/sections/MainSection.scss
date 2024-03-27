@@ -39,7 +39,7 @@ body {
 }
 
 .layoutWall {
-  display: none;
+  // display: none;
   z-index: 99999999;
   position: fixed;
   width: 100vw;
@@ -48,7 +48,7 @@ body {
   opacity: 0;
   transition: 2s;
   transition-delay: 2s;
-  border-top: 50% solid red;
+  // border-top: 50% solid red;
   &__inner {
     height: 100%;
     width: 100%;
@@ -60,7 +60,8 @@ body {
     left: 0;
     height: 50%;
     width: 100%;
-    background-color: yellow;
+
+    background: linear-gradient(to bottom, black 0%, #06131e 50%);
     transition: 1s;
     transform: translateY(-100%);
     transition-delay: 2s;
@@ -71,7 +72,8 @@ body {
     bottom: 0;
     left: 0;
     height: 50%;
-    background-color: #0077ff;
+
+    background: linear-gradient(to bottom, #06131e 40%, #030a0e 70%);
     transition: 1s;
     transform: translateY(100%);
     transition-delay: 2s;

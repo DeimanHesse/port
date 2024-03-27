@@ -9,31 +9,7 @@ import {
 } from "react";
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
-import {
-  Html,
-  OrbitControls,
-  Sky as SkyImpl,
-  StatsGl,
-  Stars,
-  Environment,
-  // Cloud,
-  // Clouds,
-  // Effects,
-  ScrollControls,
-  Scroll,
-  useScroll,
-  Text,
-  Billboard,
-  useTexture,
-  Grid,
-  Lightformer,
-  Text3D,
-  Gltf,
-  Center,
-  MapControls,
-  FlyControls,
-  Trail,
-} from "@react-three/drei";
+import { Html, OrbitControls, Sky as SkyImpl, Stars } from "@react-three/drei";
 import gsap from "gsap";
 
 import "./MainSection.scss";
@@ -695,6 +671,228 @@ const MainSection = ({ userAgent }) => {
     >
       <div className={wall ? "layoutWall" : "layoutWall active"}>
         <div className="layoutWall__inner">
+          <div className={!wall ? "preload" : "preload hidden"}>
+            <div className="preload__inner">
+              <div className="prelwrapper">
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+                <div>
+                  <div className="bar"></div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="layoutWall__top"></div>
           <div className="layoutWall__bottom"></div>
         </div>
