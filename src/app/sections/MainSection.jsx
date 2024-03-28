@@ -671,7 +671,7 @@ const MainSection = ({ userAgent }) => {
     >
       <div className={wall ? "layoutWall" : "layoutWall active"}>
         <div className="layoutWall__inner">
-          <div className={!wall ? "preload" : "preload hidden"}>
+          {/* <div className={!wall ? "preload" : "preload hidden"}>
             <div className="preload__inner">
               <div className="prelwrapper">
                 <div>
@@ -892,6 +892,9 @@ const MainSection = ({ userAgent }) => {
                 </div>
               </div>
             </div>
+          </div> */}
+          <div class={!wall ? "loader" : "loader hidden"}>
+            <div className="loader__text">загрузка</div>
           </div>
           <div className="layoutWall__top"></div>
           <div className="layoutWall__bottom"></div>
