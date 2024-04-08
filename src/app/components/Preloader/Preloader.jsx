@@ -3,10 +3,6 @@ import { useEffect, useState } from "react";
 
 import "./Preloader.scss";
 const Preloader = ({ headerVisible, setHeaderState, showContent, setWall }) => {
-  // useEffect(() => {
-  //   return () => clearTimeout(timeout); // Очистка таймера при размонтировании
-  // }, []);
-
   const closeWall = () => {
     setWall(true);
   };
