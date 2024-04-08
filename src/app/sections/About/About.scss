@@ -40,9 +40,13 @@
   &__content-wrapper {
     height: 85%;
     display: flex;
+
     // border: 1px solid red;
     @media (max-width: 800px) {
       overflow-y: scroll;
+    }
+    @media (min-width: 800px) {
+      align-items: center;
     }
   }
   &__content {

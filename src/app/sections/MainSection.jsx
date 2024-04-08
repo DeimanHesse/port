@@ -586,26 +586,24 @@ const MainSection = ({ userAgent }) => {
   };
 
   const weelHandler = async (e) => {
-    console.log("ffffffffdfd");
-    console.log(userAgent);
     if (userAgent && !userAgent.toLowerCase().includes("mobile")) {
-      console.log(userAgent);
-      if (stopFlagRef.current) {
-        console.log("call");
-        stopFlagRef.current = false;
-        let targetStage;
-        if (e.deltaY > 0 && currentStageRef.current + 1 < 6) {
-          targetStage = currentStageRef.current + 1;
-          setStage(targetStage, currentStageRef.current);
-          currentStageRef.current = currentStageRef.current + 1;
-        } else if (e.deltaY < 0 && currentStageRef.current - 1 > 0) {
-          targetStage = currentStageRef.current - 1;
-          setStage(targetStage, currentStageRef.current);
-          currentStageRef.current = currentStageRef.current - 1;
+      if (!popup) {
+        if (stopFlagRef.current) {
+          stopFlagRef.current = false;
+          let targetStage;
+          if (e.deltaY > 0 && currentStageRef.current + 1 < 6) {
+            targetStage = currentStageRef.current + 1;
+            setStage(targetStage, currentStageRef.current);
+            currentStageRef.current = currentStageRef.current + 1;
+          } else if (e.deltaY < 0 && currentStageRef.current - 1 > 0) {
+            targetStage = currentStageRef.current - 1;
+            setStage(targetStage, currentStageRef.current);
+            currentStageRef.current = currentStageRef.current - 1;
+          }
+          setTimeout(() => {
+            stopFlagRef.current = true;
+          }, 2000);
         }
-        setTimeout(() => {
-          stopFlagRef.current = true;
-        }, 2000);
       }
     }
   };
@@ -636,8 +634,6 @@ const MainSection = ({ userAgent }) => {
     currentStageRef.current = targetStage;
   };
 
-  console.log(skyBoxRef.current);
-
   const red = new THREE.MeshPhysicalMaterial({
     side: THREE.DoubleSide,
     emissiveIntensity: 0.1,
@@ -657,9 +653,6 @@ const MainSection = ({ userAgent }) => {
 
   const [wall, setWall] = useState(false);
   useLayoutEffect(() => {
-    console.log("mounted");
-    console.log(wall);
-
     // setShowContent(true);
   }, []);
 
@@ -671,229 +664,7 @@ const MainSection = ({ userAgent }) => {
     >
       <div className={wall ? "layoutWall" : "layoutWall active"}>
         <div className="layoutWall__inner">
-          {/* <div className={!wall ? "preload" : "preload hidden"}>
-            <div className="preload__inner">
-              <div className="prelwrapper">
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-                <div>
-                  <div className="bar"></div>
-                </div>
-              </div>
-            </div>
-          </div> */}
-          <div class={!wall ? "loader" : "loader hidden"}>
+          <div className={!wall ? "loader" : "loader hidden"}>
             <div className="loader__text">загрузка</div>
           </div>
           <div className="layoutWall__top"></div>
